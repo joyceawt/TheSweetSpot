@@ -1,4 +1,8 @@
 --
+-- The Sweet Spot, Joyce AU, Samantha Perona
+-- Team 25
+--
+--
 -- Disable foreign key check and autocommit
 --
 SET
