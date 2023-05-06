@@ -1,0 +1,122 @@
+
+/*   ----- Variables  -----  */
+:root {
+    --bgColor: rgb(238, 224, 222);
+    --linkColor: #e4dad9;
+    --fontColor: #111218;
+    --sectionBg: none;
+    --articleBg: white;
+
+}
+
+html, body{
+    background-color: var(--bgColor);
+    margin: 0;
+    padding: 0;
+}
+body{
+    /* FLEX BOX! because why not? */
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: column;
+    /* background-color: rosybrown; */
+}
+
+
+/* NAVIGATION */
+nav{
+      /* flex items*/
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+nav a {
+    padding: 10px;
+    text-decoration:none;
+    text-align: center;
+    font-size: large;
+    /*
+    border: 1px solid;
+    border-radius: 8px;
+    */
+    margin: 2% 10% 2% 10%;
+}
+
+section{
+    display: flex;
+    align-items:stretch ;
+    justify-content: center;
+    flex-flow: column wrap;
+    gap: 20px;
+    padding: .5%;
+    
+}
+
+article{
+    padding: 1%;
+    max-width: 1000px;
+    border-radius: 5px;
+}
+
+
+article.SectionHeader{
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: transparent;
+}
+
+
+article.ListDrinks{
+    background-color: white;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-evenly;
+    flex-direction: row;
+    gap: 10px;
+}
+
+article.ListDrinks div{
+    padding: 1%;
+    
+}
+
+article.ListDrinks div.Description{
+    max-width: 400px;
+    
+}
+
+article.ListDrinks div.DrinkActions, div.DrinkPicture{
+    /* i will keep using flex. no one can stop me.*/
+    display: flex;
+    align-items: stretch;
+    justify-content: space-evenly;
+    flex-direction: column;
+    
+}
+
+button{
+    padding: 12px;
+    width: 100px;
+}
+
+
+img{
+    width: 125px;
+    height: 125px;
+}
+
+h1{
+    font-size: clamp(35px, 6.0vw, 65px);
+}
