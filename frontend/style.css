@@ -6,6 +6,9 @@
     --fontColor: #111218;
     --sectionBg: none;
     --articleBg: white;
+    --accentColor: #bb95a1;
+    --accentColorHover: #cd6fcf;
+    --tabletrEven: rgba(238, 224, 222, 0.85);
 
 }
 
@@ -52,6 +55,10 @@ nav a {
     margin: 2% 10% 2% 10%;
 }
 
+nav a.navCurrent{
+    text-decoration: underline;
+}
+
 section{
     display: flex;
     align-items:stretch ;
@@ -63,18 +70,57 @@ section{
 }
 
 article{
-    padding: 1%;
+    padding: 0 1% 0 1%;
     max-width: 1000px;
     border-radius: 5px;
 }
 
 
+/* TABLE */
+table{
+    border-collapse: collapse; 
+    border-radius: 5px;
+    width: 100%;
+}
+
+thead {
+    background-color: var(--custom-transparency-section);
+    text-align: left;
+    color: var(--custom-lighter-text-color);
+    white-space: nowrap;
+}
+
+tr {
+    padding: 2%;
+    text-align: left;
+    min-width: 100px;
+}
+    tr:nth-child(even) {
+        background-color: var(--tabletrEven);
+    }
+
+  th { 
+    padding: 2%;
+    min-width: 100px;
+}
+
+td {
+    padding: 2%;
+    min-width: 100px;
+}
+ td button{
+    width: 50px;
+ }
+
+
+/* DRINK LIST */
 article.SectionHeader{
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
     background-color: transparent;
+    padding: -1%;
 }
 
 
@@ -106,9 +152,41 @@ article.ListDrinks div.DrinkActions, div.DrinkPicture{
     
 }
 
+
+
+/* ORDERS + CUSTOMERS*/
+
+article.Order, .Customers{
+    padding: 0 1% 0 1%;
+    max-width: 1000px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+
+
+
+/* Buttons... hell yea!*/
 button{
     padding: 12px;
     width: 100px;
+    background-color: var(--accentColor);
+    border-radius: 5px;
+    border: none;
+    transition-duration: 0.3s;
+}
+
+button:hover{
+    background-color: var(--accentColorHover);
+}
+
+button.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+button:active {
+    background-color: #cb4174;
 }
 
 
