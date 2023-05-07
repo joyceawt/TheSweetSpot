@@ -1,0 +1,335 @@
+<html>
+<body class="d-flex flex-column  align-items-center justify-content-center">
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>The Sweet Spot</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel='stylesheet' type='text/css' media='screen' href='../scss/output.css''>
+        <!--
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <meta/>
+        -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    </head>
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+-->
+	<header class="p-5" >
+		<h1 class="display-2"><strong>THE SWEET SPOT</strong></h1>
+	</header>
+
+      <nav class="nav flex-row justify-content-center sticky-top c-mw-1000">
+            <a class="nav-link active" aria-current="page" href="index.html">Drinks</a>
+            <a class="nav-link" href="orders.html">Orders</a>
+            <a class="nav-link" href="customers.html">Customers</a>
+      </nav>
+
+
+	<section class="d-flex flex-column justify-content-evenly c-mw-1000" id="mainContent">
+        
+        <!-- THE DIV THAT CONTAINS THE TITLE DRINK, FILTER (ORDER RESULTS BY), SEARCH AND ADD-->
+        <div class="d-inline-flex p-1">
+            <!-- TITLE -->
+            <div class="me-auto p-1"><h4><strong>Drinks</strong></h4></div>
+
+            <!-- SEARCH  -->
+            <div class="p-1 d-inline-flex">  
+                <!-- THIS PART COLLAPSES! -->
+                <div class="collapse" id="SearchCollapsable">
+                    <input class="form-control p-2 bg-light" type="search" placeholder="Search" aria-label="Search">
+                </div>
+
+                <!-- THE ACTUAL SEARCH BUTTON ITSELF-->
+                <button class="btn btn-light btn-outline-dark" type="button" data-bs-toggle="collapse" data-bs-target="#SearchCollapsable" aria-expanded="false" aria-controls="SearchCollapsable">
+                    <i class="bi bi-search fs-3"></i>
+                </button>
+            </div>
+
+            <!-- ADD -->
+            <div class="p-1 d-inline-flex">
+                <button class="btn btn-light btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#addDrinkModal">  <i class="bi bi-plus-lg fs-3"></i> </button>
+            </div>
+        </div>
+
+        <!-- EACH 'ARTICLES' CONTAIN A DRINK DETAIL!-->
+		<article class="d-flex flex-row align-content-center justify-content-center rounded bg-light p-1" id="content-001">
+            <!-- Boba Picture -->
+            <div class="p-2 d-flex justify-content-center align-content-center">
+                <img id ="img-001" src="../public/Images/boba.png" >
+            </div>
+
+            <!-- TABLE of information: drink Name, ID, description and price..-->
+                <table class="table table-sm">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Name</th>
+                        <td id="name-001">Brown Sugar Pearl</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">ID</th>
+                        <td id="id-001">001</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Description</th>
+                        <td id="drinkDescription-001">Bubble tea made out of fresh milk, brown sugar syrup and tapioca pearls. does not contain any tea.</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">Price</th>
+                        <td id="drinkPrice-001">$5.99</td>
+   
+                      </tr>
+                    </tbody>
+                  </table>
+
+            <!-- buttons -->
+            <div class="p-2 d-flex flex-column justify-content-evenly align-content-center">
+                <!-- EDIT -->
+                <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#editEntryModal"><i class="bi bi-pencil-square fs-3"></i></button>
+                <!-- DELETE -->
+                <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" ><i class="bi bi-x-lg fs-3"></i></button>
+            </div>
+
+		</article>
+
+
+
+        <article class="d-flex flex-row align-content-center justify-content-center rounded bg-light p-1" id="content-002">
+            <!-- Boba Picture -->
+            <div class="p-2 d-flex justify-content-center align-content-center">
+                <img id ="img-001" src="../public/Images/boba.png" >
+            </div>
+
+            <!-- TABLE of information: drink Name, ID, description and price..-->
+                <table class="table table-sm">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Name</th>
+                        <td id="name-002">Brown Sugar Pearl</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">ID</th>
+                        <td id="id-002">002</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Description</th>
+                        <td id="drinkDescription-002">Bubble tea made out of fresh milk, brown sugar syrup and tapioca pearls. does not contain any tea.</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">Price</th>
+                        <td id="drinkPrice-002">$5.99</td>
+   
+                      </tr>
+                    </tbody>
+                  </table>
+
+            <!-- buttons -->
+            <div class="p-2 d-flex flex-column justify-content-evenly align-content-center">
+                <!-- EDIT -->
+                <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#editEntryModal"><i class="bi bi-pencil-square fs-3"></i></button>
+                <!-- DELETE -->
+                <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" ><i class="bi bi-x-lg fs-3"></i></button>
+            </div>
+
+		</article>
+
+
+
+        <article class="d-flex flex-row align-content-center justify-content-center rounded bg-light p-1" id="content-003">
+            <!-- Boba Picture -->
+            <div class="p-2 d-flex justify-content-center align-content-center">
+                <img id ="img-003" src="../public/Images/boba.png" >
+            </div>
+
+            <!-- TABLE of information: drink Name, ID, description and price..-->
+                <table class="table table-sm">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Name</th>
+                        <td id="name-003">Brown Sugar Pearl</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">ID</th>
+                        <td id="id-003">003</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Description</th>
+                        <td id="drinkDescription-003">Bubble tea made out of fresh milk, brown sugar syrup and tapioca pearls. does not contain any tea.</td>
+
+                      </tr>
+                      <tr>
+                        <th scope="row">Price</th>
+                        <td id="drinkPrice-003">$5.99</td>
+   
+                      </tr>
+                    </tbody>
+                  </table>
+
+            <!-- buttons -->
+            <div class="p-2 d-flex flex-column justify-content-evenly align-content-center">
+                <!-- EDIT -->
+                <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#editEntryModal"><i class="bi bi-pencil-square fs-3"></i></button>
+                <!-- DELETE -->
+                <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" ><i class="bi bi-x-lg fs-3"></i></button>
+            </div>
+
+		</article>
+
+
+
+
+
+
+
+
+  <!-- ADD AN ENTRY Modal. This is referenced directly off Bootstrap modal example. -->
+  <div class="modal fade" id="addDrinkModal" tabindex="-1" aria-labelledby="addDrink" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addDrink">Add a new drink! </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+             <!-- Type in drink name!-->
+            <div class="mb-3">
+              <label for="add-drink-name" class="col-form-label">Drink Name:</label>
+              <input type="text" class="form-control" id="add-drink-name">
+            </div>
+
+            <!-- Type in drink description-->
+            <div class="mb-3">
+              <label for="add-description" class="col-form-label">Description:</label>
+              <textarea class="form-control" id="add-description"></textarea>
+            </div>
+
+            <!-- Type in the price-->
+            <div class="mb-3">
+                <label for="add-price" class="col-form-label">Price:</label>
+                <input type="text" class="form-control" id="add-price">
+            </div>
+
+            <!-- upload a picture-->
+            <label for="inputUploadNewPicture" class="form-label">Upload a picture:</label>
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" id="inputUploadNewPicture">
+            </div>
+              
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- EDIT THE ENTRY Modal. This is referenced directly off Bootstrap modal example. -->
+    <div class="modal fade" id="editEntryModal" tabindex="-1" aria-labelledby="editEntry" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="editEntry">Edit entry: </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+
+                <!-- EDIT THE DRINK NAME -->
+                <div class="mb-3">
+                  <label for="edit-drink-name" class="col-form-label">Drink Name:</label>
+                  <input type="text" class="form-control" id="edit-drink-name">
+                </div>
+
+                <!-- EDIT THE DRINK DESCRIPTION -->
+                <div class="mb-3">
+                  <label for="edit-drink-descr" class="col-form-label">Description:</label>
+                  <textarea class="form-control" id="edit-drink-descr"></textarea>
+                </div>
+
+                <!-- EDIT THE DRINK PRICE -->
+                <div class="mb-3">
+                    <label for="edit-drink-price" class="col-form-label">Price:</label>
+                    <input type="text" class="form-control" id="edit-drink-price">
+                </div>
+
+                <!--!!OPTIONAL!! upload new picture.-->
+
+                  
+                <div class="form-check form-switch">
+
+                    <input class="form-check-input" type="checkbox" role="switch" id="imageUploadToggle" 
+                    data-bs-toggle="collapse" data-bs-target="#UploadNewImageCollapsable" aria-expanded="false" aria-controls="UploadNewImageCollapsable" checked="FALSE" >
+
+                    <label class="form-check-label" for="imageUploadToggle">Upload new image? </label>
+                </div>
+
+                <div class="input-group mb-3 collapse" id="UploadNewImageCollapsable">
+                    <input type="file" class="form-control" id="inputUploadNewPicture">
+                </div>
+
+
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- CONFIRM THE DELETE Modal. This is referenced directly off Bootstrap modal example. -->
+    <div class="modal " id="confirmDeleteModal" tabindex="-1" aria-labelledby="Confirm delete?" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Delete entry?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+        <!-- directly from bootstrap's example. 
+            <nav aria-label="Page navigation example bg-light">
+                <ul class="pagination justify-content-end">
+                  <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav>
+              -->
+	</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#imageUploadToggle').bootstrapToggle('off')
+        $("#imageUploadToggle").bootstrapSwitch('state', false);
+        $('#imageUploadToggle').prop('checked', false).change();
+        $('#imageUploadToggle').removeAttr("checked");
+    });
+</script>
+</body>
+</html>

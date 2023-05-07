@@ -1,0 +1,21 @@
+/* custom CSS for BOOTSTRAP*/
+// Default variable overrides
+$body-bg:  rgb(238, 224, 222);
+$body-color: #111;
+
+header{
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: column;
+}
+
+article{
+    margin: 1% 0 1% 0;
+}
+.c-mw-1000{
+    max-width: 850px;
+}
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
