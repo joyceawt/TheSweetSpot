@@ -31,8 +31,19 @@
         <!-- THE DIV THAT CONTAINS THE TITLE DRINK, FILTER (ORDER RESULTS BY), SEARCH AND ADD-->
         <div class="d-inline-flex p-1">
             <!-- TITLE -->
-            <div class="me-auto p-1"><h4><strong>Drinks</strong></h4></div>
+            <div class="p-2"><h4><strong>Drinks</strong></h4></div>
+            <!-- Sort settings-->
+            <div class="dropdown me-auto p-1">
 
+                <button class="btn" type="button" data-bs-toggle="dropdown"  aria-expanded="false"> <i class="bi bi-filter fs-3"></i></button>
+
+                <div class="dropdown-menu">
+                    <li><h6 class="dropdown-header">Sort by</h6></li>
+                    <li><a class="dropdown-item" href="#">Name</a></li>
+                    <li><a class="dropdown-item" href="#">Drink ID</a></li>
+                    <li><a class="dropdown-item" href="#">Price</a></li>
+                </div>
+            </div>
             <!-- SEARCH  -->
             <div class="p-1 d-inline-flex">  
                 <!-- THIS PART COLLAPSES! -->
@@ -40,7 +51,7 @@
                     <input class="form-control p-2 bg-light" type="search" placeholder="Search" aria-label="Search">
                 </div>
 
-                <!-- THE ACTUAL SEARCH BUTTON ITSELF-->
+                <!-- THE SEARCH BUTTON ITSELF-->
                 <button class="btn btn-light btn-outline-dark" type="button" data-bs-toggle="collapse" data-bs-target="#SearchCollapsable" aria-expanded="false" aria-controls="SearchCollapsable">
                     <i class="bi bi-search fs-3"></i>
                 </button>
@@ -220,7 +231,7 @@
               
           </form>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer ">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <button type="button" class="btn btn-primary">Add</button>
         </div>
@@ -264,7 +275,7 @@
                 <div class="form-check form-switch">
 
                     <input class="form-check-input" type="checkbox" role="switch" id="imageUploadToggle" 
-                    data-bs-toggle="collapse" data-bs-target="#UploadNewImageCollapsable" aria-expanded="false" aria-controls="UploadNewImageCollapsable">
+                    data-bs-toggle="collapse" data-bs-target="#UploadNewImageCollapsable" aria-expanded="false" aria-controls="UploadNewImageCollapsable" checked="FALSE" >
 
                     <label class="form-check-label" for="imageUploadToggle">Upload new image? </label>
                 </div>
