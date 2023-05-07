@@ -264,7 +264,7 @@
                 <div class="form-check form-switch">
 
                     <input class="form-check-input" type="checkbox" role="switch" id="imageUploadToggle" 
-                    data-bs-toggle="collapse" data-bs-target="#UploadNewImageCollapsable" aria-expanded="false" aria-controls="UploadNewImageCollapsable" checked="FALSE" >
+                    data-bs-toggle="collapse" data-bs-target="#UploadNewImageCollapsable" aria-expanded="false" aria-controls="UploadNewImageCollapsable">
 
                     <label class="form-check-label" for="imageUploadToggle">Upload new image? </label>
                 </div>
@@ -324,13 +324,10 @@
 </script>
 
 <script>
-	//can't get the a toggle to be off by default. it's in: Edit an entry -> upload image toggle.
-    	$(document).ready(function(){
-        $('#imageUploadToggle').bootstrapToggle('off')
-        $("#imageUploadToggle").bootstrapSwitch('state', false);
-        $('#imageUploadToggle').prop('checked', false).change();
-        $('#imageUploadToggle').removeAttr("checked");
-    });
+    window.onload = () => {
+        // create a couple of elements in an otherwise empty HTML page
+        console.log(document.getElementById("imageUploadToggle").getAttributeNames());
+      };
 </script>
 </body>
 </html>
