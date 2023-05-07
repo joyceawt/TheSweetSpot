@@ -324,7 +324,8 @@
 </script>
 
 <script>
-    $(document).ready(function(){
+	//can't get the a toggle to be off by default. it's in: Edit an entry -> upload image toggle.
+    	$(document).ready(function(){
         $('#imageUploadToggle').bootstrapToggle('off')
         $("#imageUploadToggle").bootstrapSwitch('state', false);
         $('#imageUploadToggle').prop('checked', false).change();
