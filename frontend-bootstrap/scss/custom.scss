@@ -1,6 +1,6 @@
 /* custom CSS for BOOTSTRAP*/
 // Default variable overrides
-$body-bg:  rgb(238, 224, 222);
+$body-bg:  rgb(235, 207, 210);
 $body-color: #111;
 
 header{
@@ -13,9 +13,19 @@ header{
 article{
     margin: 1% 0 1% 0;
 }
-.c-mw-1000{
-    max-width: 850px;
+.custom-size{
+    max-width: 100%;
+    width: 1000px;  
 }
 
-@import "../node_modules/bootstrap/scss/bootstrap";
+
+
+.dashedDivider {
+    border-top: 2px dashed #5b2b41;
+}
+
+.footer-font-color{
+    color: #5b2b41;
+}
+@import "../../node_modules/bootstrap/scss/bootstrap";
 

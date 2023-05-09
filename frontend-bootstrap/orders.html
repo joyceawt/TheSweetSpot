@@ -1,50 +1,44 @@
-<html>
+<!DOCTYPE html>
 <body class="d-flex flex-column  align-items-center justify-content-center">
     <head>
         <meta charset='utf-8'>
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
         <title>The Sweet Spot | Orders</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
-        <link rel='stylesheet' type='text/css' media='screen' href='../scss/output.css''>
-        <!--
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-        <meta/>
-        -->
+        <link rel='stylesheet' type='text/css' media='screen' href='../scss/output.css'>
+        <!-- not on a port -->
+        <link rel='stylesheet' type='text/css' media='screen' href='scss/output.css'>
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     </head>
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
--->
+
 	<header class="p-5" >
 		<h1 class="display-2"><strong>THE SWEET SPOT</strong></h1>
 	</header>
+  <nav class="nav flex-row justify-content-center sticky-top custom-size fs-5 bg-body">
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="drinks.html">Drinks</a>
+    <a class="nav-link active" aria-current="page" href="orders.html">Orders</a>
+    <a class="nav-link" href="customers.html">Customers</a>
+  </nav>
 
-      <nav class="nav flex-row justify-content-center sticky-top c-mw-1000">
-            <a class="nav-link" href="index.html">Drinks</a>
-            <a class="nav-link active" aria-current="page" href="orders.html">Orders</a>
-            <a class="nav-link" href="customers.html">Customers</a>
-      </nav>
-
-
-	<section class="d-flex flex-column justify-content-evenly c-mw-1000" id="mainContent">
+	<section class="d-flex flex-column justify-content-evenly custom-size" id="mainContent">
         
         <!-- THE DIV THAT CONTAINS THE TITLE ORDER HISTORY, FILTER (ORDER RESULTS BY), SEARCH AND ADD-->
         <div class="d-inline-flex p-1">
             <!-- TITLE -->
-            <div class=" p-1"><h4><strong>Order History</strong></h4></div>
+            <div class="p-1"><h4><strong>Orders</strong></h4></div>
 
             <!-- Sort settings-->
             <div class="dropdown p-1">
 
-                <button class="btn" type="button" data-bs-toggle="dropdown"  aria-expanded="false"> <i class="bi bi-filter fs-3"></i></button>
+                <button class="btn" type="button" data-bs-toggle="dropdown"  aria-expanded="false"> <i class="bi bi-filter fs-5"></i></button>
 
                 <div class="dropdown-menu">
                     <li><h6 class="dropdown-header">Sort by</h6></li>
                     <li><a class="dropdown-item" href="#">Order ID</a></li>
                     <li><a class="dropdown-item" href="#">Customer ID</a></li>
-                    <li><a class="dropdown-item" href="#">Customer Name</a></li>
                     <li><a class="dropdown-item" href="#">Order date</a></li>
-                    <li><a class="dropdown-item" href="#">Items ordered</a></li>
                     <li><a class="dropdown-item" href="#">Total price</a></li>
                 </div>
             </div>
@@ -52,7 +46,7 @@
             <!-- FILTER by -->
             <div class="dropdown me-auto p-1">
 
-                <button class="btn" type="button" data-bs-toggle="dropdown"  aria-expanded="false"> <i class="bi bi-funnel fs-3"></i></button>
+                <button class="btn" type="button" data-bs-toggle="dropdown"  aria-expanded="false"> <i class="bi bi-funnel fs-5"></i></button>
 
                 <div class="dropdown-menu">
                     <li><h6 class="dropdown-header">Filter by</h6></li>
@@ -71,31 +65,29 @@
                 </div>
 
                 <!-- THE ACTUAL SEARCH BUTTON ITSELF-->
-                <button class="btn btn-light btn-outline-dark " type="button" data-bs-toggle="collapse" data-bs-target="#SearchCollapsable" aria-expanded="false" aria-controls="SearchCollapsable">
+                <button class="btn btn-light btn-primary " type="button" data-bs-toggle="collapse" data-bs-target="#SearchCollapsable" aria-expanded="false" aria-controls="SearchCollapsable">
                     <i class="bi bi-search fs-3"></i>
                 </button>
             </div>
 
             <!-- ADD -->
             <div class="p-1 d-inline-flex">
-                <button class="btn btn-light btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">  <i class="bi bi-plus-lg fs-3"></i> </button>
+                <button class="btn btn-light btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">  <i class="bi bi-plus-lg fs-3"></i> </button>
             </div>
         </div>
 
         <!-- table of orders -->
         
-        <article  class="rounded bg-light p-4">
+        <article class="card table-responsive bg-white " >
             <table class="table table-striped table-hover">
                 <!-- header for rows -->
                 <caption></caption>
-                <thead>
+                <thead class="thead-dark">
                     <tr>
                         <th></th>
                         <th>OrderID</th>
                         <th>CustomerID</th>
-                        <th>Name</th>
                         <th>Order Date</th>
-                        <th>Items</th>
                         <th>Total</th>
                     </tr>
                 </thead>
@@ -106,43 +98,107 @@
                         <td><button class="btn btn-outline-dark " type="button" data-bs-toggle="modal" data-bs-target="#viewMoreInfoModal"> <i class="bi bi-info-circle"></i></button></td>
                         <td>001</td>
                         <td>1</td>
-                        <td>The Boba Rat</td>
-                        <td>5-6-2021 11:00:00</td>
-                        <td>2</td>
-                        <td>14.00</td>
+                        <td>2023-04-27 12:00:00</td>
+                        <td>7.00</td>
                     </tr>
 
                     <tr>
                         <td> <button class="btn btn-outline-dark" type="button" data-bs-toggle="modal" data-bs-target="#viewMoreInfoModal"> <i class="bi bi-info-circle"></i></button></td>
                         <td>002</td>
-                        <td>1</td>
-                        <td>The Boba Rat</td>
-                        <td>5-6-2021 11:00:00</td>
                         <td>2</td>
-                        <td>14.00</td>
+                        <td>2023-02-12 17:00:00</td>
+                        <td>14.50</td>
                     </tr>
 
                     <tr>
                         <td><button class="btn btn-outline-dark"  type="button" data-bs-toggle="modal" data-bs-target="#viewMoreInfoModal"> <i class="bi bi-info-circle"></i></button></td>
                         <td>003</td>
-                        <td>1</td>
-                        <td>The Boba Rat</td>
-                        <td>5-6-2021 11:00:00</td>
-                        <td>2</td>
-                        <td>14.00</td>
+                        <td>3</td>
+                        <td>2023-02-12 19:00:00</td>
+                        <td>21.00</td>
                     </tr>
                 </tbody>
-
-                
-
             </table>
 		</article>
 
 
+    <!-- intersection table here for now. In live version, this info should be in the modal when clicked?-->
+    <div class="d-inline-flex p-1">
+      <!-- TITLE -->
+      <div class="p-1"><h4><strong>Order Details</strong></h4></div>
+    </div>
+    <article class="card table-responsive bg-white " >
+      <table class="table table-striped table-hover">
+          <!-- header for rows -->
+          <caption></caption>
+          <thead class="thead-dark">
+              <tr>
+                  <th>order_items_id</th>
+                  <th>Order ID</th>
+                  <th>Drink ID</th>
+                  <th>Drink QTY</th>
+                  <th>Ice level</th>
+                  <th>Sugar level</th>
+                  <th>Dairy option</th>
+                  <th>Boba option</th>
+              </tr>
+          </thead>
+
+          <!-- table dynamic body below here. EXAMPLE DATA BELOW! REMOVE -->
+          <tbody class="table-group-divider">
+              <tr>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1.0</td>
+                  <td>0.5</td>
+                  <td>1</td>
+                  <td>1</td>
+
+              </tr>
+
+              <tr>
+                  <td>2</td>
+                  <td>2</td>
+                  <td>2</td>
+                  <td>1</td>
+                  <td>0.5</td>
+                  <td>0.5</td>
+                  <td>1</td>
+                  <td>1</td>
+
+              </tr>
+
+              <tr>
+                  <td>3</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>1</td>
+                  <td>1.0</td>
+                  <td>1.0</td>
+                  <td>1</td>
+                  <td>1</td>
+              </tr>
+
+              <tr>
+                <td>4</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+                <td>1.0</td>
+                <td>0.5</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+          </tbody>
+      </table>
+</article>
+
 
   <!-- ADD AN ENTRY Modal. This is referenced directly off Bootstrap modal example. -->
   <div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="addOrderModal">Add a new ORDER! </h1>
@@ -266,14 +322,14 @@
               -->
 	</section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-</script>
+  <footer class="custom-size pt-xxl-5">
+    <hr class="hr hr-blurry dashedDivider" />
+    <div class="p-3">
+      <p class="footer-font-color">©2023 Samantha Perona and Joyce Au. </p>
+    </div>
+  </footer>
 
-<script>
-    window.onload = () => {
-        // create a couple of elements in an otherwise empty HTML page
-        console.log(document.getElementById("imageUploadToggle").getAttributeNames());
-      };
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 </script>
 </body>
 </html>
