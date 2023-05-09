@@ -58,21 +58,79 @@ function inputValidator(arg, obj){
     
 
 }
-function selectData(idName){
-    console.log(idName);
-}
 
 function addStaticDataForTest(drinkName, drinkDescription, drinkPrice){
+    // document.getElementById("content-3").parentElement.id
+    //let parent_Node = document.getElementById("mainContent");
+    let newDrinkNode = document.createElement('article');
+    newDrinkNode.setAttribute("class", "d-flex flex-row align-content-center justify-content-center rounded bg-white p-1");
+    newDrinkNode.setAttribute("id",`content-${childCount}`);
 
-    let drinkData = document.createElement('div');
+    newDrinkNode.innerHTML=`
+        <!-- Boba Picture -->
+        <div class="p-2 d-flex justify-content-center align-content-center">
+            <img id ="img-${childCount}" src="../public/Images/boba.png" >
+        </div>
+
+        <!-- TABLE of information: drink Name, ID, description and price..-->
+            <table class="table table-sm">
+                <tbody>
+                <tr>
+                    <th scope="row" style="width: 10%">Name</th>
+                    <td id="name-${childCount}">${drinkName}</td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width: 10%">ID</th>
+                    <td id="id-${childCount}">${childCount}</td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width: 10%">Description</th>
+                    <td id="drinkDescription-${childCount}">${drinkDescription}</td>
+
+                </tr>
+                <tr>
+                    <th scope="row" style="width: 10%">Price</th>
+                    <td id="drinkPrice-${childCount}">$${drinkPrice}</td>
+
+                </tr>
+                </tbody>
+            </table>
+
+        <!-- buttons -->
+        <div class="p-2 d-flex flex-column justify-content-evenly align-content-center">
+            <!-- EDIT -->
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#editEntryModal" id=${childCount} onclick="editButtonClicked(this)"><i class="bi bi-pencil-square fs-3"></i></button>
+            <!-- DELETE -->
+            <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" id=${childCount} onclick="selectButtonClicked(this)"><i class="bi bi-x-lg fs-3"></i></button>
+        </div>
+    `
+    document.getElementById("mainContent").append(newDrinkNode)
+
+    document.getElementById("add-new-drink-btn").innerHTML =`Add item`
 
 }
 
-function optionButtonClicked(obj){
+function selectButtonClicked(obj){
     // set the selectedID to whatever is clicked.
     selectedId = obj.getAttribute("id");
-    console.log("i was clicked from this:", selectedId);
+    //console.log("i was clicked from:", selectedId);
+}
+
+
+function editButtonClicked(obj){
+    selectedId = obj.getAttribute("id");
+    console.log("prompted to edit: ", selectedId);
     
+    // load the contents of the current information of the drink into the textbox themselves.
+    let currDrinkName = document.getElementById(`name-${selectedId}`).textContent;
+    let currDrinkDesc = document.getElementById(`drinkDescription-${selectedId}`).textContent;
+    let currDrinkPrice = document.getElementById(`drinkPrice-${selectedId}`).textContent;
+    
+    console.log(currDrinkName, currDrinkDesc, currDrinkPrice);
+
+    document.getElementById("edit-drink-name").value = currDrinkName;
+    document.getElementById("edit-drink-descr").value = currDrinkDesc;
+    document.getElementById("edit-drink-price").value = currDrinkPrice;
 }
 
 
@@ -87,7 +145,7 @@ async function deleteButtonClickedYes(){
     //document.getElementById("content-5").parentElement.id 
     let targetID = "content-" + selectedId;
 
-    console.log(targetID);
+    //console.log(targetID);
     let parent_Node = document.getElementById("mainContent");
     let target_Node = document.getElementById(targetID);
     let test = parent_Node.removeChild(target_Node);
@@ -99,10 +157,30 @@ async function deleteButtonClickedYes(){
     // PLACE CODE HERE TO DELETE IN BACKEND
 }
 
+async function saveEditButtonClicked(){
+    // console.log("now saving: " , selectedId);
+    let editEntryModal = document.getElementById('editEntryModal');
+    let modal = bootstrap.Modal.getInstance(editEntryModal);
 
-async function editButtonClicked(event){
-    event.preventDefault(); 
-    console.log("now editing... " , selectedId);
+    // grab the contents.
+    let drinkEditName = document.getElementById("edit-drink-name").value;
+    let drinkEditDescription = document.getElementById("edit-drink-descr").value;
+    let drinkEditPrice = document.getElementById("edit-drink-price").value;
+
+    console.log(drinkEditName,drinkEditDescription,drinkEditPrice )
+
+    // change the values 
+    document.getElementById(`name-${selectedId}`).innerHTML  = drinkEditName
+    document.getElementById(`drinkDescription-${selectedId}`).innerHTML  = drinkEditDescription;
+    document.getElementById(`drinkPrice-${selectedId}`).innerHTML  = drinkEditPrice;
+
+
+    //close modal.
+    modal.hide();
+
+    // unselect.
+    selectedId=-1;
+
 
 }
 
@@ -127,23 +205,7 @@ async function addButtonClicked(event){
     </div>
     `;
 
-
-   // let buttonID = event.target.getAttribute('id');
-
-
-    //let picture = document.getElementById("add-drink-name").value;
-
-    //replace the content of the button to 'loading' icon..
-
-    //fetch from appropriate url whic is /addNewDrinkEntry
-    
-    
-    let entryObject = {
-        "drinkName": drinkName,
-        "drinkDescription": drinkDescription,
-        "drinkPrice": drinkPrice
-    };
-
+    // code for when db is connected
     let urlEncodedObj = new URLSearchParams();
     urlEncodedObj.append("drinkName", drinkName);
     urlEncodedObj.append("drinkDescription", drinkDescription);
@@ -151,67 +213,22 @@ async function addButtonClicked(event){
 
     //console.log(entryObject);
 
+    // grab the modal window
     let addDrinkModal = document.getElementById('addDrinkModal');
     let modal = bootstrap.Modal.getInstance(addDrinkModal);
 
-
+    //increase childcount 
     childCount= childCount+1;
-    let newTargetID = "content-" + childCount;
-
-
     // document.getElementById("content-3").parentElement.id
     //let parent_Node = document.getElementById("mainContent");
-    let newDrinkNode = document.createElement('article');
-    newDrinkNode.setAttribute("class", "d-flex flex-row align-content-center justify-content-center rounded bg-white p-1");
-    newDrinkNode.setAttribute("id",`content-${childCount}`);
 
-    
-    
-    newDrinkNode.innerHTML=`
-        <!-- Boba Picture -->
-        <div class="p-2 d-flex justify-content-center align-content-center">
-            <img id ="img-00${childCount}" src="../public/Images/boba.png" >
-        </div>
-
-        <!-- TABLE of information: drink Name, ID, description and price..-->
-            <table class="table table-sm">
-                <tbody>
-                <tr>
-                    <th scope="row">Name</th>
-                    <td id="name-003">${drinkName}</td>
-                </tr>
-                <tr>
-                    <th scope="row">ID</th>
-                    <td id="id-003">00${childCount}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Description</th>
-                    <td id="drinkDescription-00${childCount}">${drinkDescription}</td>
-
-                </tr>
-                <tr>
-                    <th scope="row">Price</th>
-                    <td id="drinkPrice-00${childCount}">$${drinkPrice}</td>
-
-                </tr>
-                </tbody>
-            </table>
-
-        <!-- buttons -->
-        <div class="p-2 d-flex flex-column justify-content-evenly align-content-center">
-            <!-- EDIT -->
-            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#editEntryModal" id=${childCount} onclick="optionButtonClicked(this)"><i class="bi bi-pencil-square fs-3"></i></button>
-            <!-- DELETE -->
-            <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" id=${childCount} onclick="optionButtonClicked(this)"><i class="bi bi-x-lg fs-3"></i></button>
-        </div>
-    `
-
-
-
-    //add error into html.
-    document.getElementById("mainContent").append(newDrinkNode)
-
+    // create the static content by calling a function
+    addStaticDataForTest(drinkName, drinkDescription, drinkPrice);
+   
+    // change the button back to original 
     document.getElementById("add-new-drink-btn").innerHTML =`Add item`
+
+    // hide the modal window
     modal.hide();
     
 
@@ -277,7 +294,7 @@ async function addButtonClicked(event){
 
 
 
-// add event listeners.
+// add event listeners for practice
 document.addEventListener("DOMContentLoaded", function(event) {
     const addEntry =  document.getElementById('add-new-drink-btn');
     addEntry.addEventListener('click', addButtonClicked);
