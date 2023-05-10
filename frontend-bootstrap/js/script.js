@@ -1,14 +1,6 @@
 'use strict'
 
-
-
-
 //global variables. not a good practice but it will do here:
-let validateInputs = {
-    "drinkName": false,
-    "drinkDescription": false,
-    "drinkPrice": false
-  }
 
 //to store which data is selected for edit or deletion
 let selectedId= -1;
@@ -16,11 +8,24 @@ let selectedId= -1;
 // TEMPORARY until DB is connected. only used for client side adding and deleting.
 let childCount = 3;
 
-function getResultsTable(){
 
-}
+
+/***************
+ * 
+ * FOLLOWING FUNCTIONS AND VARIABLES NEEDS TO BE REMOVED ONCE DB IS LIVE.
+ * 
+ * 
+ */
+
+let validateInputs = {
+    "drinkName": false,
+    "drinkDescription": false,
+    "drinkPrice": false
+  }
+
 
 function inputValidator(arg, obj){
+    
     let check = document.getElementById(arg).value;
     if(arg =="add-drink-name"){
         if(check.length >0){
@@ -56,7 +61,6 @@ function inputValidator(arg, obj){
         document.getElementById("add-new-drink-btn").disabled = true; 
     }
     
-
 }
 
 function addStaticDataForTest(drinkName, drinkDescription, drinkPrice){
@@ -69,7 +73,7 @@ function addStaticDataForTest(drinkName, drinkDescription, drinkPrice){
     newDrinkNode.innerHTML=`
         <!-- Boba Picture -->
         <div class="p-2 d-flex justify-content-center align-content-center">
-            <img id ="img-${childCount}" src="../public/Images/boba.png" >
+            <img id ="img-${childCount}" src="Images/boba.png" >
         </div>
 
         <!-- TABLE of information: drink Name, ID, description and price..-->
@@ -77,20 +81,20 @@ function addStaticDataForTest(drinkName, drinkDescription, drinkPrice){
                 <tbody>
                 <tr>
                     <th scope="row" style="width: 10%">Name</th>
-                    <td id="name-${childCount}">${drinkName}</td>
+                    <td id="name-${childCount}"  style="word-wrap: break-word">${drinkName}</td>
                 </tr>
                 <tr>
                     <th scope="row" style="width: 10%">ID</th>
-                    <td id="id-${childCount}">${childCount}</td>
+                    <td id="id-${childCount}"  style="word-wrap: break-word">${childCount}</td>
                 </tr>
                 <tr>
                     <th scope="row" style="width: 10%">Description</th>
-                    <td id="drinkDescription-${childCount}">${drinkDescription}</td>
+                    <td id="drinkDescription-${childCount}"  style="word-wrap: break-word">${drinkDescription}</td>
 
                 </tr>
                 <tr>
                     <th scope="row" style="width: 10%">Price</th>
-                    <td id="drinkPrice-${childCount}">$${drinkPrice}</td>
+                    <td style="word-wrap: break-word">$<span id="drinkPrice-${childCount}">${drinkPrice}</span></td>
 
                 </tr>
                 </tbody>
@@ -109,6 +113,25 @@ function addStaticDataForTest(drinkName, drinkDescription, drinkPrice){
     document.getElementById("add-new-drink-btn").innerHTML =`Add item`
 
 }
+
+/*
+// add event listeners for practice.
+document.addEventListener("DOMContentLoaded", function(event) {
+    const addEntry =  document.getElementById('add-new-drink-btn');
+    addEntry.addEventListener('click', addButtonClicked);
+});
+
+
+*/
+
+
+
+/****
+ * 
+ * ESSENTIAL FUNCTIONS BELOW. DO NOT REMOVE.
+ * 
+ * 
+ */
 
 function selectButtonClicked(obj){
     // set the selectedID to whatever is clicked.
@@ -170,9 +193,9 @@ async function saveEditButtonClicked(){
     console.log(drinkEditName,drinkEditDescription,drinkEditPrice )
 
     // change the values 
-    document.getElementById(`name-${selectedId}`).innerHTML  = drinkEditName
-    document.getElementById(`drinkDescription-${selectedId}`).innerHTML  = drinkEditDescription;
-    document.getElementById(`drinkPrice-${selectedId}`).innerHTML  = drinkEditPrice;
+    document.getElementById(`name-${selectedId}`).innerText   = drinkEditName
+    document.getElementById(`drinkDescription-${selectedId}`).innerText   = drinkEditDescription;
+    document.getElementById(`drinkPrice-${selectedId}`).innerText   = drinkEditPrice;
 
 
     //close modal.
@@ -185,8 +208,10 @@ async function saveEditButtonClicked(){
 }
 
 async function addButtonClicked(event){
-    //prevent default event.
-    event.preventDefault(); 
+    //prevent default event FOR STATICALLY ADDING. please REMOVE once connected to DB!
+    event.preventDefault();  
+
+
     let drinkName = document.getElementById("add-drink-name").value;
     let drinkDescription = document.getElementById("add-description").value;
     let drinkPrice = document.getElementById("add-price").value;
@@ -294,8 +319,3 @@ async function addButtonClicked(event){
 
 
 
-// add event listeners for practice
-document.addEventListener("DOMContentLoaded", function(event) {
-    const addEntry =  document.getElementById('add-new-drink-btn');
-    addEntry.addEventListener('click', addButtonClicked);
-});
