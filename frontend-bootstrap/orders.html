@@ -90,6 +90,7 @@
                         <th>CustomerID</th>
                         <th>Order Date</th>
                         <th>Total</th>
+                        <th>Option</th>
                     </tr>
                 </thead>
 
@@ -101,6 +102,11 @@
                         <td>1</td>
                         <td>2023-04-27 12:00:00</td>
                         <td>7.00</td>
+                        <td>
+                          <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#editEntryModal" id=1  onclick="editButtonClicked(this)""><i class="bi bi-pencil-square fs-6"></i></button>
+                          
+                          <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" id=1 onclick="selectButtonClicked(this)"><i class="bi bi-x-lg fs-6"></i></button>
+                        </td>
                     </tr>
 
                     <tr>
@@ -109,6 +115,11 @@
                         <td>2</td>
                         <td>2023-02-12 17:00:00</td>
                         <td>14.50</td>
+                        <td>
+                          <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#editEntryModal" id=1  onclick="editButtonClicked(this)""><i class="bi bi-pencil-square fs-6"></i></button>
+                          
+                          <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" id=1 onclick="selectButtonClicked(this)"><i class="bi bi-x-lg fs-6"></i></button>
+                        </td>
                     </tr>
 
                     <tr>
@@ -117,19 +128,76 @@
                         <td>3</td>
                         <td>2023-02-12 19:00:00</td>
                         <td>21.00</td>
+                        <td>
+                          <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#editEntryModal" id=1  onclick="editButtonClicked(this)""><i class="bi bi-pencil-square fs-6"></i></button>
+                          
+                          <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" id=1 onclick="selectButtonClicked(this)"><i class="bi bi-x-lg fs-6"></i></button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
 		</article>
 
+    <article>
+      <div class="p-lg-5"></div>
+    </article>
 
     <!-- intersection table here for now. In live version, this info should be in the modal when clicked?-->
-    <div class="d-inline-flex p-1">
-      <!-- TITLE -->
-      <div class="p-1"><h4><strong>Order Details</strong></h4></div>
+        <!-- THE DIV THAT CONTAINS THE TITLE ORDER HISTORY, FILTER (ORDER RESULTS BY), SEARCH AND ADD-->
+        <div class="d-inline-flex p-1" id="order-tb">
+          <!-- TITLE -->
+          <div class="p-1"><h4><strong>Order Details</strong></h4></div>
 
-    </div>
-    <p class="p-2">NOTE: This is the intersection table between <a href="#order-tb">Order</a> and <a href="drinks.html">Drinks</a>. It will remain in the same page as Orders as it makes more sense logically.</p>
+          <!-- Sort settings-->
+          <div class="dropdown p-1">
+
+              <button class="btn" type="button" data-bs-toggle="dropdown"  aria-expanded="false"> <i class="bi bi-filter fs-5"></i></button>
+
+              <div class="dropdown-menu">
+                  <li><h6 class="dropdown-header">Sort by</h6></li>
+                  <li><a class="dropdown-item" href="#">...</a></li>
+                  <li><a class="dropdown-item" href="#">...</a></li>
+                  <li><a class="dropdown-item" href="#">...</a></li>
+
+              </div>
+          </div>
+
+          <!-- FILTER by -->
+          <div class="dropdown me-auto p-1">
+
+              <button class="btn" type="button" data-bs-toggle="dropdown"  aria-expanded="false"> <i class="bi bi-funnel fs-5"></i></button>
+
+              <div class="dropdown-menu">
+                  <li><h6 class="dropdown-header">Filter by</h6></li>
+                  <li><a class="dropdown-item" href="#">?</a></li>
+                  <li><a class="dropdown-item" href="#">?</a></li>
+                  <li><a class="dropdown-item" href="#">?</a></li>
+              </div>
+          </div>
+
+
+          <!-- SEARCH  -->
+          <div class="p-1 d-inline-flex">  
+              <!-- THIS PART COLLAPSES! -->
+              <div class="collapse p-2" id="SearchCollapsable">
+                  <input class="form-control bg-light" type="search" placeholder="Search" aria-label="Search">
+              </div>
+
+              <!-- THE ACTUAL SEARCH BUTTON ITSELF-->
+              <button class="btn btn-light btn-primary btn-outline-secondary " type="button" data-bs-toggle="collapse" data-bs-target="#SearchCollapsable" aria-expanded="false" aria-controls="SearchCollapsable">
+                  <i class="bi bi-search fs-3"></i>
+              </button>
+          </div>
+
+          <!-- ADD -->
+          <div class="p-1 d-inline-flex">
+              <button class="btn btn-light btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#addOrderDetailModal">  <i class="bi bi-plus-lg fs-3"></i> </button>
+          </div>
+      </div>
+
+    <p class="p-2">NOTE: This is the intersection table between <a href="#order-tb">Order</a> and <a href="drinks.html">Drinks</a>. It will remain in the same page as Orders as it makes more sense logically. Eventually, this table will be moved to the pop up that appears when you click on <button class="btn btn-outline-dark " type="button" data-bs-toggle="modal" data-bs-target="#viewMoreInfoModal"> <i class="bi bi-info-circle"></i></button>, which is found on the order table above.</p>
+
+
     <article class="card table-responsive bg-white " >
 
       <table class="table table-striped table-hover">
@@ -258,7 +326,7 @@
 
 
   <!-- ADD AN ENTRY Modal: Order Details. This is referenced directly off Bootstrap modal example. -->
-  <div class="modal fade" id="addOrderDetailsModal" tabindex="-1" aria-labelledby="addOrderDetailsModal" aria-hidden="true">
+  <div class="modal fade" id="addOrderDetailModal" tabindex="-1" aria-labelledby="addOrderDetailsModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -267,38 +335,43 @@
         </div>
         <div class="modal-body">
           <form>
-             <!-- Type in customer ID!-->
+             <!-- Type in Order ID!-->
             <div class="mb-3">
-              <label for="add-customer-ID" class="col-form-label">Customer ID:</label>
+              <label for="add-customer-ID" class="col-form-label">Order ID:</label>
               <input type="text" class="form-control bg-transparent" id="add-customer-ID">
             </div>
 
-            <!-- Type in customer name-->
+            
             <div class="mb-3">
-              <label for="add-description" class="col-form-label">Customer Name:</label>
-              <textarea class="form-control bg-transparent" id="add-description"></textarea>
+              <label for="add-customer-ID" class="col-form-label">Drink ID:</label>
+              <input type="text" class="form-control bg-transparent" id="add-customer-ID">
             </div>
 
-            <!-- Type in the order date?-->
             <div class="mb-3">
-                <label for="add-date" class="col-form-label">Order date:</label>
-                <input type="text" class="form-control bg-transparent" id="add-date">
+              <label for="add-customer-ID" class="col-form-label">Drink Qty:</label>
+              <input type="text" class="form-control bg-transparent" id="add-customer-ID">
             </div>
 
-
-            <!-- Type in the items ordered?-->
             <div class="mb-3">
-                <label for="add-total-items" class="col-form-label">Items total:</label>
-                <input type="text" class="form-control bg-transparent" id="add-total-items">
+              <label for="add-customer-ID" class="col-form-label">Ice level:</label>
+              <input type="text" class="form-control bg-transparent" id="add-customer-ID">
             </div>
 
-            <!-- Type in the total price?-->
             <div class="mb-3">
-                <label for="add-total-price" class="col-form-label">Total price:</label>
-                <input type="number" class="form-control bg-transparent" id="add-total-price">
+              <label for="add-customer-ID" class="col-form-label">Sugar level:</label>
+              <input type="text" class="form-control bg-transparent" id="add-customer-ID">
             </div>
 
-              
+            <div class="mb-3">
+              <label for="add-customer-ID" class="col-form-label">Dairy Option:</label>
+              <input type="text" class="form-control bg-transparent" id="add-customer-ID">
+            </div>
+
+            
+            <div class="mb-3">
+              <label for="add-customer-ID" class="col-form-label">Boba Option:</label>
+              <input type="text" class="form-control bg-transparent" id="add-customer-ID">
+            </div>
           </form>
         </div>
         <div class="modal-footer">
