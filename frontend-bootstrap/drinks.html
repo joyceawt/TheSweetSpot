@@ -95,20 +95,20 @@
                     <tbody>
                       <tr>
                         <th scope="row" style="width: 10%">Name</th>
-                        <td id="name-1">Brown Sugar Lover</td>
+                        <td id="name-1" style="word-wrap: break-word">Brown Sugar Lover</td>
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%">ID</th>
-                        <td id="id-1">1</td>
+                        <td id="id-1" style="word-wrap: break-word">1</td>
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%">Description</th>
-                        <td id="drinkDescription-1">Brown Sugar, Black tapioca pearls, Fresh milk</td>
+                        <td id="drinkDescription-1" style="word-wrap: break-word">Brown Sugar, Black tapioca pearls, Fresh milk</td>
 
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%" >Price</th>
-                        <td>$<span id="drinkPrice-1">7.00</span></td>
+                        <td>$<span id="drinkPrice-1" style="word-wrap: break-word">7.00</span></td>
    
                       </tr>
                     </tbody>
@@ -137,20 +137,20 @@
                     <tbody>
                       <tr>
                         <th scope="row" style="width: 10%">Name</th>
-                        <td id="name-2">Earl Gray Milk Tea</td>
+                        <td id="name-2" style="word-wrap: break-word">Earl Gray Milk Tea</td>
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%">ID</th>
-                        <td id="id-2">2</td>
+                        <td id="id-2" style="word-wrap: break-word">2</td>
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%">Description</th>
-                        <td id="drinkDescription-2">A blend of milk & citrusy taste from Earl Gray Tea.</td>
+                        <td id="drinkDescription-2" style="word-wrap: break-word">A blend of milk & citrusy taste from Earl Gray Tea.</td>
 
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%">Price</th>
-                        <td>$<span id="drinkPrice-2">7.00</span></td>
+                        <td style="word-wrap: break-word">$<span id="drinkPrice-2">7.00</span></td>
    
                       </tr>
                     </tbody>
@@ -179,20 +179,20 @@
                     <tbody>
                       <tr>
                         <th scope="row" style="width: 10%">Name</th>
-                        <td id="name-3">Classic Milk Tea with Golden Pearls</td>
+                        <td id="name-3" style="word-wrap: break-word">Classic Milk Tea with Golden Pearls</td>
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%">ID</th>
-                        <td id="id-3">3</td>
+                        <td id="id-3" style="word-wrap: break-word">3</td>
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%">Description</th>
-                        <td id="drinkDescription-3">All-time favorite with golden pearls</td>
+                        <td id="drinkDescription-3"  style="word-wrap: break-word">All-time favorite with golden pearls</td>
 
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%">Price</th>
-                        <td>$<span id="drinkPrice-3">7.00</span></td>
+                        <td style="word-wrap: break-word">$<span id="drinkPrice-3">7.00</span></td>
    
                       </tr>
                     </tbody>
@@ -225,7 +225,16 @@
         </div>
         
         <div class="modal-body">
-          <form class="needs-validation" action="/addNewDrinkEntry" method="post">
+          <div class="alert alert-primary d-flex align-items-center" role="alert">
+            <div>
+              Please fill in all of the required information below to add a new entry.
+            </div>
+          </div>
+
+          
+
+         
+          <form class="needs-validation" > <!--action="/addNewDrinkEntry" method="post"-->
              <!-- Type in drink name!-->
             <div class="mb-3">
               <label for="add-drink-name" class="col-form-label">Drink Name:</label>
@@ -254,6 +263,11 @@
             </div>
             -->
 
+            <div class="modal-footer ">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
+              <button type="submit" class="btn btn-primary" id="add-new-drink-btn" disabled onclick="addButtonClicked(event)">Add item</button>
+            </div>
+
           </form>
 
 
@@ -275,10 +289,7 @@
                   </div>
           -->
         </div>
-        <div class="modal-footer ">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
-          <button type="submit" class="btn btn-primary" id="add-new-drink-btn" disabled>Add item</button>
-        </div>
+
       </div>
     </div>
   </div>
