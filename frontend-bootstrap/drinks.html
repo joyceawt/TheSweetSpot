@@ -36,7 +36,7 @@
 	</header>
 
     <nav class="nav flex-row justify-content-center sticky-top custom-size fs-5 bg-body">
-        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="/">Home</a>
         <a class="nav-link active" aria-current="page" href="drinks.html">Drinks</a>
         <a class="nav-link" href="orders.html">Orders</a>
         <a class="nav-link" href="customers.html">Customers</a>
@@ -65,12 +65,12 @@
             <!-- SEARCH  -->
             <div class="p-1 d-inline-flex">  
                 <!-- THIS PART COLLAPSES! -->
-                <div class="collapse" id="SearchCollapsable">
-                    <input class="form-control p-2 bg-light" type="search" placeholder="Search" aria-label="Search">
+                <div class="collapse p-2 " id="SearchCollapsable" >
+                    <input class="form-control bg-light" type="search" placeholder="Search" aria-label="Search">
                 </div>
 
                 <!-- THE SEARCH BUTTON ITSELF-->
-                <button class="btn btn-light btn-primary btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#SearchCollapsable" aria-expanded="false" aria-controls="SearchCollapsable" >
+                <button class="btn btn-light btn-primary btn-outline-secondary " type="button" data-bs-toggle="collapse" data-bs-target="#SearchCollapsable" aria-expanded="false" aria-controls="SearchCollapsable" >
                     <i class="bi bi-search fs-3"></i>
                 </button>
             </div>
@@ -108,7 +108,7 @@
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%" >Price</th>
-                        <td id="drinkPrice-1">$7.00</td>
+                        <td>$<span id="drinkPrice-1">7.00</span></td>
    
                       </tr>
                     </tbody>
@@ -129,7 +129,7 @@
     <article class="d-flex flex-row align-content-center justify-content-center rounded bg-white p-1" id="content-2">
             <!-- Boba Picture: OPTIONAL. -->
             <div class="p-2 d-flex justify-content-center align-content-center">
-                <img id ="img-2" src="../public/Images/boba.png" >
+                <img id ="img-2" src="Images/boba.png" >
             </div>
 
             <!-- TABLE of information: drink Name, ID, description and price..-->
@@ -150,7 +150,7 @@
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%">Price</th>
-                        <td id="drinkPrice-2">$7.50</td>
+                        <td>$<span id="drinkPrice-2">7.00</span></td>
    
                       </tr>
                     </tbody>
@@ -171,7 +171,7 @@
     <article class="d-flex flex-row align-content-center justify-content-center rounded bg-white p-1" id="content-3">
             <!-- Boba Picture -->
             <div class="p-2 d-flex justify-content-center align-content-center">
-                <img id ="img-3" src="../public/Images/boba.png" >
+                <img id ="img-3" src="Images/boba.png" >
             </div>
 
             <!-- TABLE of information: drink Name, ID, description and price..-->
@@ -192,7 +192,7 @@
                       </tr>
                       <tr>
                         <th scope="row" style="width: 10%">Price</th>
-                        <td id="drinkPrice-3">$7.00</td>
+                        <td>$<span id="drinkPrice-3">7.00</span></td>
    
                       </tr>
                     </tbody>
@@ -229,19 +229,21 @@
              <!-- Type in drink name!-->
             <div class="mb-3">
               <label for="add-drink-name" class="col-form-label">Drink Name:</label>
-              <input type="text" class="form-control" id="add-drink-name" autofocus="autofocus" oninput="inputValidator('add-drink-name', this)" required> </input>
+              <input type="text" class="form-control bg-transparent" id="add-drink-name" autofocus="autofocus" oninput="inputValidator('add-drink-name', this)" required> </input>
             </div>
 
             <!-- Type in drink description-->
             <div class="mb-3">
               <label for="add-description" class="col-form-label">Description:</label>
-              <textarea class="form-control" id="add-description"  autofocus="autofocus" oninput="inputValidator('add-description', this)" required></textarea>
+              <textarea class="form-control bg-transparent" id="add-description"  autofocus="autofocus" oninput="inputValidator('add-description', this)" required></textarea>
             </div>
 
             <!-- Type in the price-->
             <div class="mb-3">
                 <label for="add-price" class="col-form-label">Price:</label>
-                <input type="text" class="form-control" id="add-price" autofocus="autofocus" oninput="inputValidator('add-price', this)" required>
+                <div class="input-group">
+                  <span class="input-group-text ">$</span><input type="text" class="form-control bg-transparent" id="add-price" autofocus="autofocus" oninput="inputValidator('add-price', this)" required>
+                </div>
             </div>
 
             <!-- upload a picture
@@ -251,10 +253,7 @@
                 <input type="file" class="form-control" id="inputUploadNewPicture">
             </div>
             -->
-            <div class="modal-footer ">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
-              <button type="submit" class="btn btn-primary" id="add-new-drink-btn" disabled>Add item</button>
-            </div>
+
           </form>
 
 
@@ -276,6 +275,10 @@
                   </div>
           -->
         </div>
+        <div class="modal-footer ">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cancel</button>
+          <button type="submit" class="btn btn-primary" id="add-new-drink-btn" disabled>Add item</button>
+        </div>
       </div>
     </div>
   </div>
@@ -290,23 +293,25 @@
             </div>
             <div class="modal-body">
 
-              <form class="needs-validation">
+              <form class="needs-validation bg-transparent">
                 <!-- EDIT THE DRINK NAME -->
                 <div class="mb-3">
                   <label for="edit-drink-name" class="col-form-label">Drink Name:</label>
-                  <input type="text" class="form-control" id="edit-drink-name" autofocus="autofocus" required>
+                  <input type="text" class="form-control bg-transparent" id="edit-drink-name" autofocus="autofocus" required>
                 </div>
 
                 <!-- EDIT THE DRINK DESCRIPTION -->
                 <div class="mb-3">
                   <label for="edit-drink-descr" class="col-form-label">Description:</label>
-                  <textarea class="form-control" id="edit-drink-descr" required></textarea>
+                  <textarea class="form-control bg-transparent" id="edit-drink-descr" required></textarea>
                 </div>
 
                 <!-- EDIT THE DRINK PRICE -->
                 <div class="mb-3">
                     <label for="edit-drink-price" class="col-form-label">Price:</label>
-                    <input type="text" class="form-control" id="edit-drink-price" required>
+                    <div class="input-group">
+                    <span class="input-group-text ">$</span><input type="number" class="form-control bg-transparent" id="edit-drink-price" required>
+                    </div>
                 </div>
 
                 <!--!!OPTIONAL!! upload new picture.

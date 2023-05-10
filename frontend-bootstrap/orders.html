@@ -16,7 +16,7 @@
 		<h1 class="display-2"><strong>THE SWEET SPOT</strong></h1>
 	</header>
   <nav class="nav flex-row justify-content-center sticky-top custom-size fs-5 bg-body">
-    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="/">Home</a>
     <a class="nav-link" href="drinks.html">Drinks</a>
     <a class="nav-link active" aria-current="page" href="orders.html">Orders</a>
     <a class="nav-link" href="customers.html">Customers</a>
@@ -60,19 +60,19 @@
             <!-- SEARCH  -->
             <div class="p-1 d-inline-flex">  
                 <!-- THIS PART COLLAPSES! -->
-                <div class="collapse" id="SearchCollapsable">
-                    <input class="form-control p-2 bg-light" type="search" placeholder="Search" aria-label="Search">
+                <div class="collapse p-2" id="SearchCollapsable">
+                    <input class="form-control bg-light" type="search" placeholder="Search" aria-label="Search">
                 </div>
 
                 <!-- THE ACTUAL SEARCH BUTTON ITSELF-->
-                <button class="btn btn-light btn-primary " type="button" data-bs-toggle="collapse" data-bs-target="#SearchCollapsable" aria-expanded="false" aria-controls="SearchCollapsable">
+                <button class="btn btn-light btn-primary btn-outline-secondary " type="button" data-bs-toggle="collapse" data-bs-target="#SearchCollapsable" aria-expanded="false" aria-controls="SearchCollapsable">
                     <i class="bi bi-search fs-3"></i>
                 </button>
             </div>
 
             <!-- ADD -->
             <div class="p-1 d-inline-flex">
-                <button class="btn btn-light btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">  <i class="bi bi-plus-lg fs-3"></i> </button>
+                <button class="btn btn-light btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#addOrderModal">  <i class="bi bi-plus-lg fs-3"></i> </button>
             </div>
         </div>
 
@@ -201,7 +201,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="addOrderModal">Add a new ORDER! </h1>
+          <h1 class="modal-title fs-5" id="addOrderModal">Add order information </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -209,32 +209,32 @@
              <!-- Type in customer ID!-->
             <div class="mb-3">
               <label for="add-customer-ID" class="col-form-label">Customer ID:</label>
-              <input type="text" class="form-control" id="add-customer-ID">
+              <input type="text" class="form-control bg-transparent" id="add-customer-ID">
             </div>
 
             <!-- Type in customer name-->
             <div class="mb-3">
               <label for="add-description" class="col-form-label">Customer Name:</label>
-              <textarea class="form-control" id="add-description"></textarea>
+              <textarea class="form-control bg-transparent" id="add-description"></textarea>
             </div>
 
             <!-- Type in the order date?-->
             <div class="mb-3">
                 <label for="add-date" class="col-form-label">Order date:</label>
-                <input type="text" class="form-control" id="add-date">
+                <input type="text" class="form-control bg-transparent" id="add-date">
             </div>
 
 
             <!-- Type in the items ordered?-->
             <div class="mb-3">
                 <label for="add-total-items" class="col-form-label">Items total:</label>
-                <input type="text" class="form-control" id="add-total-items">
+                <input type="text" class="form-control bg-transparent" id="add-total-items">
             </div>
 
             <!-- Type in the total price?-->
             <div class="mb-3">
                 <label for="add-total-price" class="col-form-label">Total price:</label>
-                <input type="text" class="form-control" id="add-total-price">
+                <input type="text" class="form-control bg-transparent" id="add-total-price">
             </div>
 
               
