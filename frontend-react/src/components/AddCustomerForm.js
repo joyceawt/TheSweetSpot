@@ -1,6 +1,6 @@
 import React from "react";
 
-function AddCustomerForm() {
+function AddCustomerForm({ onAddCust }) {
   return (
     <>
       <form className="needs-validation">
@@ -34,7 +34,11 @@ function AddCustomerForm() {
           >
             Cancel
           </button>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={() => onAddCust()}
+          >
             Add
           </button>
         </div>

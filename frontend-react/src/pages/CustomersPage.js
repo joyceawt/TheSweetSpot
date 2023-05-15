@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Modal from "../components/Modal";
 import AddCustomerForm from "../components/AddCustomerForm";
@@ -8,13 +9,11 @@ import CustomerList from "../components/CustomerList";
 function CustomersPage() {
   const [customerList, setCustomerList] = useState([]);
 
+  const redirect = useNavigate();
+
   const loadAllCustomers = async () => {
     try {
-      const response = await axios.get("http://localhost:9124/api/customers", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.get("http://localhost:9124/api/customers");
 
       setCustomerList(response.data);
     } catch (err) {
@@ -22,24 +21,47 @@ function CustomersPage() {
     }
   };
 
+  // ADD a single Customer
+  const onAddCustomer = async (customer) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:9124/api/customers",
+        customer
+      );
+      if (response) {
+        const customers = await loadAllCustomers();
+        setCustomerList(response.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // UPDATE a single Customer
   const onEditCustomer = async (customer_id) => {
-    console.log("onEdit from CustomersPage. the id was: ", customer_id);
+    try {
+      const response = await axios.put(
+        `http://localhost:9124/api/customers/${customer_id}`
+      );
+      redirect("/customers");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // DELETE a single customer!.
   const onDeleteCustomer = async (customer_id) => {
-    console.log("onDelete from CustomersPage. the id was: ", customer_id);
-    /*
-      const response = await fetch(`/log/${drink_id}`, { method: 'DELETE' });
-      if (response.status === 204) {
-          const getResponse = await fetch('/log');
-          const currentDrinkList = await getResponse.json();
-          setDrinkList(currentDrinkList);
-      } else {
-          console.error(`Failed to delete drink with _id = ${drink_id}, status code = ${response.status}`)
+    try {
+      const response = await axios.delete(
+        `http://localhost:9124/api/customers/${customer_id}`
+      );
+      if (response) {
+        const customers = await loadAllCustomers();
+        setCustomerList(response.data);
       }
-      */
+    } catch (err) {
+      console.error(`Failed to delete customer with id = ${customer_id}`);
+    }
   };
 
   //LOAD all subscriptions
@@ -54,7 +76,7 @@ function CustomersPage() {
       trigger="add-customer"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
       btnclasses="btn btn-light btn-outline-primary"
-      content={<AddCustomerForm />}
+      content={<AddCustomerForm onAddCust={onAddCustomer} />}
       title="Add a new customer"
     />
   );

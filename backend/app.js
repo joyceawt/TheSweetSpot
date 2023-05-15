@@ -7,11 +7,7 @@ const cors = require("cors");
 
 app.use(cors());
 
-//routes
-
-//GET routes
-
-// Get all customers
+//Customers
 app.get("/api/customers", (req, res) => {
   db.pool.query("SELECT * FROM Customers", (err, results, fields) => {
     if (err) {
@@ -20,6 +16,57 @@ app.get("/api/customers", (req, res) => {
     }
     res.json(results);
   });
+});
+
+app.put("/api/customers/:id", (req, res) => {
+  const id = req.params.id;
+  const name = req.body.name;
+  const phone = req.body.phone;
+
+  db.query(
+    "UPDATE Customers SET ? WHERE customer_id = ?",
+    [name, phone],
+    id,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.json(result);
+    }
+  );
+});
+
+app.post("/api/customers", (req, res) => {
+  const name = req.body.name;
+  const phone = req.body.phone;
+
+  db.pool.query(
+    "INSERT INTO Customers (name, phone) VALUES (?, ?)",
+    [name, phone],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.json(result);
+    }
+  );
+});
+
+app.delete("/api/customers/delete/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.pool.query(
+    "DELETE FROM Customers WHERE customer_id= ?",
+    id,
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Error deleting customer");
+        return;
+      }
+
+      res.json(result);
+    }
+  );
 });
 
 // Get all drinks
