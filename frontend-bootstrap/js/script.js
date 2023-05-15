@@ -1,76 +1,76 @@
-'use strict'
+"use strict";
 
 //global variables. not a good practice but it will do here:
 
 //to store which data is selected for edit or deletion
-let selectedId= -1;
+let selectedId = -1;
 
 // TEMPORARY until DB is connected. only used for client side adding and deleting.
 let childCount = 3;
 
-
-
 /***************
- * 
+ *
  * FOLLOWING FUNCTIONS AND VARIABLES NEEDS TO BE REMOVED ONCE DB IS LIVE.
- * 
- * 
+ *
+ *
  */
 
 let validateInputs = {
-    "drinkName": false,
-    "drinkDescription": false,
-    "drinkPrice": false
+  drinkName: false,
+  drinkDescription: false,
+  drinkPrice: false,
+};
+
+function inputValidator(arg, obj) {
+  let check = document.getElementById(arg).value;
+  if (arg == "add-drink-name") {
+    if (check.length > 0) {
+      validateInputs.drinkName = true;
+    } else {
+      validateInputs.drinkPrice = false;
+    }
   }
 
-
-function inputValidator(arg, obj){
-    
-    let check = document.getElementById(arg).value;
-    if(arg =="add-drink-name"){
-        if(check.length >0){
-            validateInputs.drinkName=true;
-        }else{
-            validateInputs.drinkPrice=false;
-        }
+  if (arg == "add-description") {
+    if (check.length > 0) {
+      validateInputs.drinkDescription = true;
+    } else {
+      validateInputs.drinkPrice = false;
     }
+  }
 
-    if (arg =="add-description"){
-        if(check.length >0){
-            validateInputs.drinkDescription=true;
-        }else{
-            validateInputs.drinkPrice=false;
-        }
+  if (arg == "add-price") {
+    if (check.length > 0) {
+      validateInputs.drinkPrice = true;
+    } else {
+      validateInputs.drinkPrice = false;
     }
+  }
 
-
-    if(arg =="add-price"){
-        if(check.length >0){
-            validateInputs.drinkPrice=true;
-        }else{
-            validateInputs.drinkPrice=false;
-        }
-    }
-
-
-    //if all of validateInputs, enable add item button.
-    if ( validateInputs.drinkName== true && validateInputs.drinkDescription== true && validateInputs.drinkPrice== true ){
-        document.getElementById("add-new-drink-btn").disabled = false; 
-
-    }else{//otherwise, ensure the add button is disabled. 
-        document.getElementById("add-new-drink-btn").disabled = true; 
-    }
-    
+  //if all of validateInputs, enable add item button.
+  if (
+    validateInputs.drinkName == true &&
+    validateInputs.drinkDescription == true &&
+    validateInputs.drinkPrice == true
+  ) {
+    document.getElementById("add-new-drink-btn").disabled = false;
+  } else {
+    //otherwise, ensure the add button is disabled.
+    document.getElementById("add-new-drink-btn").disabled = true;
+  }
 }
 
-function addStaticDataForTest(drinkName, drinkDescription, drinkPrice){
-    // document.getElementById("content-3").parentElement.id
-    //let parent_Node = document.getElementById("mainContent");
-    let newDrinkNode = document.createElement('article');
-    newDrinkNode.setAttribute("class", "d-flex flex-row align-content-center justify-content-center rounded bg-white p-1");
-    newDrinkNode.setAttribute("id",`content-${childCount}`);
+function addStaticDataForTest(drinkName, drinkDescription, drinkPrice) {
+  // document.getElementById("content-3").parentElement.id
+  //let parent_Node = document.getElementById("mainContent");
+  let newDrinkNode = document.createElement("article");
+  newDrinkNode.setAttribute(
+    "class",
+    "d-flex flex-row align-content-center justify-content-center rounded bg-white p-1"
+  );
+  newDrinkNode.setAttribute("id", `content-${childCount}`);
 
-    newDrinkNode.innerHTML=`
+  newDrinkNode.innerHTML = `
         <!-- Boba Picture -->
         <div class="p-2 d-flex justify-content-center align-content-center">
             <img id ="img-${childCount}" src="Images/boba.png" >
@@ -107,11 +107,10 @@ function addStaticDataForTest(drinkName, drinkDescription, drinkPrice){
             <!-- DELETE -->
             <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" id=${childCount} onclick="selectButtonClicked(this)"><i class="bi bi-x-lg fs-3"></i></button>
         </div>
-    `
-    document.getElementById("mainContent").append(newDrinkNode)
+    `;
+  document.getElementById("mainContent").append(newDrinkNode);
 
-    document.getElementById("add-new-drink-btn").innerHTML =`Add item`
-
+  document.getElementById("add-new-drink-btn").innerHTML = `Add item`;
 }
 
 /*
@@ -124,140 +123,135 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 */
 
-
-
 /****
- * 
+ *
  * ESSENTIAL FUNCTIONS BELOW. DO NOT REMOVE.
- * 
- * 
+ *
+ *
  */
 
-function selectButtonClicked(obj){
-    // set the selectedID to whatever is clicked.
-    selectedId = obj.getAttribute("id");
-    //console.log("i was clicked from:", selectedId);
+function selectButtonClicked(obj) {
+  // set the selectedID to whatever is clicked.
+  selectedId = obj.getAttribute("id");
+  //console.log("i was clicked from:", selectedId);
 }
 
+function editButtonClicked(obj) {
+  selectedId = obj.getAttribute("id");
+  console.log("prompted to edit: ", selectedId);
 
-function editButtonClicked(obj){
-    selectedId = obj.getAttribute("id");
-    console.log("prompted to edit: ", selectedId);
-    
-    // load the contents of the current information of the drink into the textbox themselves.
-    let currDrinkName = document.getElementById(`name-${selectedId}`).textContent;
-    let currDrinkDesc = document.getElementById(`drinkDescription-${selectedId}`).textContent;
-    let currDrinkPrice = document.getElementById(`drinkPrice-${selectedId}`).textContent;
-    
-    console.log(currDrinkName, currDrinkDesc, currDrinkPrice);
+  // load the contents of the current information of the drink into the textbox themselves.
+  let currDrinkName = document.getElementById(`name-${selectedId}`).textContent;
+  let currDrinkDesc = document.getElementById(
+    `drinkDescription-${selectedId}`
+  ).textContent;
+  let currDrinkPrice = document.getElementById(
+    `drinkPrice-${selectedId}`
+  ).textContent;
 
-    document.getElementById("edit-drink-name").value = currDrinkName;
-    document.getElementById("edit-drink-descr").value = currDrinkDesc;
-    document.getElementById("edit-drink-price").value = currDrinkPrice;
+  console.log(currDrinkName, currDrinkDesc, currDrinkPrice);
+
+  document.getElementById("edit-drink-name").value = currDrinkName;
+  document.getElementById("edit-drink-descr").value = currDrinkDesc;
+  document.getElementById("edit-drink-price").value = currDrinkPrice;
 }
 
-
-function cancelButtonClicked(){
-    console.log("cancelled selected item: ", selectedId);
-    // unselect.
-    selectedId = -1;
+function cancelButtonClicked() {
+  console.log("cancelled selected item: ", selectedId);
+  // unselect.
+  selectedId = -1;
 }
 
-async function deleteButtonClickedYes(){
+async function deleteButtonClickedYes() {
+  //document.getElementById("content-5").parentElement.id
+  let targetID = "content-" + selectedId;
 
-    //document.getElementById("content-5").parentElement.id 
-    let targetID = "content-" + selectedId;
+  //console.log(targetID);
+  let parent_Node = document.getElementById("mainContent");
+  let target_Node = document.getElementById(targetID);
+  let test = parent_Node.removeChild(target_Node);
 
-    //console.log(targetID);
-    let parent_Node = document.getElementById("mainContent");
-    let target_Node = document.getElementById(targetID);
-    let test = parent_Node.removeChild(target_Node);
+  // unselect.
+  selectedId = -1;
 
-    // unselect.
-    selectedId=-1;
-
-
-    // PLACE CODE HERE TO DELETE IN BACKEND
+  // PLACE CODE HERE TO DELETE IN BACKEND
 }
 
-async function saveEditButtonClicked(){
-    // console.log("now saving: " , selectedId);
-    let editEntryModal = document.getElementById('editEntryModal');
-    let modal = bootstrap.Modal.getInstance(editEntryModal);
+async function saveEditButtonClicked() {
+  // console.log("now saving: " , selectedId);
+  let editEntryModal = document.getElementById("editEntryModal");
+  let modal = bootstrap.Modal.getInstance(editEntryModal);
 
-    // grab the contents.
-    let drinkEditName = document.getElementById("edit-drink-name").value;
-    let drinkEditDescription = document.getElementById("edit-drink-descr").value;
-    let drinkEditPrice = document.getElementById("edit-drink-price").value;
+  // grab the contents.
+  let drinkEditName = document.getElementById("edit-drink-name").value;
+  let drinkEditDescription = document.getElementById("edit-drink-descr").value;
+  let drinkEditPrice = document.getElementById("edit-drink-price").value;
 
-    console.log(drinkEditName,drinkEditDescription,drinkEditPrice )
+  console.log(drinkEditName, drinkEditDescription, drinkEditPrice);
 
-    // change the values 
-    document.getElementById(`name-${selectedId}`).innerText   = drinkEditName
-    document.getElementById(`drinkDescription-${selectedId}`).innerText   = drinkEditDescription;
-    document.getElementById(`drinkPrice-${selectedId}`).innerText   = drinkEditPrice;
+  // change the values
+  document.getElementById(`name-${selectedId}`).innerText = drinkEditName;
+  document.getElementById(`drinkDescription-${selectedId}`).innerText =
+    drinkEditDescription;
+  document.getElementById(`drinkPrice-${selectedId}`).innerText =
+    drinkEditPrice;
 
+  //close modal.
+  modal.hide();
 
-    //close modal.
-    modal.hide();
-
-    // unselect.
-    selectedId=-1;
-
-
+  // unselect.
+  selectedId = -1;
 }
 
-async function addButtonClicked(event){
-    //prevent default event FOR STATICALLY ADDING. please REMOVE once connected to DB!
-    event.preventDefault();  
+async function addButtonClicked(event) {
+  //prevent default event FOR STATICALLY ADDING. please REMOVE once connected to DB!
+  event.preventDefault();
 
+  let drinkName = document.getElementById("add-drink-name").value;
+  let drinkDescription = document.getElementById("add-description").value;
+  let drinkPrice = document.getElementById("add-price").value;
 
-    let drinkName = document.getElementById("add-drink-name").value;
-    let drinkDescription = document.getElementById("add-description").value;
-    let drinkPrice = document.getElementById("add-price").value;
+  // DOUBLE CHECKER. entry CANNOT be null.
+  if (drinkName == "" || drinkDescription == "" || drinkPrice == "") {
+    return;
+  }
 
-    // DOUBLE CHECKER. entry CANNOT be null. 
-    if( drinkName == '' || drinkDescription =='' || drinkPrice==''){
-        return;
-    }
+  let url = "/addNewDrinkEntry";
 
-    let url='/addNewDrinkEntry';
-
-    //change text of button to 'loading'
-    document.getElementById("add-new-drink-btn").innerHTML =`
+  //change text of button to 'loading'
+  document.getElementById("add-new-drink-btn").innerHTML = `
     <div class="spinner-border spinner-border-sm" role="status">
         
     </div>
     `;
 
-    // code for when db is connected
-    let urlEncodedObj = new URLSearchParams();
-    urlEncodedObj.append("drinkName", drinkName);
-    urlEncodedObj.append("drinkDescription", drinkDescription);
-    urlEncodedObj.append("drinkPrice", drinkPrice);
+  // code for when db is connected
+  let urlEncodedObj = new URLSearchParams();
+  urlEncodedObj.append("drinkName", drinkName);
+  urlEncodedObj.append("drinkDescription", drinkDescription);
+  urlEncodedObj.append("drinkPrice", drinkPrice);
 
-    //console.log(entryObject);
+  //console.log(entryObject);
 
-    // grab the modal window
-    let addDrinkModal = document.getElementById('addDrinkModal');
-    let modal = bootstrap.Modal.getInstance(addDrinkModal);
+  // grab the modal window
+  let addDrinkModal = document.getElementById("addDrinkModal");
+  let modal = bootstrap.Modal.getInstance(addDrinkModal);
 
-    //increase childcount 
-    childCount= childCount+1;
-    // document.getElementById("content-3").parentElement.id
-    //let parent_Node = document.getElementById("mainContent");
+  //increase childcount
+  childCount = childCount + 1;
+  // document.getElementById("content-3").parentElement.id
+  //let parent_Node = document.getElementById("mainContent");
 
-    // create the static content by calling a function
-    addStaticDataForTest(drinkName, drinkDescription, drinkPrice);
-   
-    // change the button back to original 
-    document.getElementById("add-new-drink-btn").innerHTML =`Add item`
+  // create the static content by calling a function
+  addStaticDataForTest(drinkName, drinkDescription, drinkPrice);
 
-    // hide the modal window
-    modal.hide();
-    
+  // change the button back to original
+  document.getElementById("add-new-drink-btn").innerHTML = `Add item`;
 
-    /***** UNCOMMENT OUT THE SECTION BELOW WHEN IT'S TIME TO CONNECT TO BACK END. 
+  // hide the modal window
+  modal.hide();
+
+  /***** UNCOMMENT OUT THE SECTION BELOW WHEN IT'S TIME TO CONNECT TO BACK END. 
 
     return fetch(url,
         {
@@ -316,6 +310,3 @@ async function addButtonClicked(event){
         .catch(error => console.error(error));
     ******/
 }
-
-
-
