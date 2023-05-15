@@ -1,8 +1,8 @@
-// model after SubscriptionLiist
+// model after SubscriptionList
 import React from 'react';
 
 import Customer from './Customer';
-function CustomerList({ custList, onEditCust, onDeleteCust}) {
+function CustomerList({ custList, onEditCust, onDeleteCust }) {
 
     return (
     <section className="d-flex flex-column justify-content-evenly custom-size" >
