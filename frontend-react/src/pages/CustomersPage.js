@@ -8,8 +8,7 @@ import CustomerList from "../components/CustomerList";
 
 function CustomersPage() {
   const [customerList, setCustomerList] = useState([]);
-  const [name, setName]= useState([]);
-  const [phone, setPhoneNumber]= useState([]);
+
   const redirect = useNavigate();
 
   const loadAllCustomers = async () => {
@@ -39,15 +38,11 @@ function CustomersPage() {
   };
 
   // UPDATE a single Customer
-  const onEditCustomer = async (customer_id) => {
-    try {
-      const response = await axios.put(
-        `http://localhost:9124/api/customers/${customer_id}`
-      );
-      redirect("/customers");
-    } catch (err) {
-      console.log(err);
-    }
+  const onEditCustomer = async (customer) => {
+    debugger;
+    let newList = customerList;
+    newList[customer.customer_id - 1] = customer;
+    setCustomerList(newList);
   };
 
   // DELETE a single customer!.
@@ -76,7 +71,7 @@ function CustomersPage() {
     <Modal
       trigger="add-customer"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
-      btnclasses="btn btn-light btn-outline-primary"
+      btnClasses="btn btn-light btn-outline-primary"
       content={<AddCustomerForm onAddCust={onAddCustomer} />}
       title="Add a new customer"
     />
@@ -89,9 +84,7 @@ function CustomersPage() {
 
       <CustomerList
         custList={customerList}
-        onEditCust={onEditCustomer} 
-        setName={setName} 
-        setPhoneNumber={setPhoneNumber}
+        onEditCust={onEditCustomer}
         onDeleteCust={onDeleteCustomer}
       />
     </>

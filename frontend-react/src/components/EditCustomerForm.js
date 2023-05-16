@@ -1,6 +1,42 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import axios from "axios";
 
-function EditCustomerForm({ customer, onClickAction, setName, setPhoneNumber}) {
+export const EditCustomerForm = ({ customer, onClickAction }) => {
+  const [name, setNewName] = useState(customer.name);
+  const [phone, setNewPhone] = useState(customer.phone);
+  const [customer_id] = useState(customer.customer_id);
+
+  const editCustomer = async () => {
+    try {
+      const response = axios.put(
+        `http://localhost:9124/api/customers/${customer_id}`,
+        {
+          name: name,
+          phone: phone,
+        }
+      );
+      handleChange();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleNewName = (e) => {
+    setNewName(e.target.value);
+  };
+
+  const handleNewPhone = (e) => {
+    setNewPhone(e.target.value);
+  };
+
+  const handleChange = async () => {
+    const newCustomer = {
+      customer_id: customer_id,
+      name: name,
+      phone: phone,
+    };
+    onClickAction(newCustomer);
+  };
 
   return (
     <>
@@ -15,7 +51,7 @@ function EditCustomerForm({ customer, onClickAction, setName, setPhoneNumber}) {
             id="customer-ID"
             autoFocus="autoFocus"
             style={{ width: "15%" }}
-            value={customer.customer_id}
+            value={customer_id}
             disabled
           />
         </div>
@@ -27,8 +63,8 @@ function EditCustomerForm({ customer, onClickAction, setName, setPhoneNumber}) {
           <textarea
             className="form-control bg-transparent"
             id="customer-name"
-            defaultValue={customer.name}
-            onChange={(e)=>setName(e)}
+            value={name}
+            onChange={handleNewName}
             required
           ></textarea>
         </div>
@@ -42,8 +78,8 @@ function EditCustomerForm({ customer, onClickAction, setName, setPhoneNumber}) {
               type="number"
               className="form-control bg-transparent"
               id="customer-phone"
-              onChange={(e)=>setPhoneNumber(e)}
-              defaultValue={customer.phone}
+              value={phone}
+              onChange={handleNewPhone}
               required
             />
           </div>
@@ -61,7 +97,8 @@ function EditCustomerForm({ customer, onClickAction, setName, setPhoneNumber}) {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => onClickAction(customer.customer_id)}
+            data-bs-dismiss="modal"
+            onClick={editCustomer}
           >
             {" "}
             Save{" "}
@@ -70,6 +107,6 @@ function EditCustomerForm({ customer, onClickAction, setName, setPhoneNumber}) {
       </form>
     </>
   );
-}
+};
 
 export default EditCustomerForm;

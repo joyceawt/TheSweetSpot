@@ -1,8 +1,8 @@
 // model after SubscriptionList
 import React from "react";
-
 import Customer from "./Customer";
-function CustomerList({ custList, onEditCust, onDeleteCust, setName, setPhoneNumber }) {
+
+function CustomerList({ custList, onEditCust, onDeleteCust }) {
   return (
     <section className="d-flex flex-column justify-content-evenly custom-size">
       <article className="card table-responsive bg-white">
@@ -18,14 +18,12 @@ function CustomerList({ custList, onEditCust, onDeleteCust, setName, setPhoneNum
             </tr>
           </thead>
           <tbody className="table-group-divider">
-            {custList.map((custArgs, i) => (
+            {custList.map((customer, i) => (
               <Customer
                 key={i}
-                customer={custArgs}
+                customer={customer}
                 onEditCust={onEditCust}
                 onDeleteCust={onDeleteCust}
-                setName = {setName}
-                setPhoneNumber = {setPhoneNumber}
               />
             ))}
           </tbody>
