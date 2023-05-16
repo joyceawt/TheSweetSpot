@@ -21,6 +21,11 @@ function CustomersPage() {
     }
   };
 
+  // UPDATE a single Customer
+  const onEditCustomer = async () => {
+    loadAllCustomers();
+  };
+
   // ADD a single Customer
   const onAddCustomer = async (customer) => {
     try {
@@ -29,17 +34,11 @@ function CustomersPage() {
         customer
       );
       if (response) {
-        const customers = await loadAllCustomers();
-        setCustomerList(response.data);
+        setCustomerList(...customerList, response.data);
       }
     } catch (err) {
       console.log(err);
     }
-  };
-
-  // UPDATE a single Customer
-  const onEditCustomer = async () => {
-    loadAllCustomers();
   };
 
   // DELETE a single customer!.

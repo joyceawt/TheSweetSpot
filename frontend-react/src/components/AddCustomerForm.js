@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 function AddCustomerForm({ onAddCust }) {
+  const [name, setName] = useState([]);
+  const [phone, setPhone] = useState([]);
+
+  const customer = { name, phone };
+
   return (
     <>
       <form className="needs-validation">
@@ -10,7 +15,9 @@ function AddCustomerForm({ onAddCust }) {
           </label>
           <input
             className="form-control bg-transparent"
-            id="add-description"
+            id="add-name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
@@ -22,7 +29,11 @@ function AddCustomerForm({ onAddCust }) {
           <input
             type="text"
             className="form-control bg-transparent"
-            id="add-date"
+            id="add-phone"
+            value={phone}
+            onChange={(e) => {
+              setPhone(e.target.value);
+            }}
             required
           />
         </div>
@@ -37,7 +48,7 @@ function AddCustomerForm({ onAddCust }) {
           <button
             type="submit"
             className="btn btn-primary"
-            onClick={() => onAddCust()}
+            onClick={() => onAddCust(customer)}
           >
             Add
           </button>
