@@ -6,10 +6,11 @@ const db = require("./database/db-connector");
 const cors = require("cors");
 
 app.use(cors());
+app.use(express.json());
 
 //Customers
 app.get("/api/customers", (req, res) => {
-  db.pool.query("SELECT * FROM Customers", (err, results, fields) => {
+  db.pool.query("SELECT * FROM Customers", (err, results) => {
     if (err) {
       res.status(500).send("Error fetching customers");
       return;
@@ -23,13 +24,13 @@ app.put("/api/customers/:id", (req, res) => {
   const name = req.body.name;
   const phone = req.body.phone;
 
-  db.query(
-    "UPDATE Customers SET ? WHERE customer_id = ?",
-    [name, phone],
-    id,
+  db.pool.query(
+    "UPDATE Customers SET name = ?, phone = ? WHERE customer_id = ?",
+    [name, phone, id],
     (err, result) => {
       if (err) {
-        console.log(err);
+        res.status(500).send("Error updating customer");
+        return;
       }
       res.json(result);
     }
