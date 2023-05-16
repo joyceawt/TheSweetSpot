@@ -39,7 +39,6 @@ function CustomersPage() {
 
   // UPDATE a single Customer
   const onEditCustomer = async (customer) => {
-    debugger;
     let newList = customerList;
     newList[customer.customer_id - 1] = customer;
     setCustomerList(newList);
