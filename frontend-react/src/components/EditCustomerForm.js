@@ -21,14 +21,6 @@ export const EditCustomerForm = ({ customer, onClickAction }) => {
     }
   };
 
-  const handleNewName = (e) => {
-    setNewName(e.target.value);
-  };
-
-  const handleNewPhone = (e) => {
-    setNewPhone(e.target.value);
-  };
-
   return (
     <>
       <form className="needs-validation bg-transparent">
@@ -55,7 +47,7 @@ export const EditCustomerForm = ({ customer, onClickAction }) => {
             className="form-control bg-transparent"
             id="customer-name"
             value={name}
-            onChange={handleNewName}
+            onChange={(e) => setNewName(e.target.value)}
             required
           ></textarea>
         </div>
@@ -70,7 +62,9 @@ export const EditCustomerForm = ({ customer, onClickAction }) => {
               className="form-control bg-transparent"
               id="customer-phone"
               value={phone}
-              onChange={handleNewPhone}
+              onChange={(e) => {
+                setNewPhone(e.target.value);
+              }}
               required
             />
           </div>
