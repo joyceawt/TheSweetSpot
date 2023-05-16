@@ -16,9 +16,6 @@ import CustomersPage from "./pages/CustomersPage";
 function App() {
   const title = "The Sweet Spot";
 
-  const [orderList, setOrderList] = useState([]);
-  const [orderItem, setOrderItems] = useState([]);
-  const [customerList, setCustomerList] = useState([]);
   return (
     <div className="App">
       <head>
