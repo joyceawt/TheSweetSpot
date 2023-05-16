@@ -48,8 +48,7 @@ function CustomersPage() {
         `http://localhost:9124/api/customers/${customer_id}`
       );
       if (response) {
-        const customers = await loadAllCustomers();
-        setCustomerList(response.data);
+        loadAllCustomers();
       }
     } catch (err) {
       console.error(`Failed to delete customer with id = ${customer_id}`);

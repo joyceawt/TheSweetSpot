@@ -53,8 +53,9 @@ app.post("/api/customers", (req, res) => {
   );
 });
 
-app.delete("/api/customers/delete/:id", (req, res) => {
-  const id = req.params.id;
+app.delete("/api/customers/:customer_id", (req, res) => {
+  console.log(req.params);
+  const id = req.params.customer_id;
 
   db.pool.query(
     "DELETE FROM Customers WHERE customer_id= ?",
