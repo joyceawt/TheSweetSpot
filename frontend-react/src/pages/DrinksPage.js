@@ -11,10 +11,9 @@ import drinksData from "../data/drinksdata";
 
 function DrinksPage() {
   const [drinkList, setDrinkList] = useState([]);
-  const [drinkName, setDrinkName]= useState([]);
-  const [drinkDescription, setDrinkDescription]= useState([]);
-  const [drinkPrice, setdrinkPrice]= useState([]);
-
+  const [drinkName, setDrinkName] = useState([]);
+  const [drinkDescription, setDrinkDescription] = useState([]);
+  const [drinkPrice, setdrinkPrice] = useState([]);
 
   // load all.
   const loadAllDrinks = async () => {
@@ -26,12 +25,10 @@ function DrinksPage() {
   // UPDATE a single drink
   const onEditDrink = async (drink_id) => {
     // query here.
-    
   };
 
   // DELETE a single drink!.
   const onDeleteDrinks = async (drink_id) => {
-    
     /*
       const response = await fetch(`/log/${drink_id}`, { method: 'DELETE' });
       if (response.status === 204) {
@@ -54,7 +51,7 @@ function DrinksPage() {
     <Modal
       trigger="add-drink"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
-      btnclasses="btn btn-light btn-outline-primary"
+      btnClasses="btn btn-light btn-outline-primary"
       content={<AddDrinkForm />}
       title="Add a new Drink"
     />
@@ -69,7 +66,7 @@ function DrinksPage() {
         drinkLists={drinkList}
         onEditDrink={onEditDrink}
         onDeleteDrinks={onDeleteDrinks}
-        setDrinkName ={setDrinkName}
+        setDrinkName={setDrinkName}
         setDrinkDescription={setDrinkDescription}
         setdrinkPrice={setdrinkPrice}
       />

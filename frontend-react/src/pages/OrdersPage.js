@@ -14,25 +14,20 @@ function OrdersPage() {
   const [orderList, setOrderList] = useState([]);
   const [orderItemList, setOrderItemList] = useState([]);
 
-
   // Order states
-  const [orderID, setOrderID]= useState([]);
-  const [orderCustomerID, setCustomerID]= useState([]);
-  const [orderDate, setOrderDate]= useState([]);
-  const [total, setTotal]= useState([]);
+  const [orderID, setOrderID] = useState([]);
+  const [orderCustomerID, setCustomerID] = useState([]);
+  const [orderDate, setOrderDate] = useState([]);
+  const [total, setTotal] = useState([]);
 
   // OrderItem states. OI = OrderItems
-  const [OI_orderID, setOI_orderID]= useState([]);
-  const [OI_drinkID, setOI_drinkID]= useState([]);
-  const [OI_drinkQuantity, setOI_drinkQuantity ]= useState([]);
-  const [OI_iceLvl, setOI_iceLvl ]= useState([]);
-  const [OI_sugarLvl, setOI_sugarLvl ]= useState([]);
-  const [OI_dairyOpt, setOI_dairyOpt ]= useState([]);
-  const [OI_bobaOpt, setOI_bobaOpt ]= useState([]);
-
-
-
-  
+  const [OI_orderID, setOI_orderID] = useState([]);
+  const [OI_drinkID, setOI_drinkID] = useState([]);
+  const [OI_drinkQuantity, setOI_drinkQuantity] = useState([]);
+  const [OI_iceLvl, setOI_iceLvl] = useState([]);
+  const [OI_sugarLvl, setOI_sugarLvl] = useState([]);
+  const [OI_dairyOpt, setOI_dairyOpt] = useState([]);
+  const [OI_bobaOpt, setOI_bobaOpt] = useState([]);
 
   // load all.
   const loadAllOrders = async () => {
@@ -40,24 +35,16 @@ function OrdersPage() {
     setOrderItemList(orderitemsdata);
   };
   // UPDATE a single order
-  const onEditOrder = async (_id) => {
-
-  };
+  const onEditOrder = async (_id) => {};
 
   // DELETE a single customer!.
-  const onDeleteOrder = async (_id) => {
-
-  };
+  const onDeleteOrder = async (_id) => {};
 
   // UPDATE a single order
-  const onEditOrderItem = async (_id) => {
-
-  };
+  const onEditOrderItem = async (_id) => {};
 
   // DELETE a single customer!.
-  const onDeleteOrderItem = async (_id) => {
-   
-  };
+  const onDeleteOrderItem = async (_id) => {};
   // LOAD all subscriptions
   useEffect(() => {
     loadAllOrders();
@@ -68,7 +55,7 @@ function OrdersPage() {
       key="AddOrder"
       trigger="add-order"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
-      btnclasses="btn btn-light btn-outline-primary"
+      btnClasses="btn btn-light btn-outline-primary"
       content={<OrderForm />}
       title="Add a new Order"
     />
@@ -79,7 +66,7 @@ function OrdersPage() {
       key="AddOrderItem"
       trigger="add-order-item"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
-      btnclasses="btn btn-light btn-outline-primary"
+      btnClasses="btn btn-light btn-outline-primary"
       content={<AddOrderItemForm />}
       title="Add a new Order Item"
     />
@@ -110,7 +97,7 @@ function OrdersPage() {
         contentTitle="Order Item"
         addModal={OrderItemModal}
       ></UtilityBar>
-      
+
       <article>
         <OrderItemList
           orderItemList={orderItemList}
