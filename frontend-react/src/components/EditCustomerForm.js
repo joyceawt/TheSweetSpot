@@ -8,14 +8,14 @@ export const EditCustomerForm = ({ customer, onClickAction }) => {
 
   const editCustomer = async () => {
     try {
-      const response = axios.put(
+      const response = await axios.put(
         `http://localhost:9124/api/customers/${customer_id}`,
         {
           name: name,
           phone: phone,
         }
       );
-      handleChange();
+      onClickAction();
     } catch (err) {
       console.log(err);
     }
@@ -27,15 +27,6 @@ export const EditCustomerForm = ({ customer, onClickAction }) => {
 
   const handleNewPhone = (e) => {
     setNewPhone(e.target.value);
-  };
-
-  const handleChange = async () => {
-    const newCustomer = {
-      customer_id: customer_id,
-      name: name,
-      phone: phone,
-    };
-    onClickAction(newCustomer);
   };
 
   return (
