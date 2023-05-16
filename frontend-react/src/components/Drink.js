@@ -5,7 +5,15 @@ import bobaPic from "../data/images/boba_unknownartist.png";
 import Modal from "./Modal";
 import EditDrinkForm from "./EditDrinkForm";
 import DeleteConfirm from "./DeleteConfirm";
-function Drink({ key, drink, onEditDrink, onDeleteDrinks, setDrinkName, setDrinkDescription, setdrinkPrice }) {
+function Drink({
+  key,
+  drink,
+  onEditDrink,
+  onDeleteDrinks,
+  setDrinkName,
+  setDrinkDescription,
+  setdrinkPrice,
+}) {
   let id = drink.drink_id;
   let drinkName = "name-" + drink.drink_id;
   let drinkID = "id-" + drink.drink_id;
@@ -66,12 +74,12 @@ function Drink({ key, drink, onEditDrink, onDeleteDrinks, setDrinkName, setDrink
           <Modal
             trigger={modalEdit}
             buttonName={<i className="bi bi-pencil-square fs-3" />}
-            btnclasses="btn btn-light btn-outline-primary"
+            btnClasses="btn btn-light btn-outline-primary"
             content={
-              <EditDrinkForm 
-                drinkItem={drink} 
+              <EditDrinkForm
+                drinkItem={drink}
                 onClickAction={onEditDrink}
-                setDrinkName ={setDrinkName}
+                setDrinkName={setDrinkName}
                 setDrinkDescription={setDrinkDescription}
                 setdrinkPrice={setdrinkPrice}
               />
@@ -82,7 +90,7 @@ function Drink({ key, drink, onEditDrink, onDeleteDrinks, setDrinkName, setDrink
           <Modal
             trigger={modalDelete}
             buttonName={<i className="bi bi-x-lg fs-3" />}
-            btnclasses="btn btn-outline-danger"
+            btnClasses="btn btn-outline-danger"
             content={
               <DeleteConfirm
                 actionOnClick={onDeleteDrinks}

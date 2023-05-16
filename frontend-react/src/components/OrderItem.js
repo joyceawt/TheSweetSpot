@@ -4,7 +4,18 @@ import DeleteConfirm from "./DeleteConfirm";
 
 import EditOrderItemForm from "./EditOrderItemForm";
 
-function OrderItem({ orderItem, onEditOrderItem, onDeleteOrderItem, setOI_orderID, setOI_drinkID, setOI_drinkQuantity, setOI_iceLvl, setOI_sugarLvl, setOI_dairyOpt, setOI_bobaOpt }) {
+function OrderItem({
+  orderItem,
+  onEditOrderItem,
+  onDeleteOrderItem,
+  setOI_orderID,
+  setOI_drinkID,
+  setOI_drinkQuantity,
+  setOI_iceLvl,
+  setOI_sugarLvl,
+  setOI_dairyOpt,
+  setOI_bobaOpt,
+}) {
   // unique IDs.
   let modalEdit = "edit-entry-item-" + orderItem.order_items_id;
   let modalDelete = "delete-item-confirm-" + orderItem.order_items_id;
@@ -31,7 +42,7 @@ function OrderItem({ orderItem, onEditOrderItem, onDeleteOrderItem, setOI_orderI
           <Modal
             trigger={modalEdit}
             buttonName={<i className="bi bi-pencil-square fs-6"></i>}
-            btnclasses="btn btn-outline-secondary"
+            btnClasses="btn btn-outline-secondary"
             content={
               <EditOrderItemForm
                 orderItem={orderItem}
@@ -51,7 +62,7 @@ function OrderItem({ orderItem, onEditOrderItem, onDeleteOrderItem, setOI_orderI
           <Modal
             trigger={modalDelete}
             buttonName={<i className="bi bi-x-lg fs-6"></i>}
-            btnclasses="btn btn-outline-danger"
+            btnClasses="btn btn-outline-danger"
             content={
               <DeleteConfirm
                 actionOnClick={onDeleteOrderItem}

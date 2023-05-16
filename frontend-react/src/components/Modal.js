@@ -14,7 +14,7 @@ import React from "react";
 
 */
 
-function Modal({ trigger, content, btnclasses, buttonName, title }) {
+function Modal({ trigger, content, btnClasses, buttonName, title }) {
   //NOTE
   // hash trigger is needed for data-bs-target. because data-bs-target requires it to be in the form of "#triggername"
   let hashTrigger = "#" + trigger;
@@ -22,7 +22,7 @@ function Modal({ trigger, content, btnclasses, buttonName, title }) {
     <>
       <button
         type="button"
-        className={btnclasses}
+        className={btnClasses}
         data-bs-toggle="modal"
         data-bs-target={hashTrigger}
       >

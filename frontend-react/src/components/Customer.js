@@ -4,7 +4,7 @@ import DeleteConfirm from "./DeleteConfirm";
 
 import EditCustomerForm from "./EditCustomerForm";
 
-function Customer({ customer, onEditCust, onDeleteCust, setName, setPhoneNumber}) {
+function Customer({ customer, onEditCust, onDeleteCust }) {
   // unique IDs.
   let modalEdit = "edit-entry-" + customer.customer_id;
   let modalDelete = "delete-confirm-" + customer.customer_id;
@@ -25,13 +25,11 @@ function Customer({ customer, onEditCust, onDeleteCust, setName, setPhoneNumber}
           <Modal
             trigger={modalEdit}
             buttonName={<i className="bi bi-pencil-square fs-6"></i>}
-            btnclasses="btn btn-outline-secondary"
+            btnClasses="btn btn-outline-secondary"
             content={
               <EditCustomerForm
                 customer={customer}
                 onClickAction={onEditCust}
-                setName={setName}
-                setPhoneNumber={setPhoneNumber}
               />
             }
             title="Edit Customer"
@@ -40,7 +38,7 @@ function Customer({ customer, onEditCust, onDeleteCust, setName, setPhoneNumber}
           <Modal
             trigger={modalDelete}
             buttonName={<i className="bi bi-x-lg fs-6"></i>}
-            btnclasses="btn btn-outline-danger"
+            btnClasses="btn btn-outline-danger"
             content={
               <DeleteConfirm
                 actionOnClick={onDeleteCust}
