@@ -4,7 +4,7 @@ import DeleteConfirm from "./DeleteConfirm";
 
 import EditOrderItemForm from "./EditOrderItemForm";
 
-function OrderItem({ orderItem, onEditOrderItem, onDeleteOrderItem }) {
+function OrderItem({ orderItem, onEditOrderItem, onDeleteOrderItem, setOI_orderID, setOI_drinkID, setOI_drinkQuantity, setOI_iceLvl, setOI_sugarLvl, setOI_dairyOpt, setOI_bobaOpt }) {
   // unique IDs.
   let modalEdit = "edit-entry-item-" + orderItem.order_items_id;
   let modalDelete = "delete-item-confirm-" + orderItem.order_items_id;
@@ -36,6 +36,13 @@ function OrderItem({ orderItem, onEditOrderItem, onDeleteOrderItem }) {
               <EditOrderItemForm
                 orderItem={orderItem}
                 onClickAction={onEditOrderItem}
+                setOI_orderID={setOI_orderID}
+                setOI_drinkID={setOI_drinkID}
+                setOI_drinkQuantity={setOI_drinkQuantity}
+                setOI_iceLvl={setOI_iceLvl}
+                setOI_sugarLvl={setOI_sugarLvl}
+                setOI_dairyOpt={setOI_dairyOpt}
+                setOI_bobaOpt={setOI_bobaOpt}
               />
             }
             title="Edit OrderItem"

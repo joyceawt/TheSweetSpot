@@ -2,7 +2,7 @@
 import React from "react";
 
 import Drink from "../components/Drink";
-function DrinkList({ drinkLists, onEditDrink, onDeleteDrinks }) {
+function DrinkList({ drinkLists, onEditDrink, onDeleteDrinks, setDrinkName, setDrinkDescription, setdrinkPrice }) {
   console.log("DrinkList", drinkLists);
   // self note: {drinkArgs} are the arguments.
   return (
@@ -13,6 +13,9 @@ function DrinkList({ drinkLists, onEditDrink, onDeleteDrinks }) {
           drink={drinkArgs}
           onEditDrink={onEditDrink}
           onDeleteDrinks={onDeleteDrinks}
+          setDrinkName ={setDrinkName}
+          setDrinkDescription={setDrinkDescription}
+          setdrinkPrice={setdrinkPrice}
         />
       ))}
     </div>

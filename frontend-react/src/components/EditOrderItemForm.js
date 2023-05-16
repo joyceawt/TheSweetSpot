@@ -1,6 +1,28 @@
 import React from "react";
 
-function EditOrderItemForm({ orderItem, onClickAction }) {
+function EditOrderItemForm({ orderItem, onClickAction, setOI_orderID, setOI_drinkID, setOI_drinkQuantity, setOI_iceLvl, setOI_sugarLvl, setOI_dairyOpt, setOI_bobaOpt }) {
+
+  // setting these because each button needs a unique name and id.
+  // for the names
+  let uniqueIceID = "iceLevelEditOrderItem-" + orderItem.order_id ;
+  let uniqueSugarID = "sugarLevelEditOrderItem"+ orderItem.order_id ;
+  let uniqueDairyOpt = "dairyOptionEditOrderItem"+ orderItem.order_id ;
+  let uniqueBoba = "bobaOptionEditOrderItem"+ orderItem.order_id ;
+
+  // just actual ID
+  let unIce100 = "iceLevelOrdIt100-" + orderItem.order_id ;
+  let unIce50 = "iceLevelOrdIt50-" + orderItem.order_id ;
+  let unIce0 = "iceLevelOrdIt0-" + orderItem.order_id ;
+  let unSugar100 = "sugarLevelOrdIt100-" + orderItem.order_id ;
+  let unSugar50 = "sugarLevelOrdIt50-" + orderItem.order_id ;
+  let unSugar0 = "sugarLevelOrdIt0-" + orderItem.order_id ;
+  let unDairyY = "dairyOptionOrdItY-" + orderItem.order_id ;
+  let unDairyN = "dairyOptionOrdItN-" + orderItem.order_id ;
+  let unBobaY = "bobaOptionOrdItY-" + orderItem.order_id ;
+  let unBobaN = "bobaOptionOrdItN-" + orderItem.order_id ;
+
+
+
   return (
     <>
       <form className="needs-validation">
@@ -13,6 +35,7 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             className="form-control bg-transparent"
             id="edit-OrderItem-Order-ID"
             defaultValue={orderItem.order_id}
+            onChange={(e)=>setOI_orderID(e)}
           />
         </div>
 
@@ -25,6 +48,7 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             className="form-control bg-transparent"
             id="edit-OrderItem-Drink-ID"
             defaultValue={orderItem.drink_id}
+            onChange={(e)=>setOI_drinkID(e)}
             required
           />
         </div>
@@ -38,13 +62,14 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             className="form-control bg-transparent"
             id="edit-OrderItem-Drink-QTY"
             defaultValue={orderItem.drink_quantity}
+            onChange={(e)=>setOI_drinkQuantity(e)}
             required
           />
         </div>
 
         <div className="mb-3 pt-2">
           <label
-            htmlFor="iceLevelEditOrderItem"
+            htmlFor={uniqueIceID}
             className="col-form-label w-25"
           >
             Ice level:
@@ -53,13 +78,14 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             <input
               className="btn-check"
               type="radio"
-              name="iceLevelEditOrderItem"
+              name={uniqueIceID}
               value="1"
-              id="iceLevelOrdIt100"
+              id={unIce100}
+              onChange= {(e)=>setOI_iceLvl(e)}
             />
             <label
               className="btn btn-outline-primary"
-              htmlFor="iceLevelOrdIt100"
+              htmlFor={unIce100}
             >
               100%
             </label>
@@ -67,13 +93,14 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             <input
               className="btn-check"
               type="radio"
-              name="iceLevelEditOrderItem"
+              name={uniqueIceID}
               value="0.5"
-              id="iceLevelOrdIt50"
+              id={unIce50}
+              onChange= {(e)=>setOI_iceLvl(e)}
             />
             <label
               className="btn btn-outline-primary"
-              htmlFor="iceLevel5OrdIt0"
+              htmlFor={unIce50}
             >
               50%
             </label>
@@ -81,11 +108,12 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             <input
               className="btn-check"
               type="radio"
-              name="iceLevelEditOrderItem"
-              value=".25"
-              id="iceLevelOrdIt0"
+              name={uniqueIceID}
+              value="0"
+              id={unIce0}
+              onChange= {(e)=>setOI_iceLvl(e)}
             />
-            <label className="btn btn-outline-primary" htmlFor="iceLevelOrdIt0">
+            <label className="btn btn-outline-primary" htmlFor={unIce0}>
               0%
             </label>
           </div>
@@ -93,7 +121,7 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
 
         <div className="mb-3 pt-2">
           <label
-            htmlFor="sugarLevelEditOrderItem"
+            htmlFor={uniqueSugarID}
             className="col-form-label w-25"
           >
             Sugar level:
@@ -102,13 +130,14 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             <input
               className="btn-check"
               type="radio"
-              name="sugarLevelEditOrderItem"
+              name={uniqueSugarID}
               value="1"
-              id="sugarLevelOrdIt100"
+              id={unSugar100}
+              onChange= {(e)=>setOI_sugarLvl(e)}
             />
             <label
               className="btn btn-outline-primary"
-              htmlFor="sugarLevelOrdIt100"
+              htmlFor={unSugar100}
             >
               100%
             </label>
@@ -116,13 +145,14 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             <input
               className="btn-check"
               type="radio"
-              name="sugarLevelEditOrderItem"
+              name={uniqueSugarID}
               value="0.5"
-              id="sugarLevelOrdIt50"
+              id={unSugar50}
+              onChange= {(e)=>setOI_sugarLvl(e)}
             />
             <label
               className="btn btn-outline-primary"
-              htmlFor="sugarLevelOrdIt50"
+              htmlFor={unSugar50}
             >
               50%
             </label>
@@ -130,13 +160,14 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             <input
               className="btn-check"
               type="radio"
-              name="sugarLevelEditOrderItem"
-              value=".25"
-              id="sugarLevelOrdIt0"
+              name={uniqueSugarID}
+              value="0"
+              id= {unSugar0}
+              onChange= {(e)=>setOI_sugarLvl(e)}
             />
             <label
               className="btn btn-outline-primary"
-              htmlFor="sugarLevelOrdIt0"
+              htmlFor={unSugar0}
             >
               0%
             </label>
@@ -145,7 +176,7 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
 
         <div className="mb-3 pt-2">
           <label
-            htmlFor="dairyOptionEditOrderItem"
+            htmlFor={uniqueDairyOpt}
             className="col-form-label w-25"
           >
             Dairy Option:
@@ -154,13 +185,14 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             <input
               type="radio"
               className="btn-check"
-              name="dairyOptionEditOrderItem"
-              id="dairyOptionOrdItYes"
+              name={uniqueDairyOpt}
+              id={unDairyY}
               value="1"
+              onChange= {(e)=>setOI_dairyOpt(e)}
             />
             <label
               className="btn btn-outline-primary"
-              htmlFor="dairyOptionOrdItYes"
+              htmlFor={unDairyY}
             >
               Dairy
             </label>
@@ -168,13 +200,14 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             <input
               type="radio"
               className="btn-check"
-              name="dairyOptionEditOrderItem"
-              id="dairyOptionOrdItNo"
+              name={uniqueDairyOpt}
+              id={unDairyN}
               value="0"
+              onChange= {(e)=>setOI_dairyOpt(e)}
             />
             <label
               className="btn btn-outline-primary"
-              htmlFor="dairyOptionOrdItNo"
+              htmlFor={unDairyN}
             >
               Non-dairy
             </label>
@@ -183,7 +216,7 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
 
         <div className="mb-3 pt-2 ">
           <label
-            htmlFor="bobaOptionEditOrderItem"
+            htmlFor={uniqueBoba}
             className="col-form-label  w-25"
           >
             Boba Option:
@@ -193,13 +226,14 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             <input
               type="radio"
               className="btn-check"
-              name="bobaOptionEditOrderItem"
-              id="bobaOptionOrdItYes"
+              name={uniqueBoba}
+              id={unBobaY}
               value="1"
+              onChange= {(e)=>setOI_bobaOpt(e)}
             />
             <label
               className="btn btn-outline-primary"
-              htmlFor="bobaOptionOrdItYes"
+              htmlFor={unBobaY}
             >
               Yes
             </label>
@@ -207,13 +241,14 @@ function EditOrderItemForm({ orderItem, onClickAction }) {
             <input
               type="radio"
               className="btn-check"
-              name="bobaOptionEditOrderItem"
-              id="bobaOptionOrdItNo"
+              name={uniqueBoba}
+              id={unBobaN}
               value="0"
+              onChange= {(e)=>setOI_bobaOpt(e)}
             />
             <label
               className="btn btn-outline-secondary"
-              htmlFor="bobaOptionOrdItNo"
+              htmlFor={unBobaN}
             >
               No
             </label>

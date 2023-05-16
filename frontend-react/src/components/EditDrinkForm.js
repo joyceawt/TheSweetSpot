@@ -1,6 +1,6 @@
 import React from "react";
 
-function EditDrinkForm({ drinkItem, onClickAction }) {
+function EditDrinkForm({ drinkItem, onClickAction, setDrinkName, setDrinkDescription, setdrinkPrice }) {
   // for unique IDs
   let drinkName = "edit-drink-name-" + drinkItem.drink_id;
   let drinkDescription = "edit-description-" + drinkItem.drink_id;
@@ -20,6 +20,7 @@ function EditDrinkForm({ drinkItem, onClickAction }) {
             id={drinkName}
             autoFocus="autoFocus"
             defaultValue={drinkItem.drink_name}
+            onChange={(e)=>setDrinkName(e)}
             required
           />
         </div>
@@ -33,6 +34,7 @@ function EditDrinkForm({ drinkItem, onClickAction }) {
             id={drinkDescription}
             autoFocus="autoFocus"
             defaultValue={drinkItem.drink_description}
+            onChange={(e)=>setDrinkDescription(e)}
             required
           />
         </div>
@@ -49,6 +51,7 @@ function EditDrinkForm({ drinkItem, onClickAction }) {
               id={drinkPrice}
               autoFocus="autoFocus"
               defaultValue={drinkItem.drink_price}
+              onChange={(e)=>setdrinkPrice(e)}
               required
             />
           </div>

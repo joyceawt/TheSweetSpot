@@ -2,7 +2,7 @@
 import React from "react";
 
 import Customer from "./Customer";
-function CustomerList({ custList, onEditCust, onDeleteCust }) {
+function CustomerList({ custList, onEditCust, onDeleteCust, setName, setPhoneNumber }) {
   return (
     <section className="d-flex flex-column justify-content-evenly custom-size">
       <article className="card table-responsive bg-white">
@@ -24,6 +24,8 @@ function CustomerList({ custList, onEditCust, onDeleteCust }) {
                 customer={custArgs}
                 onEditCust={onEditCust}
                 onDeleteCust={onDeleteCust}
+                setName = {setName}
+                setPhoneNumber = {setPhoneNumber}
               />
             ))}
           </tbody>

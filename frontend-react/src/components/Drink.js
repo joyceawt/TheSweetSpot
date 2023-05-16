@@ -5,7 +5,7 @@ import bobaPic from "../data/images/boba_unknownartist.png";
 import Modal from "./Modal";
 import EditDrinkForm from "./EditDrinkForm";
 import DeleteConfirm from "./DeleteConfirm";
-function Drink({ key, drink, onEditDrink, onDeleteDrinks }) {
+function Drink({ key, drink, onEditDrink, onDeleteDrinks, setDrinkName, setDrinkDescription, setdrinkPrice }) {
   let id = drink.drink_id;
   let drinkName = "name-" + drink.drink_id;
   let drinkID = "id-" + drink.drink_id;
@@ -68,7 +68,13 @@ function Drink({ key, drink, onEditDrink, onDeleteDrinks }) {
             buttonName={<i className="bi bi-pencil-square fs-3" />}
             btnclasses="btn btn-light btn-outline-primary"
             content={
-              <EditDrinkForm drinkItem={drink} onClickAction={onEditDrink} />
+              <EditDrinkForm 
+                drinkItem={drink} 
+                onClickAction={onEditDrink}
+                setDrinkName ={setDrinkName}
+                setDrinkDescription={setDrinkDescription}
+                setdrinkPrice={setdrinkPrice}
+              />
             }
             title="Edit drink"
           />

@@ -1,6 +1,6 @@
 import React from "react";
 
-function EditOrderForm({ order, onClickAction }) {
+function EditOrderForm({ order, onClickAction, setCustomerID, setOrderDate, setTotal }) {
   // we may need to pass in a 'state' from here, OR: create a new object and pass it to onClickAction..
 
   return (
@@ -15,6 +15,7 @@ function EditOrderForm({ order, onClickAction }) {
             className="form-control bg-transparent"
             id="add-customer-ID"
             defaultValue={order.customer_id}
+            onChange={(e)=>setCustomerID(e)}
             required
           />
         </div>
@@ -28,6 +29,7 @@ function EditOrderForm({ order, onClickAction }) {
             className="form-control bg-transparent"
             id="add-date"
             defaultValue={order.order_date}
+            onChange={(e)=>setOrderDate(e)}
             required
           />
         </div>
@@ -41,6 +43,7 @@ function EditOrderForm({ order, onClickAction }) {
             className="form-control bg-transparent"
             id="add-total-price"
             defaultValue={order.order_total}
+            onChange={(e)=>setTotal(e)}
             required
           />
         </div>

@@ -9,22 +9,12 @@ import AddDrinkForm from "../components/AddDrinkForm";
 // WHEN DB IS CONNECTED, STOP USING drinksData.
 import drinksData from "../data/drinksdata";
 
-//import { Modal } from 'bootstrap';
 function DrinksPage() {
-  //to render the proper sizing of header.. homepage header is different size.
-  /*
-    useEffect(() => {    
-        // Update the document title using the browser API    
-        if (window.location.pathname ==="/"){
-            document.getElementById("headerDefault").classNameName = "homeOnly";
-        }
-        else{
-            document.getElementById("headerDefault").classNameName = "default";
-        }
-    });
-    */
-
   const [drinkList, setDrinkList] = useState([]);
+  const [drinkName, setDrinkName]= useState([]);
+  const [drinkDescription, setDrinkDescription]= useState([]);
+  const [drinkPrice, setdrinkPrice]= useState([]);
+
 
   // load all.
   const loadAllDrinks = async () => {
@@ -35,12 +25,13 @@ function DrinksPage() {
   };
   // UPDATE a single drink
   const onEditDrink = async (drink_id) => {
-    console.log("OnEditDrink from DrinksPage. the id was: ", drink_id);
+    // query here.
+    
   };
 
   // DELETE a single drink!.
   const onDeleteDrinks = async (drink_id) => {
-    console.log("onDeleteDrinks from DrinksPage. the id was: ", drink_id);
+    
     /*
       const response = await fetch(`/log/${drink_id}`, { method: 'DELETE' });
       if (response.status === 204) {
@@ -78,6 +69,9 @@ function DrinksPage() {
         drinkLists={drinkList}
         onEditDrink={onEditDrink}
         onDeleteDrinks={onDeleteDrinks}
+        setDrinkName ={setDrinkName}
+        setDrinkDescription={setDrinkDescription}
+        setdrinkPrice={setdrinkPrice}
       />
     </section>
   );

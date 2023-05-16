@@ -4,7 +4,7 @@ import DeleteConfirm from "./DeleteConfirm";
 
 import EditOrderForm from "./EditOrderForm";
 
-function Order({ order, onEditOrder, onDeleteOrder }) {
+function Order({ order, onEditOrder, onDeleteOrder, setCustomerID, setOrderDate, setTotal }) {
   // unique IDs.
   let modalEdit = "edit-entry-" + order.order_id;
   let modalDelete = "delete-confirm-" + order.order_id;
@@ -29,7 +29,13 @@ function Order({ order, onEditOrder, onDeleteOrder }) {
             buttonName={<i className="bi bi-pencil-square fs-6"></i>}
             btnclasses="btn btn-outline-secondary"
             content={
-              <EditOrderForm order={order} onClickAction={onEditOrder} />
+              <EditOrderForm 
+                order={order} 
+                onClickAction={onEditOrder} 
+                setCustomerID={setCustomerID}
+                setOrderDate={setOrderDate}
+                setTotal={setTotal}
+              />
             }
             title="Edit Order"
           />

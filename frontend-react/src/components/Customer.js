@@ -4,7 +4,7 @@ import DeleteConfirm from "./DeleteConfirm";
 
 import EditCustomerForm from "./EditCustomerForm";
 
-function Customer({ customer, onEditCust, onDeleteCust }) {
+function Customer({ customer, onEditCust, onDeleteCust, setName, setPhoneNumber}) {
   // unique IDs.
   let modalEdit = "edit-entry-" + customer.customer_id;
   let modalDelete = "delete-confirm-" + customer.customer_id;
@@ -30,6 +30,8 @@ function Customer({ customer, onEditCust, onDeleteCust }) {
               <EditCustomerForm
                 customer={customer}
                 onClickAction={onEditCust}
+                setName={setName}
+                setPhoneNumber={setPhoneNumber}
               />
             }
             title="Edit Customer"

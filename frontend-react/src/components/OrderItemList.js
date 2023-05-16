@@ -2,7 +2,7 @@ import React from "react";
 
 import OrderItem from "./OrderItem";
 
-function OrderList({ orderItemList, onEditOrderItem, onDeleteOrderItem }) {
+function OrderList({ orderItemList, onEditOrderItem, onDeleteOrderItem, setOI_orderID, setOI_drinkID, setOI_drinkQuantity, setOI_iceLvl, setOI_sugarLvl, setOI_dairyOpt, setOI_bobaOpt }) {
   return (
     <>
       <article className="card table-responsive bg-white ">
@@ -29,6 +29,13 @@ function OrderList({ orderItemList, onEditOrderItem, onDeleteOrderItem }) {
                 orderItem={orderItemArgs}
                 onEditOrderItem={onEditOrderItem}
                 onDeleteOrderItem={onDeleteOrderItem}
+                setOI_orderID={setOI_orderID}
+                setOI_drinkID={setOI_drinkID}
+                setOI_drinkQuantity={setOI_drinkQuantity}
+                setOI_iceLvl={setOI_iceLvl}
+                setOI_sugarLvl={setOI_sugarLvl}
+                setOI_dairyOpt={setOI_dairyOpt}
+                setOI_bobaOpt={setOI_bobaOpt}
               />
             ))}
           </tbody>

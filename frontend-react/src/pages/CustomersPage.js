@@ -8,7 +8,8 @@ import CustomerList from "../components/CustomerList";
 
 function CustomersPage() {
   const [customerList, setCustomerList] = useState([]);
-
+  const [name, setName]= useState([]);
+  const [phone, setPhoneNumber]= useState([]);
   const redirect = useNavigate();
 
   const loadAllCustomers = async () => {
@@ -88,7 +89,9 @@ function CustomersPage() {
 
       <CustomerList
         custList={customerList}
-        onEditCust={onEditCustomer}
+        onEditCust={onEditCustomer} 
+        setName={setName} 
+        setPhoneNumber={setPhoneNumber}
         onDeleteCust={onDeleteCustomer}
       />
     </>

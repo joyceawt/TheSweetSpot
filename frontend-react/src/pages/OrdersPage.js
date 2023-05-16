@@ -13,52 +13,50 @@ import orderitemsdata from "../data/orderitemsdata";
 function OrdersPage() {
   const [orderList, setOrderList] = useState([]);
   const [orderItemList, setOrderItemList] = useState([]);
+
+
+  // Order states
+  const [orderID, setOrderID]= useState([]);
+  const [orderCustomerID, setCustomerID]= useState([]);
+  const [orderDate, setOrderDate]= useState([]);
+  const [total, setTotal]= useState([]);
+
+  // OrderItem states. OI = OrderItems
+  const [OI_orderID, setOI_orderID]= useState([]);
+  const [OI_drinkID, setOI_drinkID]= useState([]);
+  const [OI_drinkQuantity, setOI_drinkQuantity ]= useState([]);
+  const [OI_iceLvl, setOI_iceLvl ]= useState([]);
+  const [OI_sugarLvl, setOI_sugarLvl ]= useState([]);
+  const [OI_dairyOpt, setOI_dairyOpt ]= useState([]);
+  const [OI_bobaOpt, setOI_bobaOpt ]= useState([]);
+
+
+
+  
+
   // load all.
   const loadAllOrders = async () => {
     setOrderList(orderData);
     setOrderItemList(orderitemsdata);
-    //const response = await fetch('/log');
-    //const dataOrders = await response.json();
-    //setOrderList(dataOrders);
   };
   // UPDATE a single order
   const onEditOrder = async (_id) => {
-    console.log("onEdit from OrdersPage. the id was: ", _id);
+
   };
 
   // DELETE a single customer!.
   const onDeleteOrder = async (_id) => {
-    console.log("onDelete from OrdersPage. the id was: ", _id);
-    /*
-      const response = await fetch(`/log/${drink_id}`, { method: 'DELETE' });
-      if (response.status === 204) {
-          const getResponse = await fetch('/log');
-          const currentDrinkList = await getResponse.json();
-          setDrinkList(currentDrinkList);
-      } else {
-          console.error(`Failed to delete drink with _id = ${drink_id}, status code = ${response.status}`)
-      }
-      */
+
   };
 
   // UPDATE a single order
   const onEditOrderItem = async (_id) => {
-    console.log("onEditOrderItem. id: ", _id);
+
   };
 
   // DELETE a single customer!.
   const onDeleteOrderItem = async (_id) => {
-    console.log("onDeleteOrderItem. id: ", _id);
-    /*
-      const response = await fetch(`/log/${drink_id}`, { method: 'DELETE' });
-      if (response.status === 204) {
-          const getResponse = await fetch('/log');
-          const currentDrinkList = await getResponse.json();
-          setDrinkList(currentDrinkList);
-      } else {
-          console.error(`Failed to delete drink with _id = ${drink_id}, status code = ${response.status}`)
-      }
-      */
+   
   };
   // LOAD all subscriptions
   useEffect(() => {
@@ -94,11 +92,16 @@ function OrdersPage() {
         contentTitle="Orders"
         addModal={OrderModal}
       ></UtilityBar>
+
       <article>
         <OrderList
           orderList={orderList}
           onEditOrder={onEditOrder}
           onDeleteOrder={onDeleteOrder}
+          setOrderID={setOrderID}
+          setCustomerID={setCustomerID}
+          setOrderDate={setOrderDate}
+          setTotal={setTotal}
         />
       </article>
 
@@ -107,11 +110,19 @@ function OrdersPage() {
         contentTitle="Order Item"
         addModal={OrderItemModal}
       ></UtilityBar>
+      
       <article>
         <OrderItemList
           orderItemList={orderItemList}
           onEditOrderItem={onEditOrderItem}
           onDeleteOrderItem={onDeleteOrderItem}
+          setOI_orderID={setOI_orderID}
+          setOI_drinkID={setOI_drinkID}
+          setOI_drinkQuantity={setOI_drinkQuantity}
+          setOI_iceLvl={setOI_iceLvl}
+          setOI_sugarLvl={setOI_sugarLvl}
+          setOI_dairyOpt={setOI_dairyOpt}
+          setOI_bobaOpt={setOI_bobaOpt}
         />
       </article>
     </>

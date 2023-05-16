@@ -1,6 +1,7 @@
 import React from "react";
 
-function EditCustomerForm({ customer, onClickAction }) {
+function EditCustomerForm({ customer, onClickAction, setName, setPhoneNumber}) {
+
   return (
     <>
       <form className="needs-validation bg-transparent">
@@ -27,6 +28,7 @@ function EditCustomerForm({ customer, onClickAction }) {
             className="form-control bg-transparent"
             id="customer-name"
             defaultValue={customer.name}
+            onChange={(e)=>setName(e)}
             required
           ></textarea>
         </div>
@@ -40,6 +42,7 @@ function EditCustomerForm({ customer, onClickAction }) {
               type="number"
               className="form-control bg-transparent"
               id="customer-phone"
+              onChange={(e)=>setPhoneNumber(e)}
               defaultValue={customer.phone}
               required
             />
