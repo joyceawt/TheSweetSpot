@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
+import DropDownDrinks from "./DropDownDrinks";
+import DropDownOrders from "./DropDownOrders";
 
-function EditOrderItemForm({ orderItem, onClickAction, setOI_orderID, setOI_drinkID, setOI_drinkQuantity, setOI_iceLvl, setOI_sugarLvl, setOI_dairyOpt, setOI_bobaOpt }) {
+
+function EditOrderItemForm({ orderItem, onClickAction, setOI_orderID, setOI_drinkID, setOI_drinkQuantity, setOI_iceLvl, setOI_sugarLvl, setOI_dairyOpt, setOI_bobaOpt, drinkList, orderList }) {
 
   // setting these because each button needs a unique name and id.
   // for the names
@@ -21,6 +24,24 @@ function EditOrderItemForm({ orderItem, onClickAction, setOI_orderID, setOI_drin
   let unBobaY = "bobaOptionOrdItY-" + orderItem.order_id ;
   let unBobaN = "bobaOptionOrdItN-" + orderItem.order_id ;
 
+    
+  // had to add local states here to be able to ensure that the <select> option is actually able to load defaults and to also change when a user selects a different option.
+  // REACT does not support selected in the option tags: https://react.dev/reference/react-dom/components/select#providing-an-initially-selected-option
+
+  const [selectedOrderID, setSelectedOrderID] = useState(orderItem.order_id);
+  const [selectedDrinkID, setSelectedDrinkID] = useState(orderItem.drink_id);
+
+
+
+  function changeSelectedOrderID(val){
+    setSelectedOrderID(val);
+    setOI_orderID(val);
+  }
+
+  function changeSelectedDrinkID(val){
+    setSelectedDrinkID(val);
+    setOI_drinkID(val);
+  }
 
 
   return (
@@ -30,27 +51,45 @@ function EditOrderItemForm({ orderItem, onClickAction, setOI_orderID, setOI_drin
           <label htmlFor="addItem-customer-ID" className="col-form-label">
             Order ID:
           </label>
-          <input
-            type="text"
-            className="form-control bg-transparent"
-            id="edit-OrderItem-Order-ID"
-            defaultValue={orderItem.order_id}
-            onChange={(e)=>setOI_orderID(e)}
-          />
+          <select 
+              className="form-select mb-3 bg-transparent" 
+              name="order_ID" 
+              id="edit-order-ID" 
+              aria-label ="order_ID"
+              value={selectedOrderID}
+              onChange={ (e) => changeSelectedOrderID(e.target.value) }
+          >
+
+            {orderList.map((orderArg, i) => (
+                  <DropDownOrders
+                  orders={orderArg}
+                  />
+            ))}
+
+          </select>
         </div>
+
+
 
         <div className="mb-3">
           <label htmlFor="addItem-customer-ID" className="col-form-label">
             Drink ID:
           </label>
-          <input
-            type="text"
-            className="form-control bg-transparent"
-            id="edit-OrderItem-Drink-ID"
-            defaultValue={orderItem.drink_id}
-            onChange={(e)=>setOI_drinkID(e)}
-            required
-          />
+          <select 
+              className="form-select mb-3 bg-transparent" 
+              name="order_ID" 
+              id="edit-order-ID" 
+              aria-label ="order_ID"
+              value={selectedDrinkID}
+              onChange={ (e) => changeSelectedDrinkID(e.target.value) }
+          >
+            {drinkList.map((drinksArg, i) => (
+                  <DropDownDrinks
+                  drinkList={drinksArg}
+                  />
+            ))}
+
+          </select>
         </div>
 
         <div className="mb-3">

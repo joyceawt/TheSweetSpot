@@ -11,10 +11,13 @@ function Order({
   setCustomerID,
   setOrderDate,
   setTotal,
+  customerList
 }) {
   // unique IDs.
   let modalEdit = "edit-entry-" + order.order_id;
   let modalDelete = "delete-confirm-" + order.order_id;
+
+  // grab 
 
   return (
     <>
@@ -42,6 +45,7 @@ function Order({
                 setCustomerID={setCustomerID}
                 setOrderDate={setOrderDate}
                 setTotal={setTotal}
+                customerList={customerList}
               />
             }
             title="Edit Order"

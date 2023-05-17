@@ -46,7 +46,7 @@ function AddCustomerForm({ onAddCust }) {
             Cancel
           </button>
           <button
-            type="submit"
+            type="button"
             className="btn btn-primary"
             onClick={() => onAddCust(customer)}
           >

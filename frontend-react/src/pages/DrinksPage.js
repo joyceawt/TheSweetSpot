@@ -5,6 +5,7 @@ import UtilityBar from "../components/UtilityBar";
 import DrinkList from "../components/DrinkList";
 import Modal from "../components/Modal";
 import AddDrinkForm from "../components/AddDrinkForm";
+import DropDownSearchCategoryDrinks from '../components/DropDownSearchCategoryDrinks'
 
 // WHEN DB IS CONNECTED, STOP USING drinksData.
 import drinksData from "../data/drinksdata";
@@ -57,11 +58,18 @@ function DrinksPage() {
     />
   );
 
+  let dropDownSearch = < DropDownSearchCategoryDrinks />
+
   // Display the page.
   // <DrinkList drinkLists ={drinksData}  onEditDrink={onEditDrink} onDeleteDrinks={onDeleteDrinks} />
   return (
     <section>
-      <UtilityBar addModal={Add_Button_Modal} contentTitle="Drinks" />
+      <UtilityBar 
+      addModal={Add_Button_Modal} 
+      contentTitle="Drinks" 
+      dropDownOption={dropDownSearch}
+      defaultSelected="name"
+      />
       <DrinkList
         drinkLists={drinkList}
         onEditDrink={onEditDrink}

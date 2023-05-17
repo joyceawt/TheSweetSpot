@@ -15,6 +15,8 @@ function OrderItem({
   setOI_sugarLvl,
   setOI_dairyOpt,
   setOI_bobaOpt,
+  drinkList, 
+  orderList
 }) {
   // unique IDs.
   let modalEdit = "edit-entry-item-" + orderItem.order_items_id;
@@ -54,6 +56,9 @@ function OrderItem({
                 setOI_sugarLvl={setOI_sugarLvl}
                 setOI_dairyOpt={setOI_dairyOpt}
                 setOI_bobaOpt={setOI_bobaOpt}
+                drinkList={drinkList}
+                orderList={orderList}
+
               />
             }
             title="Edit OrderItem"

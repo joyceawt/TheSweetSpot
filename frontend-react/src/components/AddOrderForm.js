@@ -1,6 +1,7 @@
 import React from "react";
+import DropDownCustomers from "./DropDownCustomers";
 
-function AddOrderForm() {
+function AddOrderForm({customerList}) {
   //action="/add-new-order" method="post"
   return (
     <>
@@ -9,12 +10,19 @@ function AddOrderForm() {
           <label htmlFor="add-customer-ID" className="col-form-label">
             Customer ID:
           </label>
-          <input
-            type="text"
-            className="form-control bg-transparent"
-            id="add-customer-ID"
-            required
-          />
+          <select className="form-select mb-3 bg-transparent" 
+          name="customer_id" 
+          id="add-customer-ID" 
+          aria-label ="customer_id">
+          
+            <option value=""> None </option>
+            {customerList.map((customer, i) => (
+                  <DropDownCustomers
+                  customerList={customer}
+                  />
+            ))}
+
+          </select>
         </div>
 
         <div className="mb-3">

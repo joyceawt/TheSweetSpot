@@ -1,7 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
+import DropDownCustomers from "./DropDownCustomers";
 
-function EditOrderForm({ order, onClickAction, setCustomerID, setOrderDate, setTotal }) {
-  // we may need to pass in a 'state' from here, OR: create a new object and pass it to onClickAction..
+function EditOrderForm({ order, onClickAction, setCustomerID, setOrderDate, setTotal, customerList }) {
+  ///  defaultValue={order.customer_id}
+  
+  // had to add local states here to be able to ensure that the <select> option is actually able to load defaults and to also change when a user selects a different option.
+  // REACT does not support selected in the option tags: https://react.dev/reference/react-dom/components/select#providing-an-initially-selected-option
+
+  
+  const [selectedID, setSelectedID] = useState(order.customer_id);
+
+  function changeSelectedID(val){
+    setSelectedID(val);
+    setCustomerID(val);
+  }
 
   return (
     <>
@@ -10,14 +22,29 @@ function EditOrderForm({ order, onClickAction, setCustomerID, setOrderDate, setT
           <label htmlFor="add-customer-ID" className="col-form-label">
             Customer ID:
           </label>
-          <input
-            type="text"
-            className="form-control bg-transparent"
-            id="add-customer-ID"
-            defaultValue={order.customer_id}
-            onChange={(e)=>setCustomerID(e)}
-            required
-          />
+
+          <select 
+              className="form-select mb-3 bg-transparent" 
+              name="customer_id" 
+              id="edit-customer-ID" 
+              aria-label ="customer_id"
+              value={selectedID}
+              onChange={ (e) => changeSelectedID(e.target.value) }
+          >
+
+            <option value=""> None </option>
+
+            {customerList.map((customer, i) => (
+                  <DropDownCustomers
+                  customerList={customer}
+                  />
+            ))}
+
+          </select>
+
+
+
+
         </div>
 
         <div className="mb-3">

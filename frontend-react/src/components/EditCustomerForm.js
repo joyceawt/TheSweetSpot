@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export const EditCustomerForm = ({ customer, onClickAction }) => {
+export const EditCustomerForm = ({ customer, onClickAction, customerList }) => {
   const [name, setNewName] = useState(customer.name);
   const [phone, setNewPhone] = useState(customer.phone);
   const [customer_id] = useState(customer.customer_id);
@@ -21,6 +21,11 @@ export const EditCustomerForm = ({ customer, onClickAction }) => {
     }
   };
 
+
+  // load the original selected customer.
+
+
+
   return (
     <>
       <form className="needs-validation bg-transparent">
@@ -37,6 +42,10 @@ export const EditCustomerForm = ({ customer, onClickAction }) => {
             value={customer_id}
             disabled
           />
+
+
+
+
         </div>
 
         <div className="mb-3">

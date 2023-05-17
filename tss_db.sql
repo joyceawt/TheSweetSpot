@@ -43,7 +43,7 @@ CREATE TABLE
     order_date datetime NOT NULL,
     order_total decimal(10, 2) NOT NULL,
     PRIMARY KEY (order_id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE SET NULL
   );
 
 

@@ -1,12 +1,15 @@
 import React from "react";
 
+import DropDownOrders from "./DropDownOrders";
+import DropDownDrinks from "./DropDownDrinks";
+
 function AddOrderItemForm() {
   //action="/add-new-order-item" method="post"
   return (
     <>
       <form className="needs-validation">
         <div className="mb-3">
-          <label htmlFor="addItem-customer-ID" className="col-form-label">
+          <label id="customer_id" htmlFor="addItem-customer-ID" className="col-form-label">
             Order ID:
           </label>
           <input
@@ -15,10 +18,12 @@ function AddOrderItemForm() {
             id="addItem-customer-ID"
             required
           />
+
+
         </div>
 
         <div className="mb-3">
-          <label htmlFor="addItem-customer-ID" className="col-form-label">
+          <label id="drink_id" htmlFor="addItem-customer-ID" className="col-form-label">
             Drink ID:
           </label>
           <input

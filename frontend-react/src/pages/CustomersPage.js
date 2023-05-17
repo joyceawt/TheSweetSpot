@@ -5,6 +5,7 @@ import Modal from "../components/Modal";
 import AddCustomerForm from "../components/AddCustomerForm";
 import UtilityBar from "../components/UtilityBar";
 import CustomerList from "../components/CustomerList";
+import DropDownSearchCategoryCustomers from '../components/DropDownSearchCategoryCustomers'
 
 function CustomersPage() {
   const [customerList, setCustomerList] = useState([]);
@@ -12,13 +13,24 @@ function CustomersPage() {
   const redirect = useNavigate();
 
   const loadAllCustomers = async () => {
-    try {
+    try { 
       const response = await axios.get("http://localhost:9124/api/customers");
 
       setCustomerList(response.data);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const loadCustomerByCategory = async () => {
+    // what is selected?
+
+    // call to db based on what is selected by category
+
+    // Render to loadAllCustomers.
+
+
+
   };
 
   // UPDATE a single Customer
@@ -39,6 +51,7 @@ function CustomersPage() {
     } catch (err) {
       console.log(err);
     }
+    
   };
 
   // DELETE a single customer!.
@@ -71,10 +84,17 @@ function CustomersPage() {
       title="Add a new customer"
     />
   );
+
+  let dropDownArgument = ( < DropDownSearchCategoryCustomers />);
   return (
     <>
       <section>
-        <UtilityBar addModal={Add_Button_Modal} contentTitle="Customer" />
+        <UtilityBar 
+        addModal={Add_Button_Modal} 
+        contentTitle="Customer" 
+        dropDownOption={dropDownArgument}
+        defaultSelected="name"
+        />
       </section>
 
       <CustomerList

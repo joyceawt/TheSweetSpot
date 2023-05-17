@@ -3,13 +3,20 @@ import UtilityBar from "../components/UtilityBar";
 import Modal from "../components/Modal";
 import OrderForm from "../components/AddOrderForm";
 import AddOrderItemForm from "../components/AddOrderItemForm";
+import axios from "axios";
 
 import OrderList from "../components/OrderList";
 import OrderItemList from "../components/OrderItemList";
+import DropDownSearchCategoryOrder from "../components/DropDownSearchCategoryOrders";
+import DropDownSearchCategoryOrderItems from "../components/DropDownSearchCategoryOrderItems";
+
 
 //DELETE THE STATIC DATA BELOW WHEN CONNECTED TO DB!!
 import orderData from "../data/orderdata";
 import orderitemsdata from "../data/orderitemsdata";
+
+
+
 function OrdersPage() {
   const [orderList, setOrderList] = useState([]);
   const [orderItemList, setOrderItemList] = useState([]);
@@ -29,11 +36,56 @@ function OrdersPage() {
   const [OI_dairyOpt, setOI_dairyOpt] = useState([]);
   const [OI_bobaOpt, setOI_bobaOpt] = useState([]);
 
+  //for loading pre-loaded drop down options
+  const [customerList, setCustomerList] = useState([]);
+  const [drinkList, setDrinkList] = useState([]);
+
   // load all.
   const loadAllOrders = async () => {
-    setOrderList(orderData);
-    setOrderItemList(orderitemsdata);
+    //setOrderList(orderData);
+    //setOrderItemList(orderitemsdata);
+
+    // LOAD ORDER
+    try {
+      const response = await axios.get("http://localhost:9124/api/orders");
+      setOrderList(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+
+
+    // LOAD ORDERITEMS
+    try {
+      const response = await axios.get("http://localhost:9124/api/OrderItems");
+      setOrderItemList(response.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  // load the list of customers - FOR ADDING and EDITING
+  const loadAllCustomers = async () => {
+    try {
+      const response = await axios.get("http://localhost:9124/api/customers");
+      setCustomerList(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+  // load the list for DRINKS -- for ADDING and EDITING
+  const loadAllDrinks = async () => {
+    try {
+      const response = await axios.get("http://localhost:9124/api/drinks");
+      setDrinkList(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+
+
   // UPDATE a single order
   const onEditOrder = async (_id) => {};
 
@@ -45,9 +97,13 @@ function OrdersPage() {
 
   // DELETE a single customer!.
   const onDeleteOrderItem = async (_id) => {};
-  // LOAD all subscriptions
+
+
+  // LOAD all Orders
   useEffect(() => {
     loadAllOrders();
+    loadAllCustomers();
+    loadAllDrinks();
   }, []);
 
   let OrderModal = (
@@ -56,7 +112,7 @@ function OrdersPage() {
       trigger="add-order"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
       btnClasses="btn btn-light btn-outline-primary"
-      content={<OrderForm />}
+      content={<OrderForm customerList={customerList}/>}
       title="Add a new Order"
     />
   );
@@ -72,12 +128,16 @@ function OrdersPage() {
     />
   );
 
+  let dropDownSearchOrder = < DropDownSearchCategoryOrder />
+  let dropDownSearchOrderItem = < DropDownSearchCategoryOrderItems/>
+
   return (
     <>
       <UtilityBar
         key="AddOrder"
         contentTitle="Orders"
         addModal={OrderModal}
+        dropDownOption={dropDownSearchOrder}
       ></UtilityBar>
 
       <article>
@@ -89,6 +149,7 @@ function OrdersPage() {
           setCustomerID={setCustomerID}
           setOrderDate={setOrderDate}
           setTotal={setTotal}
+          customerList={customerList}
         />
       </article>
 
@@ -96,6 +157,7 @@ function OrdersPage() {
         key="AddOrderItem"
         contentTitle="Order Item"
         addModal={OrderItemModal}
+        dropDownOption={dropDownSearchOrderItem}
       ></UtilityBar>
 
       <article>
@@ -110,6 +172,9 @@ function OrdersPage() {
           setOI_sugarLvl={setOI_sugarLvl}
           setOI_dairyOpt={setOI_dairyOpt}
           setOI_bobaOpt={setOI_bobaOpt}
+          drinkList={drinkList}
+          orderList={orderList}
+
         />
       </article>
     </>
