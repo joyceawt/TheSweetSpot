@@ -97,6 +97,25 @@ app.get("/api/drinks", (req, res) => {
   });
 });
 
+app.put("/api/drinks/:id", (req, res) => {
+  const id = req.params.id;
+  const drink_name = req.body.drink_name;
+  const drink_description = req.body.drink_description;
+  const drink_price = req.body.drink_price;
+
+  db.query(
+    "UPDATE Drinks SET ? WHERE drink_id = ?",
+    [drink_name, drink_description, drink_price],
+    id,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.json(result);
+    }
+  );
+});
+
 // Get all Orders
 app.get("/api/orders", (req, res) => {
   db.pool.query("SELECT * FROM Orders", (err, results, fields) => {

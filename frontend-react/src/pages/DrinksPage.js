@@ -11,7 +11,7 @@ function DrinksPage() {
   const [drinkList, setDrinkList] = useState([]);
   const [drinkName, setDrinkName] = useState([]);
   const [drinkDescription, setDrinkDescription] = useState([]);
-  const [drinkPrice, setdrinkPrice] = useState([]);
+  const [drinkPrice, setDrinkPrice] = useState([]);
   const [drinkNamesList, setDrinkNamesList] = useState([]);
 
   // load all.
@@ -26,8 +26,20 @@ function DrinksPage() {
   };
 
   // UPDATE a single drink
-  const onEditDrink = async (drink_id) => {
-    // query here.
+  const onEditDrink = async (drink) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:9124/api/drinks/${drink.drink_id}`,
+        {
+          drink_name: drink.drink_name,
+          drink_description: drink.drink_description,
+          drink_price: drink.drink_price,
+        }
+      );
+      if (response) loadAllDrinks();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // DELETE a single drink!.
@@ -80,7 +92,7 @@ function DrinksPage() {
         onDeleteDrinks={onDeleteDrinks}
         setDrinkName={setDrinkName}
         setDrinkDescription={setDrinkDescription}
-        setdrinkPrice={setdrinkPrice}
+        setDrinkPrice={setDrinkPrice}
       />
     </section>
   );

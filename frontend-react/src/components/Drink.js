@@ -23,7 +23,7 @@ function Drink({
   // NEED UNIQUE ID for each modal! this is to assign each drink a unique modal.
   let modalEdit = "edit-entry-" + drink.drink_id;
   let modalDelete = "delete-confirm-" + drink.drink_id;
-  console.log("Drink:", id);
+
   return (
     <>
       <article className="d-flex flex-row align-content-center justify-content-center rounded bg-white">
@@ -37,7 +37,7 @@ function Drink({
               <th scope="row" style={{ width: "10%" }}>
                 Name
               </th>
-              <td id={drinkName} style={{ "word-wrap": "break-word" }}>
+              <td id={drinkName} style={{ wordWrap: "break-word" }}>
                 {drink.drink_name}
               </td>
             </tr>
@@ -45,7 +45,7 @@ function Drink({
               <th scope="row" style={{ width: "10%" }}>
                 ID
               </th>
-              <td id={drinkID} style={{ "word-wrap": "break-word" }}>
+              <td id={drinkID} style={{ wordWrap: "break-word" }}>
                 {drink.drink_id}
               </td>
             </tr>
@@ -53,7 +53,7 @@ function Drink({
               <th scope="row" style={{ width: "10%" }}>
                 Description
               </th>
-              <td id={drinkDescription} style={{ "word-wrap": "break-word" }}>
+              <td id={drinkDescription} style={{ wordWrap: "break-word" }}>
                 {drink.drink_description}
               </td>
             </tr>
@@ -63,7 +63,7 @@ function Drink({
               </th>
               <td>
                 $
-                <span id={drinkPrice} style={{ "word-wrap": "break-word" }}>
+                <span id={drinkPrice} style={{ wordWrap: "break-word" }}>
                   {drink.drink_price}
                 </span>
               </td>

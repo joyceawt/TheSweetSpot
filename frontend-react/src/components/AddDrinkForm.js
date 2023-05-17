@@ -40,7 +40,7 @@ function AddDrinkForm({ onSubmit }) {
             className="form-control bg-transparent"
             id="add-price"
             autoFocus="autoFocus"
-            oninput="inputValidator('add-price', this)"
+            onInput="inputValidator('add-price', this)"
             required
           />
         </div>

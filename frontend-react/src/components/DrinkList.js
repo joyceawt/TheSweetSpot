@@ -2,8 +2,14 @@
 import React from "react";
 
 import Drink from "../components/Drink";
-function DrinkList({ drinkLists, onEditDrink, onDeleteDrinks, setDrinkName, setDrinkDescription, setdrinkPrice }) {
-  console.log("DrinkList", drinkLists);
+function DrinkList({
+  drinkLists,
+  onEditDrink,
+  onDeleteDrinks,
+  setDrinkName,
+  setDrinkDescription,
+  setDrinkPrice,
+}) {
   // self note: {drinkArgs} are the arguments.
   return (
     <div className="d-flex flex-column justify-content-evenly custom-size">
@@ -13,9 +19,9 @@ function DrinkList({ drinkLists, onEditDrink, onDeleteDrinks, setDrinkName, setD
           drink={drinkArgs}
           onEditDrink={onEditDrink}
           onDeleteDrinks={onDeleteDrinks}
-          setDrinkName ={setDrinkName}
+          setDrinkName={setDrinkName}
           setDrinkDescription={setDrinkDescription}
-          setdrinkPrice={setdrinkPrice}
+          setDrinkPrice={setDrinkPrice}
         />
       ))}
     </div>
