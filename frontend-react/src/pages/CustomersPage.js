@@ -5,15 +5,13 @@ import Modal from "../components/Modal";
 import AddCustomerForm from "../components/AddCustomerForm";
 import UtilityBar from "../components/UtilityBar";
 import CustomerList from "../components/CustomerList";
-import DropDownSearchCategoryCustomers from '../components/DropDownSearchCategoryCustomers'
 
 function CustomersPage() {
   const [customerList, setCustomerList] = useState([]);
-
-  const redirect = useNavigate();
+  const [searchText, setSearchText] = useState([]);
 
   const loadAllCustomers = async () => {
-    try { 
+    try {
       const response = await axios.get("http://localhost:9124/api/customers");
 
       setCustomerList(response.data);
@@ -22,20 +20,21 @@ function CustomersPage() {
     }
   };
 
-  const loadCustomerByCategory = async () => {
-    // what is selected?
-
-    // call to db based on what is selected by category
-
-    // Render to loadAllCustomers.
-
-
-
-  };
-
   // UPDATE a single Customer
   const onEditCustomer = async () => {
     loadAllCustomers();
+  };
+
+  const onFilterCustomers = (searchText) => {
+    if (searchText.length > 0) {
+      console.log("searchText", searchText);
+      const filteredCustomers = customerList.filter((customer) => {
+        return customer.name.toLowerCase().includes(searchText.toLowerCase());
+      });
+      return filteredCustomers;
+    } else {
+      return customerList;
+    }
   };
 
   // ADD a single Customer
@@ -51,7 +50,6 @@ function CustomersPage() {
     } catch (err) {
       console.log(err);
     }
-    
   };
 
   // DELETE a single customer!.
@@ -85,20 +83,20 @@ function CustomersPage() {
     />
   );
 
-  let dropDownArgument = ( < DropDownSearchCategoryCustomers />);
   return (
     <>
       <section>
-        <UtilityBar 
-        addModal={Add_Button_Modal} 
-        contentTitle="Customer" 
-        dropDownOption={dropDownArgument}
-        defaultSelected="name"
+        <UtilityBar
+          addModal={Add_Button_Modal}
+          contentTitle="Customer"
+          searchText={searchText}
+          setSearchText={setSearchText}
+          filterCustomers={onFilterCustomers}
         />
       </section>
 
       <CustomerList
-        custList={customerList}
+        custList={onFilterCustomers(searchText)}
         onEditCust={onEditCustomer}
         onDeleteCust={onDeleteCustomer}
       />

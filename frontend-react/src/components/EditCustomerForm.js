@@ -21,11 +21,6 @@ export const EditCustomerForm = ({ customer, onClickAction, customerList }) => {
     }
   };
 
-
-  // load the original selected customer.
-
-
-
   return (
     <>
       <form className="needs-validation bg-transparent">
@@ -42,10 +37,6 @@ export const EditCustomerForm = ({ customer, onClickAction, customerList }) => {
             value={customer_id}
             disabled
           />
-
-
-
-
         </div>
 
         <div className="mb-3">
