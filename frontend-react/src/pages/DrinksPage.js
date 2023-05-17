@@ -1,28 +1,30 @@
 // model after SubscriptionLogPage.js
 import React, { useEffect, useState } from "react";
-
+import axios from "axios";
 import UtilityBar from "../components/UtilityBar";
 import DrinkList from "../components/DrinkList";
 import Modal from "../components/Modal";
 import AddDrinkForm from "../components/AddDrinkForm";
 import DropDownSearchCategoryDrinks from "../components/DropDownSearchCategoryDrinks";
 
-// WHEN DB IS CONNECTED, STOP USING drinksData.
-import drinksData from "../data/drinksdata";
-
 function DrinksPage() {
   const [drinkList, setDrinkList] = useState([]);
   const [drinkName, setDrinkName] = useState([]);
   const [drinkDescription, setDrinkDescription] = useState([]);
   const [drinkPrice, setdrinkPrice] = useState([]);
+  const [drinkNamesList, setDrinkNamesList] = useState([]);
 
   // load all.
   const loadAllDrinks = async () => {
-    setDrinkList(drinksData);
-    //const response = await fetch('/log');
-    //const dataDrinks = await response.json();
-    //setDrinkList(dataDrinks);
+    try {
+      const response = await axios.get("http://localhost:9124/api/drinks");
+      setDrinkList(response.data);
+      setDrinkNamesList(response.data.map((drink) => drink.drink_name));
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   // UPDATE a single drink
   const onEditDrink = async (drink_id) => {
     // query here.
@@ -70,6 +72,7 @@ function DrinksPage() {
         renderSearchBar={false}
         dropDownOption={dropDownSearch}
         defaultSelected="name"
+        selectOptions={drinkNamesList}
       />
       <DrinkList
         drinkLists={drinkList}

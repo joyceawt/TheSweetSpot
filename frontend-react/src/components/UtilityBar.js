@@ -1,6 +1,8 @@
 import React from "react";
 import SortDropDownMenuList from "./SortDropDownMenuList";
 import SearchBar from "./SearchBar";
+import SortBy from "./SortBy";
+import Select from "./SelectDropdown";
 
 export const UtilityBar = ({
   contentTitle,
@@ -10,6 +12,8 @@ export const UtilityBar = ({
   setSearchText,
   dropDownOption,
   renderSearchBar,
+  defaultSelected,
+  selectOptions,
 }) => {
   const filterComponent = () => {
     if (renderSearchBar) {
@@ -21,7 +25,13 @@ export const UtilityBar = ({
         />
       );
     } else {
-      return SortDropDownMenuList({ dropDownOption });
+      return (
+        <Select
+          dropDownOption={dropDownOption}
+          defaultSelected={defaultSelected}
+          selectOptions={selectOptions}
+        />
+      );
     }
   };
 
@@ -33,7 +43,11 @@ export const UtilityBar = ({
             <strong>{contentTitle}</strong>
           </h4>
         </div>
-        <div className="ms-auto pt-1">{filterComponent()}</div>
+        <div className="pt-3">
+          {" "}
+          <SortBy />{" "}
+        </div>
+        <div className="ms-auto pt-4">{filterComponent()}</div>
         <div className="pt-3 pe-2"> {addModal} </div>
       </div>
     </>
