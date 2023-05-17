@@ -88,7 +88,7 @@ app.delete("/api/customers/delete/:id", (req, res) => {
 
 // Get all drinks
 app.get("/api/drinks", (req, res) => {
-  db.pool.query("SELECT * FROM Drinks", (err, results, fields) => {
+  db.pool.query("SELECT * FROM Drinks", (err, results) => {
     if (err) {
       res.status(500).send("Error fetching customers");
       return;
