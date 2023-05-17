@@ -12,7 +12,6 @@ export const SearchBar = ({ filterCustomers, searchText, setSearchText }) => {
         <span className="input-group-text">
           <i className="bi bi-search fs-4" />
         </span>
-
         <input
           className="form-control bg-white w-50"
           id="searchInput"

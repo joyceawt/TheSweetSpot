@@ -94,6 +94,7 @@ function CustomersPage() {
           searchText={searchText}
           setSearchText={setSearchText}
           filterCustomers={onFilterCustomers}
+          renderSearchBar={true}
         />
       </section>
 
