@@ -130,6 +130,7 @@ function OrdersPage() {
         contentTitle="Orders"
         addModal={OrderModal}
         dropDownOption={dropDownSearchOrder}
+        renderSearchBar={true}
       ></UtilityBar>
 
       <article>
@@ -150,6 +151,7 @@ function OrdersPage() {
         contentTitle="Order Item"
         addModal={OrderItemModal}
         dropDownOption={dropDownSearchOrderItem}
+        renderSearchBar={true}
       ></UtilityBar>
 
       <article>
