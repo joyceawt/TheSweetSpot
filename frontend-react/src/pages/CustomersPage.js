@@ -27,9 +27,11 @@ function CustomersPage() {
 
   const onFilterCustomers = (searchText) => {
     if (searchText.length > 0) {
-      console.log("searchText", searchText);
       const filteredCustomers = customerList.filter((customer) => {
-        return customer.name.toLowerCase().includes(searchText.toLowerCase());
+        return (
+          customer.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          String(customer.phone).includes(searchText)
+        );
       });
       return filteredCustomers;
     } else {
