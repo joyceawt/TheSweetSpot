@@ -9,9 +9,6 @@ import DropDownSearchCategoryDrinks from "../components/DropDownSearchCategoryDr
 
 function DrinksPage() {
   const [drinkList, setDrinkList] = useState([]);
-  const [drinkName, setDrinkName] = useState([]);
-  const [drinkDescription, setDrinkDescription] = useState([]);
-  const [drinkPrice, setDrinkPrice] = useState([]);
   const [drinkNamesList, setDrinkNamesList] = useState([]);
 
   // load all.
@@ -25,35 +22,39 @@ function DrinksPage() {
     }
   };
 
-  // UPDATE a single drink
-  const onEditDrink = async (drink) => {
+  // ADD a single Drink
+  const onAddDrink = async (drink) => {
+    debugger;
     try {
-      const response = await axios.put(
-        `http://localhost:9124/api/drinks/${drink.drink_id}`,
-        {
-          drink_name: drink.drink_name,
-          drink_description: drink.drink_description,
-          drink_price: drink.drink_price,
-        }
+      const response = await axios.post(
+        "http://localhost:9124/api/drinks",
+        drink
       );
-      if (response) loadAllDrinks();
+      if (response) {
+        setDrinkList(...drinkList, response.data);
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  // DELETE a single drink!.
-  const onDeleteDrinks = async (drink_id) => {
-    /*
-      const response = await fetch(`/log/${drink_id}`, { method: 'DELETE' });
-      if (response.status === 204) {
-          const getResponse = await fetch('/log');
-          const currentDrinkList = await getResponse.json();
-          setDrinkList(currentDrinkList);
-      } else {
-          console.error(`Failed to delete drink with _id = ${drink_id}, status code = ${response.status}`)
+  // UPDATE a single drink
+  const onEditDrink = async () => {
+    loadAllDrinks();
+  };
+
+  // DELETE a single drink
+  const onDeleteDrink = async (drink_id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:9124/api/drinks/${drink_id}`
+      );
+      if (response) {
+        loadAllDrinks();
       }
-      */
+    } catch (err) {
+      console.error(`Failed to delete drink with id = ${drink_id}`);
+    }
   };
 
   // LOAD all subscriptions
@@ -67,7 +68,7 @@ function DrinksPage() {
       trigger="add-drink"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
       btnClasses="btn btn-light btn-outline-primary"
-      content={<AddDrinkForm />}
+      content={<AddDrinkForm onAddDrink={onAddDrink} />}
       title="Add a new Drink"
     />
   );
@@ -75,7 +76,7 @@ function DrinksPage() {
   let dropDownSearch = <DropDownSearchCategoryDrinks />;
 
   // Display the page.
-  // <DrinkList drinkLists ={drinksData}  onEditDrink={onEditDrink} onDeleteDrinks={onDeleteDrinks} />
+  // <DrinkList drinkLists ={drinksData}  onEditDrink={onEditDrink} onDeleteDrink={onDeleteDrink} />
   return (
     <section>
       <UtilityBar
@@ -89,10 +90,7 @@ function DrinksPage() {
       <DrinkList
         drinkLists={drinkList}
         onEditDrink={onEditDrink}
-        onDeleteDrinks={onDeleteDrinks}
-        setDrinkName={setDrinkName}
-        setDrinkDescription={setDrinkDescription}
-        setDrinkPrice={setDrinkPrice}
+        onDeleteDrink={onDeleteDrink}
       />
     </section>
   );

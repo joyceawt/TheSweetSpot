@@ -6,6 +6,7 @@ const db = require("./database/db-connector");
 const cors = require("cors");
 
 app.use(cors());
+app.use(express.json());
 
 //get all customers
 app.get("/api/customers", (req, res) => {
@@ -33,26 +34,26 @@ app.get("/api/customers/:id", (req, res) => {
   );
 });
 
-//
-
+//update customer by ID
 app.put("/api/customers/:id", (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
   const phone = req.body.phone;
 
-  db.query(
-    "UPDATE Customers SET ? WHERE customer_id = ?",
-    [name, phone],
-    id,
+  db.pool.query(
+    "UPDATE Customers SET name = ?, phone = ? WHERE customer_id = ?",
+    [name, phone, id],
     (err, result) => {
       if (err) {
-        console.log(err);
+        res.status(500).send("Error updating customer");
+        return;
       }
       res.json(result);
     }
   );
 });
 
+//add new customer
 app.post("/api/customers", (req, res) => {
   const name = req.body.name;
   const phone = req.body.phone;
@@ -69,6 +70,7 @@ app.post("/api/customers", (req, res) => {
   );
 });
 
+//delete customer by ID
 app.delete("/api/customers/delete/:id", (req, res) => {
   const id = req.params.id;
 
@@ -97,16 +99,35 @@ app.get("/api/drinks", (req, res) => {
   });
 });
 
+// update drink by ID
 app.put("/api/drinks/:id", (req, res) => {
   const id = req.params.id;
   const drink_name = req.body.drink_name;
   const drink_description = req.body.drink_description;
   const drink_price = req.body.drink_price;
 
-  db.query(
-    "UPDATE Drinks SET ? WHERE drink_id = ?",
+  db.pool.query(
+    "UPDATE Drinks SET drink_name = ?, drink_description = ?, drink_price = ? WHERE drink_id = ?",
+    [drink_name, drink_description, drink_price, id],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Error updating drink");
+        return;
+      }
+      res.json(result);
+    }
+  );
+});
+
+//create a drink
+app.post("/api/drinks", (req, res) => {
+  const drink_name = req.body.drink_name;
+  const drink_description = req.body.drink_description;
+  const drink_price = req.body.drink_price;
+
+  db.pool.query(
+    "INSERT INTO Drinks (drink_name, drink_description, drink_price) VALUES (?, ?, ?)",
     [drink_name, drink_description, drink_price],
-    id,
     (err, result) => {
       if (err) {
         console.log(err);
@@ -114,6 +135,22 @@ app.put("/api/drinks/:id", (req, res) => {
       res.json(result);
     }
   );
+});
+
+//delete a drink
+app.delete("/api/drinks/:id", (req, res) => {
+  console.log("hello");
+  const id = req.params.id;
+
+  db.pool.query("DELETE FROM Drinks WHERE drink_id= ?", id, (err, result) => {
+    console.log("res", result);
+    if (err) {
+      res.status(500).send("Error deleting drink");
+      return;
+    }
+
+    res.json(result);
+  });
 });
 
 // Get all Orders

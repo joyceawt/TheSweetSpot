@@ -54,7 +54,7 @@ function CustomersPage() {
     }
   };
 
-  // DELETE a single customer!.
+  // DELETE a single customer
   const onDeleteCustomer = async (customer_id) => {
     try {
       const response = await axios.delete(

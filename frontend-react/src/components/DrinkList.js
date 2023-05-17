@@ -2,14 +2,7 @@
 import React from "react";
 
 import Drink from "../components/Drink";
-function DrinkList({
-  drinkLists,
-  onEditDrink,
-  onDeleteDrinks,
-  setDrinkName,
-  setDrinkDescription,
-  setDrinkPrice,
-}) {
+function DrinkList({ drinkLists, onEditDrink, onDeleteDrink }) {
   // self note: {drinkArgs} are the arguments.
   return (
     <div className="d-flex flex-column justify-content-evenly custom-size">
@@ -18,10 +11,7 @@ function DrinkList({
           key={i}
           drink={drinkArgs}
           onEditDrink={onEditDrink}
-          onDeleteDrinks={onDeleteDrinks}
-          setDrinkName={setDrinkName}
-          setDrinkDescription={setDrinkDescription}
-          setDrinkPrice={setDrinkPrice}
+          onDeleteDrink={onDeleteDrink}
         />
       ))}
     </div>

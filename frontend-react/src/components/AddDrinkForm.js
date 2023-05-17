@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-function AddDrinkForm({ onSubmit }) {
-  // action="/add-new-drink" method="post"
+function AddDrinkForm({ onAddDrink }) {
+  const [drink_name, setDrinkName] = useState([]);
+  const [drink_description, setDrinkDescription] = useState([]);
+  const [drink_price, setDrinkPrice] = useState([]);
+
+  const drink = { drink_name, drink_description, drink_price };
+
   return (
     <form className="needs-validation">
       <div className="mb-3">
@@ -12,6 +17,8 @@ function AddDrinkForm({ onSubmit }) {
           type="text"
           className="form-control bg-transparent"
           id="add-drink-name"
+          value={drink_name}
+          onChange={(e) => setDrinkName(e.target.value)}
           autoFocus="autoFocus"
           required
         />
@@ -25,6 +32,8 @@ function AddDrinkForm({ onSubmit }) {
           className="form-control bg-transparent"
           id="add-description"
           autoFocus="autoFocus"
+          value={drink_description}
+          onChange={(e) => setDrinkDescription(e.target.value)}
           required
         />
       </div>
@@ -40,7 +49,10 @@ function AddDrinkForm({ onSubmit }) {
             className="form-control bg-transparent"
             id="add-price"
             autoFocus="autoFocus"
-            onInput="inputValidator('add-price', this)"
+            value={drink_price}
+            onChange={(e) => {
+              setDrinkPrice(e.target.value);
+            }}
             required
           />
         </div>
@@ -58,6 +70,7 @@ function AddDrinkForm({ onSubmit }) {
           type="submit"
           className="btn btn-primary"
           id="add-new-drink-btn"
+          onClick={() => onAddDrink(drink)}
         >
           Add item
         </button>

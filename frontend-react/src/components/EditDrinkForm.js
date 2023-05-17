@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
-function EditDrinkForm({
-  drinkItem,
-  onClickAction,
-  setDrinkName,
-  setDrinkDescription,
-  setDrinkPrice,
-}) {
+export const EditDrinkForm = ({ drinkItem, onClickAction }) => {
   // for unique IDs
-  let drinkName = "edit-drink-name-" + drinkItem.drink_id;
-  let drinkDescription = "edit-description-" + drinkItem.drink_id;
-  let drinkPrice = "edit-price-" + drinkItem.drink_id;
-  let drinkBtn = "edit-drink-btn-" + drinkItem.drink_id;
+  const drinkNameId = "edit-drink-name-" + drinkItem.drink_id;
+  const drinkDescriptionId = "edit-description-" + drinkItem.drink_id;
+  const drinkPriceId = "edit-price-" + drinkItem.drink_id;
+  const drinkBtnId = "edit-drink-btn-" + drinkItem.drink_id;
+
+  const [drink_name, setNewDrinkName] = useState(drinkItem.drink_name);
+  const [drink_description, setNewDrinkDescription] = useState(
+    drinkItem.drink_description
+  );
+  const [drink_price, setNewDrinkPrice] = useState(drinkItem.drink_price);
+  const [drink_id] = useState(drinkItem.drink_id);
+
+  const editDrink = async () => {
+    try {
+      const response = await axios.put(
+        `http://localhost:9124/api/drinks/${drink_id}`,
+        {
+          drink_name: drink_name,
+          drink_description: drink_description,
+          drink_price: drink_price,
+        }
+      );
+      onClickAction();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -23,10 +41,10 @@ function EditDrinkForm({
           <input
             type="text"
             className="form-control bg-transparent"
-            id={drinkName}
+            id={drinkNameId}
             autoFocus="autoFocus"
-            defaultValue={drinkItem.drink_name}
-            onChange={(e) => setDrinkName(e)}
+            value={drink_name}
+            onChange={(e) => setNewDrinkName(e.target.value)}
             required
           />
         </div>
@@ -37,10 +55,10 @@ function EditDrinkForm({
           </label>
           <textarea
             className="form-control bg-transparent"
-            id={drinkDescription}
+            id={drinkDescriptionId}
             autoFocus="autoFocus"
-            defaultValue={drinkItem.drink_description}
-            onChange={(e) => setDrinkDescription(e)}
+            value={drink_description}
+            onChange={(e) => setNewDrinkDescription(e.target.value)}
             required
           />
         </div>
@@ -54,10 +72,10 @@ function EditDrinkForm({
             <input
               type="number"
               className="form-control bg-transparent"
-              id={drinkPrice}
+              id={drinkPriceId}
               autoFocus="autoFocus"
-              defaultValue={drinkItem.drink_price}
-              onChange={(e) => setDrinkPrice(e)}
+              value={drink_price}
+              onChange={(e) => setNewDrinkPrice(e.target.value)}
               required
             />
           </div>
@@ -74,8 +92,9 @@ function EditDrinkForm({
           <button
             type="button"
             className="btn btn-primary"
-            id={drinkBtn}
-            onClick={() => onClickAction(drinkItem)}
+            id={drinkBtnId}
+            data-bs-dismiss="modal"
+            onClick={editDrink}
           >
             Save
           </button>
@@ -83,6 +102,6 @@ function EditDrinkForm({
       </form>
     </>
   );
-}
+};
 
 export default EditDrinkForm;
