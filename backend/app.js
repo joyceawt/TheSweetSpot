@@ -6,11 +6,61 @@ const db = require("./database/db-connector");
 const cors = require("cors");
 
 app.use(cors());
-app.use(express.json());
 
-//Customers
+
+// filter functions
+
+function filterSearchCustomer(req){
+
+  // ensures that the parameter names matches our columns in the db.
+  // filter out any un-needed parameters.
+  let params = {}
+
+  if (req.query.customer_id !== undefined) {
+      params.customer_id = req.query.customer_id;
+  } if (req.query.name !== undefined) {
+      params.name = req.query.name;
+  } if (req.query.phone !== undefined) {
+      params.phone = req.query.phone;
+  }
+
+  return params;
+}
+
+
+// Customers: original.
+/*
 app.get("/api/customers", (req, res) => {
-  db.pool.query("SELECT * FROM Customers", (err, results) => {
+  db.pool.query("SELECT * FROM Customers", (err, results, fields) => {
+    if (err) {
+      res.status(500).send("Error fetching customers");
+      return;
+    }
+    res.json(results);
+  });
+});
+*/
+
+// Customers: with filters based on parameters.
+app.get("/api/customers", (req, res) => {
+  let params = filterSearchCustomer(req);
+  console.log(params);
+
+  // create a QUERY based on params.
+  let reqQuery=``;
+
+  if (params.customer_id !== undefined){
+    reqQuery = `SELECT * FROM Customers WHERE customer_id = ${params.customer_id}`;
+  }if(params.name !== undefined){
+    reqQuery = `SELECT * FROM Customers WHERE name = ${params.name}`;
+  }if(params.phone !== undefined){
+    reqQuery = `SELECT * FROM Customers WHERE phone = ${params.phone}`;
+  }else{
+    reqQuery = "SELECT * FROM Customers";
+  }
+
+
+  db.pool.query(`${reqQuery}`, (err, results, fields) => {
     if (err) {
       res.status(500).send("Error fetching customers");
       return;
@@ -19,18 +69,36 @@ app.get("/api/customers", (req, res) => {
   });
 });
 
+
+// get customers by ID
+// Customers
+app.get("/api/customers/:id", (req, res) => {
+
+  db.pool.query(`SELECT * FROM Customers WHERE customer_id = ${req.params.id}`, (err, results, fields) => {
+    if (err) {
+      res.status(500).send("Error fetching customers");
+      return;
+    }
+    res.json(results);
+  });
+
+
+});
+
+// 
+
 app.put("/api/customers/:id", (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
   const phone = req.body.phone;
 
-  db.pool.query(
-    "UPDATE Customers SET name = ?, phone = ? WHERE customer_id = ?",
-    [name, phone, id],
+  db.query(
+    "UPDATE Customers SET ? WHERE customer_id = ?",
+    [name, phone],
+    id,
     (err, result) => {
       if (err) {
-        res.status(500).send("Error updating customer");
-        return;
+        console.log(err);
       }
       res.json(result);
     }
@@ -53,9 +121,8 @@ app.post("/api/customers", (req, res) => {
   );
 });
 
-app.delete("/api/customers/:customer_id", (req, res) => {
-  console.log(req.params);
-  const id = req.params.customer_id;
+app.delete("/api/customers/delete/:id", (req, res) => {
+  const id = req.params.id;
 
   db.pool.query(
     "DELETE FROM Customers WHERE customer_id= ?",
@@ -83,7 +150,7 @@ app.get("/api/drinks", (req, res) => {
 });
 
 // Get all Orders
-app.get("/api/drinks", (req, res) => {
+app.get("/api/orders", (req, res) => {
   db.pool.query("SELECT * FROM Orders", (err, results, fields) => {
     if (err) {
       res.status(500).send("Error fetching customers");
