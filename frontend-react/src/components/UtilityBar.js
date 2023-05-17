@@ -47,7 +47,9 @@ export const UtilityBar = ({
           {" "}
           <SortBy />{" "}
         </div>
-        <div className="ms-auto pt-4">{filterComponent()}</div>
+        <div className={`ms-auto ${renderSearchBar ? "pt-1" : "pt-4"}`}>
+          {filterComponent()}
+        </div>
         <div className="pt-3 pe-2"> {addModal} </div>
       </div>
     </>
