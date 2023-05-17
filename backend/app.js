@@ -139,11 +139,9 @@ app.post("/api/drinks", (req, res) => {
 
 //delete a drink
 app.delete("/api/drinks/:id", (req, res) => {
-  console.log("hello");
   const id = req.params.id;
 
   db.pool.query("DELETE FROM Drinks WHERE drink_id= ?", id, (err, result) => {
-    console.log("res", result);
     if (err) {
       res.status(500).send("Error deleting drink");
       return;
@@ -155,22 +153,64 @@ app.delete("/api/drinks/:id", (req, res) => {
 
 // Get all Orders
 app.get("/api/orders", (req, res) => {
-  db.pool.query("SELECT * FROM Orders", (err, results, fields) => {
+  db.pool.query("SELECT * FROM Orders", (err, results) => {
     if (err) {
-      res.status(500).send("Error fetching customers");
+      res.status(500).send("Error fetching orders");
       return;
     }
     res.json(results);
   });
 });
 
-app.get("/api/OrderItems", (req, res) => {
-  db.pool.query("SELECT * FROM OrderItems", (err, results, fields) => {
+// update order by ID
+app.put("/api/orders/:id", (req, res) => {
+  const id = req.params.id;
+  const customer_id = req.body.customer_id;
+  const order_total = req.body.order_total;
+  const order_date = req.body.order_date;
+
+  db.pool.query(
+    "UPDATE Orders SET customer_id = ?, order_total = ?, order_date = ? WHERE order_id = ?",
+    [customer_id, order_total, order_date, id],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Error updating drink");
+        return;
+      }
+      res.json(result);
+    }
+  );
+});
+
+//create a order
+app.post("/api/orders", (req, res) => {
+  const customer_id = req.body.customer_id;
+  const order_total = req.body.order_total;
+  const order_date = req.body.order_date;
+
+  db.pool.query(
+    "INSERT INTO Orders (customer_id, order_total, order_date) VALUES (?, ?, ?)",
+    [customer_id, order_total, order_date],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.json(result);
+    }
+  );
+});
+
+//delete an order
+app.delete("/api/orders/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.pool.query("DELETE FROM Orders WHERE order_id= ?", id, (err, result) => {
     if (err) {
-      res.status(500).send("Error fetching customers");
+      res.status(500).send("Error deleting order");
       return;
     }
-    res.json(results);
+
+    res.json(result);
   });
 });
 

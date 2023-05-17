@@ -10,12 +10,9 @@ import OrderItemList from "../components/OrderItemList";
 import DropDownSearchCategoryOrder from "../components/DropDownSearchCategoryOrders";
 import DropDownSearchCategoryOrderItems from "../components/DropDownSearchCategoryOrderItems";
 
-
 //DELETE THE STATIC DATA BELOW WHEN CONNECTED TO DB!!
 import orderData from "../data/orderdata";
 import orderitemsdata from "../data/orderitemsdata";
-
-
 
 function OrdersPage() {
   const [orderList, setOrderList] = useState([]);
@@ -53,7 +50,6 @@ function OrdersPage() {
       console.log(err);
     }
 
-
     // LOAD ORDERITEMS
     try {
       const response = await axios.get("http://localhost:9124/api/OrderItems");
@@ -73,7 +69,6 @@ function OrdersPage() {
     }
   };
 
-
   // load the list for DRINKS -- for ADDING and EDITING
   const loadAllDrinks = async () => {
     try {
@@ -83,8 +78,6 @@ function OrdersPage() {
       console.log(err);
     }
   };
-  
-
 
   // UPDATE a single order
   const onEditOrder = async (_id) => {};
@@ -97,7 +90,6 @@ function OrdersPage() {
 
   // DELETE a single customer!.
   const onDeleteOrderItem = async (_id) => {};
-
 
   // LOAD all Orders
   useEffect(() => {
@@ -112,7 +104,7 @@ function OrdersPage() {
       trigger="add-order"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
       btnClasses="btn btn-light btn-outline-primary"
-      content={<OrderForm customerList={customerList}/>}
+      content={<OrderForm customerList={customerList} />}
       title="Add a new Order"
     />
   );
@@ -128,8 +120,8 @@ function OrdersPage() {
     />
   );
 
-  let dropDownSearchOrder = < DropDownSearchCategoryOrder />
-  let dropDownSearchOrderItem = < DropDownSearchCategoryOrderItems/>
+  let dropDownSearchOrder = <DropDownSearchCategoryOrder />;
+  let dropDownSearchOrderItem = <DropDownSearchCategoryOrderItems />;
 
   return (
     <>
@@ -174,7 +166,6 @@ function OrdersPage() {
           setOI_bobaOpt={setOI_bobaOpt}
           drinkList={drinkList}
           orderList={orderList}
-
         />
       </article>
     </>
