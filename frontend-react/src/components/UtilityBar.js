@@ -1,5 +1,4 @@
 import React from "react";
-import SortDropDownMenuList from "./SortDropDownMenuList";
 import SearchBar from "./SearchBar";
 import SortBy from "./SortBy";
 import Select from "./SelectDropdown";
