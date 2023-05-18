@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import DropDownCustomers from "./DropDownCustomers";
+import SelectDropdown from "./SelectDropdown";
 
-function AddOrderForm({customerList}) {
-  //action="/add-new-order" method="post"
+function AddOrderForm({ customerList, onAddOrder }) {
+  const [customer_id, setCustomerID] = useState([]);
+  const [order_date, setOrderDate] = useState([]);
+  const [order_total, setTotal] = useState([]);
+
+  const order = { customer_id, order_date, order_total };
+  const handleCustomerSelection = (customer) => {
+    setCustomerID(customer);
+  };
   return (
     <>
       <form className="needs-validation">
@@ -10,19 +18,18 @@ function AddOrderForm({customerList}) {
           <label htmlFor="add-customer-ID" className="col-form-label">
             Customer ID:
           </label>
-          <select className="form-select mb-3 bg-transparent" 
-          name="customer_id" 
-          id="add-customer-ID" 
-          aria-label ="customer_id">
-          
-            <option value=""> None </option>
-            {customerList.map((customer, i) => (
-                  <DropDownCustomers
-                  customerList={customer}
-                  />
-            ))}
-
-          </select>
+          <SelectDropdown
+            className={"form-select mb-3 bg-transparent"}
+            ariaLabel={"customer_id"}
+            onChangeHandler={handleCustomerSelection}
+            id="add-customer-ID"
+            name="customer_id"
+            selectOptions={customerList}
+            optionValue={"id"}
+            optionDisplay={"name"}
+            defaultFilterValue={"None"}
+            selectedOption={setCustomerID}
+          ></SelectDropdown>
         </div>
 
         <div className="mb-3">

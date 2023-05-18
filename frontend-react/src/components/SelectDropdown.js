@@ -2,27 +2,35 @@ import React from "react";
 
 export const Select = ({
   selectOptions,
-  filterSelect,
-  setFilterText,
+  filterSelect = null,
+  setFilterText = null,
   selectedOption,
   defaultFilterValue,
+  className = "form-select bg-light",
+  ariaLabel = null,
+  optionValue = null,
+  onChangeHandler = null,
+  optionDisplay = null,
 }) => {
   const handleChange = (e) => {
-    setFilterText(e.target.value);
-    filterSelect(e.target.value);
+    if (onChangeHandler != null) {
+      onChangeHandler(e.target.value);
+    } else {
+      setFilterText(e.target.value);
+      filterSelect(e.target.value);
+    }
   };
-
   return (
     <select
-      className="form-select bg-light"
-      aria-label="Filter By Drink Name"
+      className={className}
+      aria-label={ariaLabel}
       onChange={handleChange}
       defaultValue={selectedOption}
     >
       <option>{defaultFilterValue}</option>
-      {selectOptions.map((option) => (
-        <option key={option} value={option}>
-          {option}
+      {selectOptions.map((option, i) => (
+        <option key={i} value={optionValue ? option[optionValue] : option}>
+          {optionDisplay ? option[optionDisplay] : option}
         </option>
       ))}
     </select>

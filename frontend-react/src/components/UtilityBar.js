@@ -12,6 +12,7 @@ export const UtilityBar = ({
   defaultOption,
   renderSearchBar = null,
   selectOptions,
+  ariaLabel,
 }) => {
   const filterComponent = () => {
     if (renderSearchBar) {
@@ -30,6 +31,7 @@ export const UtilityBar = ({
           filterSelect={filterSearch}
           setFilterText={setSearchText}
           defaultFilterValue={defaultOption}
+          ariaLabel={ariaLabel}
         />
       );
     }

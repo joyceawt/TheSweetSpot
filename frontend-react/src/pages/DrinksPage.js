@@ -5,7 +5,6 @@ import UtilityBar from "../components/UtilityBar";
 import DrinkList from "../components/DrinkList";
 import Modal from "../components/Modal";
 import AddDrinkForm from "../components/AddDrinkForm";
-import DropDownSearchCategoryDrinks from "../components/DropDownSearchCategoryDrinks";
 
 export const allDrinks = async () => {
   return await axios.get("http://localhost:9124/api/drinks");
@@ -16,6 +15,7 @@ export const DrinksPage = () => {
   const [drinkNamesList, setDrinkNamesList] = useState([]);
   const defaultFilterValue = "Filter By Drink Name";
   const [searchText, setSearchText] = useState(defaultFilterValue, "");
+  const ariaLabel = "Filter By Drink Name";
 
   // load all.
   const loadAllDrinks = async () => {
@@ -92,22 +92,18 @@ export const DrinksPage = () => {
     />
   );
 
-  let dropDownSearch = <DropDownSearchCategoryDrinks />;
-
-  // Display the page.
-  // <DrinkList drinkLists ={drinksData}  onEditDrink={onEditDrink} onDeleteDrink={onDeleteDrink} />
   return (
     <section>
       <UtilityBar
         addModal={Add_Button_Modal}
         contentTitle="Drinks"
         renderSearchBar={false}
-        dropDownOption={dropDownSearch}
         searchText={searchText}
         selectOptions={drinkNamesList}
         filterSearch={onFilterDrinks}
         setSearchText={setSearchText}
         defaultOption={defaultFilterValue}
+        ariaLabel={ariaLabel}
       />
       <DrinkList
         drinkLists={onFilterDrinks(searchText)}
