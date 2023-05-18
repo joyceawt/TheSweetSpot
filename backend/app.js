@@ -184,20 +184,30 @@ app.put("/api/orders/:id", (req, res) => {
 
 //create a order
 app.post("/api/orders", (req, res) => {
-  const customer_id = req.body.customer_id;
+  const customer_id =
+    req.body.customer_id == "None" ? null : req.body.customer_id;
   const order_total = req.body.order_total;
   const order_date = req.body.order_date;
 
-  db.pool.query(
-    "INSERT INTO Orders (customer_id, order_total, order_date) VALUES (?, ?, ?)",
-    [customer_id, order_total, order_date],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      res.json(result);
+  const no_customer_id_query =
+    "INSERT INTO Orders (order_total, order_date) VALUES (?, ?)";
+
+  const default_query =
+    "INSERT INTO Orders (customer_id, order_total, order_date) VALUES (?, ?, ?)";
+
+  const query = customer_id == null ? no_customer_id_query : default_query;
+
+  const query_array =
+    customer_id == null
+      ? [order_total, order_date]
+      : [customer_id, order_total, order_date];
+
+  db.pool.query(query, query_array, (err, result) => {
+    if (err) {
+      console.log(err);
     }
-  );
+    res.json(result);
+  });
 });
 
 //delete an order

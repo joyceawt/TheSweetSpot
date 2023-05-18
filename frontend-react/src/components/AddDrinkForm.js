@@ -19,7 +19,7 @@ function AddDrinkForm({ onAddDrink }) {
           id="add-drink-name"
           value={drink_name}
           onChange={(e) => setDrinkName(e.target.value)}
-          autoFocus="autoFocus"
+          autoFocus
           required
         />
       </div>
@@ -31,7 +31,6 @@ function AddDrinkForm({ onAddDrink }) {
         <textarea
           className="form-control bg-transparent"
           id="add-description"
-          autoFocus="autoFocus"
           value={drink_description}
           onChange={(e) => setDrinkDescription(e.target.value)}
           required
@@ -48,7 +47,6 @@ function AddDrinkForm({ onAddDrink }) {
             type="number"
             className="form-control bg-transparent"
             id="add-price"
-            autoFocus="autoFocus"
             value={drink_price}
             onChange={(e) => {
               setDrinkPrice(e.target.value);
