@@ -20,14 +20,16 @@ export const Select = ({
       filterSelect(e.target.value);
     }
   };
+
   return (
     <select
       className={className}
       aria-label={ariaLabel}
       onChange={handleChange}
       defaultValue={selectedOption}
+      placeholder={defaultFilterValue}
     >
-      <option>{defaultFilterValue}</option>
+      {defaultFilterValue ? <option>{defaultFilterValue}</option> : ""}
       {selectOptions.map((option, i) => (
         <option key={i} value={optionValue ? option[optionValue] : option}>
           {optionDisplay ? option[optionDisplay] : option}
