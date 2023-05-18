@@ -10,7 +10,7 @@ export const UtilityBar = ({
   searchText,
   setSearchText,
   defaultOption,
-  renderSearchBar,
+  renderSearchBar = null,
   selectOptions,
 }) => {
   const filterComponent = () => {
@@ -22,7 +22,7 @@ export const UtilityBar = ({
           setSearchText={setSearchText}
         />
       );
-    } else {
+    } else if (renderSearchBar == false) {
       return (
         <Select
           selectOptions={selectOptions}

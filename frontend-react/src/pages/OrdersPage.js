@@ -195,7 +195,6 @@ function OrdersPage() {
         key="AddOrder"
         contentTitle="Orders"
         addModal={OrderModal}
-        dropDownOption={dropDownSearchOrder}
         renderSearchBar={true}
       ></UtilityBar>
 
@@ -216,8 +215,6 @@ function OrdersPage() {
         key="AddOrderItem"
         contentTitle="Order Item"
         addModal={OrderItemModal}
-        dropDownOption={dropDownSearchOrderItem}
-        renderSearchBar={true}
       ></UtilityBar>
 
       <article>
