@@ -7,7 +7,11 @@ import Modal from "../components/Modal";
 import AddDrinkForm from "../components/AddDrinkForm";
 import DropDownSearchCategoryDrinks from "../components/DropDownSearchCategoryDrinks";
 
-function DrinksPage() {
+export const allDrinks = async () => {
+  return await axios.get("http://localhost:9124/api/drinks");
+};
+
+export const DrinksPage = () => {
   const [drinkList, setDrinkList] = useState([]);
   const [drinkNamesList, setDrinkNamesList] = useState([]);
   const defaultFilterValue = "Filter By Drink Name";
@@ -16,7 +20,7 @@ function DrinksPage() {
   // load all.
   const loadAllDrinks = async () => {
     try {
-      const response = await axios.get("http://localhost:9124/api/drinks");
+      const response = await allDrinks();
       setDrinkList(response.data);
       setDrinkNamesList(response.data.map((drink) => drink.drink_name));
     } catch (err) {
@@ -112,6 +116,6 @@ function DrinksPage() {
       />
     </section>
   );
-}
+};
 
 export default DrinksPage;

@@ -5,13 +5,17 @@ import AddCustomerForm from "../components/AddCustomerForm";
 import UtilityBar from "../components/UtilityBar";
 import CustomerList from "../components/CustomerList";
 
-function CustomersPage() {
+export const allCustomers = async () => {
+  return await axios.get("http://localhost:9124/api/customers");
+};
+
+export const CustomersPage = () => {
   const [customerList, setCustomerList] = useState([]);
   const [searchText, setSearchText] = useState([]);
 
   const loadAllCustomers = async () => {
     try {
-      const response = await axios.get("http://localhost:9124/api/customers");
+      const response = await allCustomers();
 
       setCustomerList(response.data);
     } catch (err) {
@@ -104,6 +108,6 @@ function CustomersPage() {
       />
     </>
   );
-}
+};
 
 export default CustomersPage;
