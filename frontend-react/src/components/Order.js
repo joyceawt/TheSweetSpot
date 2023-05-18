@@ -4,20 +4,12 @@ import DeleteConfirm from "./DeleteConfirm";
 
 import EditOrderForm from "./EditOrderForm";
 
-function Order({
-  order,
-  onEditOrder,
-  onDeleteOrder,
-  setCustomerID,
-  setOrderDate,
-  setTotal,
-  customerList
-}) {
+function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
   // unique IDs.
   let modalEdit = "edit-entry-" + order.order_id;
   let modalDelete = "delete-confirm-" + order.order_id;
 
-  // grab 
+  // grab
 
   return (
     <>
@@ -42,9 +34,6 @@ function Order({
               <EditOrderForm
                 order={order}
                 onClickAction={onEditOrder}
-                setCustomerID={setCustomerID}
-                setOrderDate={setOrderDate}
-                setTotal={setTotal}
                 customerList={customerList}
               />
             }

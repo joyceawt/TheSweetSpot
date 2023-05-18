@@ -2,7 +2,7 @@ import React from "react";
 
 import Order from "./Order";
 
-function OrderList({ orderList, onEditOrder, onDeleteOrder, setCustomerID, setOrderDate, setTotal, customerList }) {
+function OrderList({ orderList, onEditOrder, onDeleteOrder, customerList }) {
   return (
     <>
       <article className="card table-responsive bg-white ">
@@ -25,9 +25,6 @@ function OrderList({ orderList, onEditOrder, onDeleteOrder, setCustomerID, setOr
                 order={orderArgs}
                 onEditOrder={onEditOrder}
                 onDeleteOrder={onDeleteOrder}
-                setCustomerID={setCustomerID}
-                setOrderDate={setOrderDate}
-                setTotal={setTotal}
                 customerList={customerList}
               />
             ))}

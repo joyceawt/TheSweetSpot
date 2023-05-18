@@ -17,14 +17,11 @@ export const EditDrinkForm = ({ drinkItem, onClickAction }) => {
 
   const editDrink = async () => {
     try {
-      const response = await axios.put(
-        `http://localhost:9124/api/drinks/${drink_id}`,
-        {
-          drink_name: drink_name,
-          drink_description: drink_description,
-          drink_price: drink_price,
-        }
-      );
+      await axios.put(`http://localhost:9124/api/drinks/${drink_id}`, {
+        drink_name: drink_name,
+        drink_description: drink_description,
+        drink_price: drink_price,
+      });
       onClickAction();
     } catch (err) {
       console.log(err);
