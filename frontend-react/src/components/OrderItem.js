@@ -31,8 +31,8 @@ function OrderItem({
         <td>{orderItem.drink_quantity}</td>
         <td>{orderItem.ice_level}</td>
         <td>{orderItem.sugar_level}</td>
-        <td>{orderItem.dairy_option}</td>
-        <td>{orderItem.boba_option}</td>
+        <td>{orderItem.dairy_option == 1 ? "Yes" : "No"}</td>
+        <td>{orderItem.boba_option == 1 ? "Yes" : "No"}</td>
         <td>
           <Modal
             trigger={modalEdit}
