@@ -1,9 +1,9 @@
 import React from "react";
 
-export const SearchBar = ({ filterCustomers, searchText, setSearchText }) => {
+export const SearchBar = ({ filterSearch, searchText, setSearchText }) => {
   const handleChange = (e) => {
     setSearchText(e.target.value);
-    filterCustomers(e.target.value);
+    filterSearch(e.target.value);
   };
 
   return (

@@ -92,7 +92,7 @@ function CustomersPage() {
           contentTitle="Customer"
           searchText={searchText}
           setSearchText={setSearchText}
-          filterCustomers={onFilterCustomers}
+          filterSearch={onFilterCustomers}
           renderSearchBar={true}
         />
       </section>

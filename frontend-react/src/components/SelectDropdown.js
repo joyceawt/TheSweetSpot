@@ -1,14 +1,25 @@
 import React from "react";
 
-export const Select = ({ selectOptions }) => {
+export const Select = ({
+  selectOptions,
+  filterSelect,
+  setFilterText,
+  selectedOption,
+  defaultFilterValue,
+}) => {
+  const handleChange = (e) => {
+    setFilterText(e.target.value);
+    filterSelect(e.target.value);
+  };
+
   return (
     <select
       className="form-select bg-light"
-      aria-label="Default select example"
+      aria-label="Filter By Drink Name"
+      onChange={handleChange}
+      defaultValue={selectedOption}
     >
-      <option disabled selected hidden>
-        Filter By Drink Name{" "}
-      </option>
+      <option>{defaultFilterValue}</option>
       {selectOptions.map((option) => (
         <option key={option} value={option}>
           {option}

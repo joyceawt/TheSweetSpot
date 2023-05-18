@@ -10,6 +10,8 @@ import DropDownSearchCategoryDrinks from "../components/DropDownSearchCategoryDr
 function DrinksPage() {
   const [drinkList, setDrinkList] = useState([]);
   const [drinkNamesList, setDrinkNamesList] = useState([]);
+  const defaultFilterValue = "Filter By Drink Name";
+  const [searchText, setSearchText] = useState(defaultFilterValue, "");
 
   // load all.
   const loadAllDrinks = async () => {
@@ -24,7 +26,6 @@ function DrinksPage() {
 
   // ADD a single Drink
   const onAddDrink = async (drink) => {
-    debugger;
     try {
       const response = await axios.post(
         "http://localhost:9124/api/drinks",
@@ -57,6 +58,20 @@ function DrinksPage() {
     }
   };
 
+  //filter Drinks
+  const onFilterDrinks = (filterName) => {
+    if (filterName != "Filter By Drink Name") {
+      const filteredDrinks = drinkList.filter((drink) => {
+        return drink.drink_name
+          .toLowerCase()
+          .includes(filterName.toLowerCase());
+      });
+      return filteredDrinks;
+    } else {
+      return drinkList;
+    }
+  };
+
   // LOAD all subscriptions
   useEffect(() => {
     loadAllDrinks();
@@ -84,11 +99,14 @@ function DrinksPage() {
         contentTitle="Drinks"
         renderSearchBar={false}
         dropDownOption={dropDownSearch}
-        defaultSelected="name"
+        searchText={searchText}
         selectOptions={drinkNamesList}
+        filterSearch={onFilterDrinks}
+        setSearchText={setSearchText}
+        defaultOption={defaultFilterValue}
       />
       <DrinkList
-        drinkLists={drinkList}
+        drinkLists={onFilterDrinks(searchText)}
         onEditDrink={onEditDrink}
         onDeleteDrink={onDeleteDrink}
       />

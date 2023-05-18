@@ -7,19 +7,18 @@ import Select from "./SelectDropdown";
 export const UtilityBar = ({
   contentTitle,
   addModal,
-  filterCustomers,
+  filterSearch,
   searchText,
   setSearchText,
-  dropDownOption,
+  defaultOption,
   renderSearchBar,
-  defaultSelected,
   selectOptions,
 }) => {
   const filterComponent = () => {
     if (renderSearchBar) {
       return (
         <SearchBar
-          filterCustomers={filterCustomers}
+          filterSearch={filterSearch}
           searchText={searchText}
           setSearchText={setSearchText}
         />
@@ -27,9 +26,11 @@ export const UtilityBar = ({
     } else {
       return (
         <Select
-          dropDownOption={dropDownOption}
-          defaultSelected={defaultSelected}
           selectOptions={selectOptions}
+          selectedOption={searchText}
+          filterSelect={filterSearch}
+          setFilterText={setSearchText}
+          defaultFilterValue={defaultOption}
         />
       );
     }
