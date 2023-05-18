@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import UtilityBar from "../components/UtilityBar";
+import axios from "axios";
+import { allCustomers } from "./CustomersPage";
+import { allDrinks } from "./DrinksPage";
 import Modal from "../components/Modal";
 import OrderForm from "../components/AddOrderForm";
 import AddOrderItemForm from "../components/AddOrderItemForm";
-import axios from "axios";
-
 import OrderList from "../components/OrderList";
 import OrderItemList from "../components/OrderItemList";
 import DropDownSearchCategoryOrder from "../components/DropDownSearchCategoryOrders";
 import DropDownSearchCategoryOrderItems from "../components/DropDownSearchCategoryOrderItems";
-
-//DELETE THE STATIC DATA BELOW WHEN CONNECTED TO DB!!
-import orderData from "../data/orderdata";
-import orderitemsdata from "../data/orderitemsdata";
 
 function OrdersPage() {
   const [orderList, setOrderList] = useState([]);
@@ -33,67 +30,136 @@ function OrdersPage() {
   const [OI_dairyOpt, setOI_dairyOpt] = useState([]);
   const [OI_bobaOpt, setOI_bobaOpt] = useState([]);
 
-  //for loading pre-loaded drop down options
+  // //for loading pre-loaded drop down options
   const [customerList, setCustomerList] = useState([]);
   const [drinkList, setDrinkList] = useState([]);
 
-  // load all.
+  // LOAD ORDERS
   const loadAllOrders = async () => {
-    //setOrderList(orderData);
-    //setOrderItemList(orderitemsdata);
-
-    // LOAD ORDER
     try {
       const response = await axios.get("http://localhost:9124/api/orders");
       setOrderList(response.data);
     } catch (err) {
       console.log(err);
     }
+  };
 
-    // LOAD ORDERITEMS
+  const loadAllOrderItems = async () => {
     try {
-      const response = await axios.get("http://localhost:9124/api/OrderItems");
+      const response = await axios.get("http://localhost:9124/api/order_items");
       setOrderItemList(response.data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // load the list of customers - FOR ADDING and EDITING
   const loadAllCustomers = async () => {
     try {
-      const response = await axios.get("http://localhost:9124/api/customers");
+      const response = await allCustomers();
+
       setCustomerList(response.data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // load the list for DRINKS -- for ADDING and EDITING
   const loadAllDrinks = async () => {
     try {
-      const response = await axios.get("http://localhost:9124/api/drinks");
+      const response = await allDrinks();
+
       setDrinkList(response.data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  // UPDATE a single order
-  const onEditOrder = async (_id) => {};
+  const onEditOrderItem = async () => {
+    loadAllOrderItems();
+  };
 
-  // DELETE a single customer!.
-  const onDeleteOrder = async (_id) => {};
+  const onEditOrder = async () => {
+    loadAllOrders();
+    loadAllOrderItems();
+  };
 
-  // UPDATE a single order
-  const onEditOrderItem = async (_id) => {};
+  const onAddOrder = async (customer_id, order_date, order_total) => {
+    try {
+      const response = await axios.post("http://localhost:9124/api/orders", {
+        customer_id: customer_id,
+        order_date: order_date,
+        order_total: order_total,
+      });
+      if (response) {
+        setOrderList(...orderList, response.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  // DELETE a single customer!.
-  const onDeleteOrderItem = async (_id) => {};
+  const onAddOrderItem = async (
+    order_id,
+    drink_id,
+    ice_level,
+    sugar_option,
+    dairy_option,
+    drink_quantity,
+    order_total
+  ) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:9124/api/order_items",
+        {
+          order_id: order_id,
+          drink_id: drink_id,
+          ice_level: ice_level,
+          sugar_option: sugar_option,
+          dairy_option: dairy_option,
+          drink_quantity: drink_quantity,
+          order_total: order_total,
+        }
+      );
+      if (response) {
+        setOrderItemList(...orderItemList, response.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // DELETE a single order
+  const onDeleteOrder = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:9124/api/orders/${id}`
+      );
+      if (response) {
+        loadAllOrders();
+        loadAllOrderItems();
+      }
+    } catch (err) {
+      console.log(`Failed to delete order with id: ${id}`);
+    }
+  };
+
+  // delete a single order item
+  const onDeleteOrderItem = async (orders_item_id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:9124/api/order_items/${orders_item_id}`
+      );
+      if (response) {
+        loadAllOrderItems();
+      }
+    } catch (err) {
+      console.error(`Failed to delete customer with id = ${orders_item_id}`);
+    }
+  };
 
   // LOAD all Orders
   useEffect(() => {
     loadAllOrders();
+    loadAllOrderItems();
     loadAllCustomers();
     loadAllDrinks();
   }, []);
