@@ -68,6 +68,7 @@ function OrdersPage() {
 
   const onEditOrderItem = async () => {
     await loadAllOrderItems();
+    await loadAllOrders();
   };
 
   const onEditOrder = async () => {
@@ -190,7 +191,13 @@ function OrdersPage() {
       trigger="add-order-item"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
       btnClasses="btn btn-light btn-outline-primary"
-      content={<AddOrderItemForm />}
+      content={
+        <AddOrderItemForm
+          drinkList={drinkList}
+          orderList={orderList}
+          onAddOrderItem={onAddOrderItem}
+        />
+      }
       title="Add a new Order Item"
     />
   );

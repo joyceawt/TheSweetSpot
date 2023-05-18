@@ -1,47 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 
-import DropDownOrders from "./DropDownOrders";
-import DropDownDrinks from "./DropDownDrinks";
+function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
+  const [order_id, setOrderID] = useState("");
+  const [drink_id, setDrinkID] = useState("");
+  const [drink_quantity, setDrinkQuantity] = useState("");
+  const [ice_level, setIceLevel] = useState("1");
+  const [sugar_level, setSugarLevel] = useState("1");
+  const [dairy_option, setDairyOption] = useState("1");
+  const [boba_option, setBobaOption] = useState("1");
 
-function AddOrderItemForm() {
-  //action="/add-new-order-item" method="post"
+  const order_item = {
+    order_id,
+    drink_id,
+    drink_quantity,
+    ice_level,
+    sugar_level,
+    dairy_option,
+    boba_option,
+  };
+
   return (
     <>
       <form className="needs-validation">
         <div className="mb-3">
-          <label id="customer_id" htmlFor="addItem-customer-ID" className="col-form-label">
+          <label
+            id="customer_id"
+            htmlFor="addItem-customer-ID"
+            className="col-form-label"
+          >
             Order ID:
-          </label>
-          <input
-            type="text"
-            className="form-control bg-transparent"
-            id="addItem-customer-ID"
-            required
-          />
-
-
-        </div>
-
-        <div className="mb-3">
-          <label id="drink_id" htmlFor="addItem-customer-ID" className="col-form-label">
-            Drink ID:
-          </label>
-          <input
-            type="text"
-            className="form-control bg-transparent"
-            id="addItem-customer-ID"
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="addItem-customer-ID" className="col-form-label">
-            Drink Qty:
           </label>
           <input
             type="number"
             className="form-control bg-transparent"
             id="addItem-customer-ID"
+            value={order_id}
+            onChange={(e) => setOrderID(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label
+            id="drink_id"
+            htmlFor="addItem-customer-ID"
+            className="col-form-label"
+          >
+            Drink ID:
+          </label>
+          <input
+            type="number"
+            className="form-control bg-transparent"
+            id="addItem-customer-ID"
+            value={drink_id}
+            onChange={(e) => setDrinkID(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="addItem-drink-qty-label" className="col-form-label">
+            Drink Qty:
+          </label>
+          <input
+            type="number"
+            className="form-control bg-transparent"
+            id="addItem-qty-ID"
+            value={drink_quantity}
+            onChange={(e) => setDrinkQuantity(e.target.value)}
             required
           />
         </div>
@@ -197,7 +223,12 @@ function AddOrderItemForm() {
           >
             Cancel
           </button>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            data-bs-dismiss="modal"
+            onClick={() => onAddOrderItem(order_item)}
+          >
             Add
           </button>
         </div>
