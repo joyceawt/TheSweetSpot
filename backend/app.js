@@ -214,6 +214,97 @@ app.delete("/api/orders/:id", (req, res) => {
   });
 });
 
+// Get all OrderItems
+app.get("/api/order_items", (req, res) => {
+  db.pool.query("SELECT * FROM OrderItems", (err, results) => {
+    if (err) {
+      res.status(500).send("Error fetching order items");
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// update orderItem by ID
+app.put("/api/order_items/:id", (req, res) => {
+  const id = req.params.id;
+  const order_id = req.params.order_id;
+  const drink_id = req.body.drink_id;
+  const ice_level = req.body.ice_level;
+  const sugar_option = req.body.sugar_option;
+  const dairy_option = req.body.dairy_option;
+  const boba_option = req.body.boba_option;
+  const drink_quantity = req.body.drink_quantity;
+
+  db.pool.query(
+    "UPDATE OrderItems SET order_id = ?, drink_id = ?, ice_level = ?, sugar_option = ?, dairy_option = ?, boba_option = ?, order_id = ?, drink_quantity = ? WHERE order_items_id = ?",
+    [
+      order_id,
+      drink_id,
+      ice_level,
+      sugar_option,
+      dairy_option,
+      boba_option,
+      drink_quantity,
+    ],
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Error updating drink");
+        return;
+      }
+      res.json(result);
+    }
+  );
+});
+
+//create an orderItem
+app.post("/api/order_items", (req, res) => {
+  const order_id = req.params.order_id;
+  const drink_id = req.body.drink_id;
+  const ice_level = req.body.ice_level;
+  const sugar_option = req.body.sugar_option;
+  const dairy_option = req.body.dairy_option;
+  const boba_option = req.body.boba_option;
+  const drink_quantity = req.body.drink_quantity;
+
+  db.pool.query(
+    "INSERT INTO OrderItems (order_id, drink_id, ice_level, sugar_option, dairy_option, boba_option, drink_quantity) VALUES (?, ?, ?)",
+    [
+      order_id,
+      drink_id,
+      ice_level,
+      sugar_option,
+      dairy_option,
+      boba_option,
+      drink_quantity,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.json(result);
+    }
+  );
+});
+
+//delete an orderItem
+app.delete("/api/order_items/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.pool.query(
+    "DELETE FROM Orders WHERE order_items_id= ?",
+    id,
+    (err, result) => {
+      if (err) {
+        res.status(500).send("Error deleting order");
+        return;
+      }
+
+      res.json(result);
+    }
+  );
+});
+
 //listener
 app.listen(PORT, () => {
   console.log(
