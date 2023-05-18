@@ -71,6 +71,7 @@ function AddOrderForm({ customerList, onAddOrder }) {
           <button
             type="submit"
             className="btn btn-primary"
+            data-bs-dismiss="modal"
             onClick={() => onAddOrder(order)}
           >
             Add
