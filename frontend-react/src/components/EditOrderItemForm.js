@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SelectDropdown from "./SelectDropdown";
+import axios from "axios";
 
 function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
   // setting these because each button needs a unique name and id.
@@ -21,10 +22,7 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
   let unBobaY = "bobaOptionOrdItY-" + orderItem.order_id;
   let unBobaN = "bobaOptionOrdItN-" + orderItem.order_id;
 
-  // had to add local states here to be able to ensure that the <select> option is actually able to load defaults and to also change when a user selects a different option.
-  // REACT does not support selected in the option tags: https://react.dev/reference/react-dom/components/select#providing-an-initially-selected-option
-
-  const [order_id, setSelectedOrderID] = useState(orderItem.order_id);
+  const [order_id, setorder_id] = useState(orderItem.order_id);
   const [drink_id, setSelectedDrinkID] = useState(orderItem.drink_id);
   const [drink_quantity, setSelectedDrinkQuantity] = useState(
     orderItem.drink_quantity
@@ -57,8 +55,8 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
     }
   };
 
-  function changeSelectedOrderID(val) {
-    setSelectedOrderID(val);
+  function changeorder_id(val) {
+    setorder_id(val);
   }
 
   function changeSelectedDrinkID(val) {
@@ -75,7 +73,7 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
           <SelectDropdown
             className={"form-select mb-3 bg-transparent"}
             ariaLabel={"order_ID"}
-            onChangeHandler={changeSelectedOrderID}
+            onChangeHandler={changeorder_id}
             id="edit-order-ID"
             name="order_ID"
             selectOptions={orderList}
@@ -96,9 +94,9 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
             id="edit-drink-ID"
             name="drink_ID"
             selectOptions={drinkList}
-            optionValue={"drinks_id"}
+            optionValue={"drink_id"}
             optionDisplay={"drinks_name"}
-            selectedOption={drinks_id}
+            selectedOption={drink_id}
           ></SelectDropdown>
         </div>
 
