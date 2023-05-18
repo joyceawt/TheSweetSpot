@@ -8,15 +8,8 @@ function OrderItem({
   orderItem,
   onEditOrderItem,
   onDeleteOrderItem,
-  setOI_orderID,
-  setOI_drinkID,
-  setOI_drinkQuantity,
-  setOI_iceLvl,
-  setOI_sugarLvl,
-  setOI_dairyOpt,
-  setOI_bobaOpt,
-  drinkList, 
-  orderList
+  drinkList,
+  orderList,
 }) {
   // unique IDs.
   let modalEdit = "edit-entry-item-" + orderItem.order_items_id;
@@ -49,16 +42,8 @@ function OrderItem({
               <EditOrderItemForm
                 orderItem={orderItem}
                 onClickAction={onEditOrderItem}
-                setOI_orderID={setOI_orderID}
-                setOI_drinkID={setOI_drinkID}
-                setOI_drinkQuantity={setOI_drinkQuantity}
-                setOI_iceLvl={setOI_iceLvl}
-                setOI_sugarLvl={setOI_sugarLvl}
-                setOI_dairyOpt={setOI_dairyOpt}
-                setOI_bobaOpt={setOI_bobaOpt}
                 drinkList={drinkList}
                 orderList={orderList}
-
               />
             }
             title="Edit OrderItem"

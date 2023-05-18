@@ -78,12 +78,10 @@ function OrdersPage() {
   const onFilterOrders = (searchText) => {
     if (searchText.length > 0) {
       const filteredOrders = orderList.filter((order) => {
-        return (
-          order.order_id.toString().includes(searchText) ||
-          order.customer_id.toString().includes(searchText) ||
-          order.order_date.toString().includes(searchText) ||
-          order.order_total.toString().includes(searchText)
-        );
+        return order.order_id.toString().includes(searchText);
+        // order.customer_id.toString().includes(searchText) ||
+        // order.order_date.toString().includes(searchText) ||
+        // order.order_total.toString().includes(searchText)
       });
       return filteredOrders;
     } else {
@@ -110,10 +108,10 @@ function OrdersPage() {
     order_id,
     drink_id,
     ice_level,
-    sugar_option,
+    sugar_level,
     dairy_option,
     drink_quantity,
-    order_total
+    boba_option
   ) => {
     try {
       const response = await axios.post(
@@ -122,10 +120,10 @@ function OrdersPage() {
           order_id: order_id,
           drink_id: drink_id,
           ice_level: ice_level,
-          sugar_option: sugar_option,
+          sugar_level: sugar_level,
           dairy_option: dairy_option,
           drink_quantity: drink_quantity,
-          order_total: order_total,
+          boba_option: boba_option,
         }
       );
       if (response) {
@@ -211,7 +209,7 @@ function OrdersPage() {
 
       <article>
         <OrderList
-          orderList={orderList}
+          orderList={onFilterOrders(searchText)}
           onEditOrder={onEditOrder}
           onDeleteOrder={onDeleteOrder}
           customerList={customerList}
@@ -232,13 +230,6 @@ function OrdersPage() {
           orderItemList={orderItemList}
           onEditOrderItem={onEditOrderItem}
           onDeleteOrderItem={onDeleteOrderItem}
-          setOI_orderID={setOI_orderID}
-          setOI_drinkID={setOI_drinkID}
-          setOI_drinkQuantity={setOI_drinkQuantity}
-          setOI_iceLvl={setOI_iceLvl}
-          setOI_sugarLvl={setOI_sugarLvl}
-          setOI_dairyOpt={setOI_dairyOpt}
-          setOI_bobaOpt={setOI_bobaOpt}
           drinkList={drinkList}
           orderList={orderList}
         />

@@ -241,21 +241,22 @@ app.put("/api/order_items/:id", (req, res) => {
   const order_id = req.params.order_id;
   const drink_id = req.body.drink_id;
   const ice_level = req.body.ice_level;
-  const sugar_option = req.body.sugar_option;
+  const sugar_level = req.body.sugar_level;
   const dairy_option = req.body.dairy_option;
   const boba_option = req.body.boba_option;
   const drink_quantity = req.body.drink_quantity;
 
   db.pool.query(
-    "UPDATE OrderItems SET order_id = ?, drink_id = ?, ice_level = ?, sugar_option = ?, dairy_option = ?, boba_option = ?, order_id = ?, drink_quantity = ? WHERE order_items_id = ?",
+    "UPDATE OrderItems SET order_id = ?, drink_id = ?, ice_level = ?, sugar_level = ?, dairy_option = ?, boba_option = ?, drink_quantity = ? WHERE order_items_id = ?",
     [
       order_id,
       drink_id,
       ice_level,
-      sugar_option,
+      sugar_level,
       dairy_option,
       boba_option,
       drink_quantity,
+      id,
     ],
     (err, result) => {
       if (err) {
@@ -272,18 +273,18 @@ app.post("/api/order_items", (req, res) => {
   const order_id = req.params.order_id;
   const drink_id = req.body.drink_id;
   const ice_level = req.body.ice_level;
-  const sugar_option = req.body.sugar_option;
+  const sugar_level = req.body.sugar_level;
   const dairy_option = req.body.dairy_option;
   const boba_option = req.body.boba_option;
   const drink_quantity = req.body.drink_quantity;
 
   db.pool.query(
-    "INSERT INTO OrderItems (order_id, drink_id, ice_level, sugar_option, dairy_option, boba_option, drink_quantity) VALUES (?, ?, ?)",
+    "INSERT INTO OrderItems (order_id, drink_id, ice_level, sugar_level, dairy_option, boba_option, drink_quantity) VALUES (?, ?, ?)",
     [
       order_id,
       drink_id,
       ice_level,
-      sugar_option,
+      sugar_level,
       dairy_option,
       boba_option,
       drink_quantity,
