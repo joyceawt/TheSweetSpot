@@ -4,22 +4,19 @@ import axios from "axios";
 import { allCustomers } from "./CustomersPage";
 import { allDrinks } from "./DrinksPage";
 import Modal from "../components/Modal";
-import OrderForm from "../components/AddOrderForm";
+import AddOrderForm from "../components/AddOrderForm";
 import AddOrderItemForm from "../components/AddOrderItemForm";
 import OrderList from "../components/OrderList";
 import OrderItemList from "../components/OrderItemList";
-import DropDownSearchCategoryOrder from "../components/DropDownSearchCategoryOrders";
-import DropDownSearchCategoryOrderItems from "../components/DropDownSearchCategoryOrderItems";
 
 function OrdersPage() {
   const [orderList, setOrderList] = useState([]);
   const [orderItemList, setOrderItemList] = useState([]);
+  const [searchText, setSearchText] = useState([]);
 
-  // Order states
-  const [orderID, setOrderID] = useState([]);
-  const [orderCustomerID, setCustomerID] = useState([]);
-  const [orderDate, setOrderDate] = useState([]);
-  const [total, setTotal] = useState([]);
+  // //for loading pre-loaded drop down options
+  const [customerList, setCustomerList] = useState([]);
+  const [drinkList, setDrinkList] = useState([]);
 
   // OrderItem states. OI = OrderItems
   const [OI_orderID, setOI_orderID] = useState([]);
@@ -29,10 +26,6 @@ function OrdersPage() {
   const [OI_sugarLvl, setOI_sugarLvl] = useState([]);
   const [OI_dairyOpt, setOI_dairyOpt] = useState([]);
   const [OI_bobaOpt, setOI_bobaOpt] = useState([]);
-
-  // //for loading pre-loaded drop down options
-  const [customerList, setCustomerList] = useState([]);
-  const [drinkList, setDrinkList] = useState([]);
 
   // LOAD ORDERS
   const loadAllOrders = async () => {
@@ -74,20 +67,36 @@ function OrdersPage() {
   };
 
   const onEditOrderItem = async () => {
-    loadAllOrderItems();
+    await loadAllOrderItems();
   };
 
   const onEditOrder = async () => {
-    loadAllOrders();
-    loadAllOrderItems();
+    await loadAllOrders();
+    await loadAllOrderItems();
   };
 
-  const onAddOrder = async (customer_id, order_date, order_total) => {
+  const onFilterOrders = (searchText) => {
+    if (searchText.length > 0) {
+      const filteredOrders = orderList.filter((order) => {
+        return (
+          order.order_id.toString().includes(searchText) ||
+          order.customer_id.toString().includes(searchText) ||
+          order.order_date.toString().includes(searchText) ||
+          order.order_total.toString().includes(searchText)
+        );
+      });
+      return filteredOrders;
+    } else {
+      return orderList;
+    }
+  };
+
+  const onAddOrder = async (order) => {
     try {
       const response = await axios.post("http://localhost:9124/api/orders", {
-        customer_id: customer_id,
-        order_date: order_date,
-        order_total: order_total,
+        customer_id: order.customer_id,
+        order_date: order.order_date,
+        order_total: order.order_total,
       });
       if (response) {
         setOrderList(...orderList, response.data);
@@ -170,7 +179,9 @@ function OrdersPage() {
       trigger="add-order"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
       btnClasses="btn btn-light btn-outline-primary"
-      content={<OrderForm customerList={customerList} />}
+      content={
+        <AddOrderForm customerList={customerList} onAddOrder={onAddOrder} />
+      }
       title="Add a new Order"
     />
   );
@@ -186,9 +197,6 @@ function OrdersPage() {
     />
   );
 
-  let dropDownSearchOrder = <DropDownSearchCategoryOrder />;
-  let dropDownSearchOrderItem = <DropDownSearchCategoryOrderItems />;
-
   return (
     <>
       <UtilityBar
@@ -196,6 +204,9 @@ function OrdersPage() {
         contentTitle="Orders"
         addModal={OrderModal}
         renderSearchBar={true}
+        searchText={searchText}
+        setSearchText={setSearchText}
+        filterSearch={onFilterOrders}
       ></UtilityBar>
 
       <article>
@@ -203,11 +214,10 @@ function OrdersPage() {
           orderList={orderList}
           onEditOrder={onEditOrder}
           onDeleteOrder={onDeleteOrder}
-          setOrderID={setOrderID}
-          setCustomerID={setCustomerID}
-          setOrderDate={setOrderDate}
-          setTotal={setTotal}
           customerList={customerList}
+          filterSearch={onFilterOrders}
+          searchText={searchText}
+          setSearchText={setSearchText}
         />
       </article>
 

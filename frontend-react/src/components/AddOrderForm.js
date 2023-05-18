@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import DropDownCustomers from "./DropDownCustomers";
 import SelectDropdown from "./SelectDropdown";
 
 function AddOrderForm({ customerList, onAddOrder }) {
-  const [customer_id, setCustomerID] = useState([]);
-  const [order_date, setOrderDate] = useState([]);
-  const [order_total, setTotal] = useState([]);
+  const [customer_id, setCustomerID] = useState("");
+  const [order_date, setOrderDate] = useState("");
+  const [order_total, setTotal] = useState("");
 
   const order = { customer_id, order_date, order_total };
   const handleCustomerSelection = (customer) => {
@@ -25,7 +24,7 @@ function AddOrderForm({ customerList, onAddOrder }) {
             id="add-customer-ID"
             name="customer_id"
             selectOptions={customerList}
-            optionValue={"id"}
+            optionValue={"customer_id"}
             optionDisplay={"name"}
             defaultFilterValue={"None"}
             selectedOption={setCustomerID}
@@ -37,9 +36,11 @@ function AddOrderForm({ customerList, onAddOrder }) {
             Order date:
           </label>
           <input
-            type="text"
+            type="datetime-local"
             className="form-control bg-transparent"
             id="add-date"
+            value={order_date}
+            onChange={(e) => setOrderDate(e.target.value)}
             required
           />
         </div>
@@ -52,6 +53,9 @@ function AddOrderForm({ customerList, onAddOrder }) {
             type="number"
             className="form-control bg-transparent"
             id="add-total-price"
+            value={order_total}
+            step="0.01"
+            onChange={(e) => setTotal(e.target.value)}
             required
           />
         </div>
@@ -64,7 +68,11 @@ function AddOrderForm({ customerList, onAddOrder }) {
           >
             Cancel
           </button>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={() => onAddOrder(order)}
+          >
             Add
           </button>
         </div>

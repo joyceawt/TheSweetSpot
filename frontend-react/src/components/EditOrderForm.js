@@ -1,19 +1,29 @@
-import React, {useState} from "react";
-import DropDownCustomers from "./DropDownCustomers";
+import React, { useState } from "react";
+import SelectDropdown from "./SelectDropdown";
+import axios from "axios";
 
-function EditOrderForm({ order, onClickAction, setCustomerID, setOrderDate, setTotal, customerList }) {
-  ///  defaultValue={order.customer_id}
-  
-  // had to add local states here to be able to ensure that the <select> option is actually able to load defaults and to also change when a user selects a different option.
-  // REACT does not support selected in the option tags: https://react.dev/reference/react-dom/components/select#providing-an-initially-selected-option
+function EditOrderForm({ order, onClickAction, customerList }) {
+  const [customer_id, setNewCustomerID] = useState(order.customer_id);
+  const [order_date, setNewOrderDate] = useState(order.order_date);
+  const [order_total, setNewTotal] = useState(order.order_total);
+  const [order_id] = useState(order.order_id);
 
-  
-  const [selectedID, setSelectedID] = useState(order.customer_id);
+  const editOrder = async () => {
+    try {
+      await axios.put(`http://localhost:9124/api/orders/${order_id}`, {
+        customer_id: customer_id,
+        order_date: order_date,
+        order_total: order_total,
+      });
+      onClickAction();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  function changeSelectedID(val){
-    setSelectedID(val);
-    setCustomerID(val);
-  }
+  const handleCustomerSelection = (customer) => {
+    setNewCustomerID(customer);
+  };
 
   return (
     <>
@@ -22,29 +32,17 @@ function EditOrderForm({ order, onClickAction, setCustomerID, setOrderDate, setT
           <label htmlFor="add-customer-ID" className="col-form-label">
             Customer ID:
           </label>
-
-          <select 
-              className="form-select mb-3 bg-transparent" 
-              name="customer_id" 
-              id="edit-customer-ID" 
-              aria-label ="customer_id"
-              value={selectedID}
-              onChange={ (e) => changeSelectedID(e.target.value) }
-          >
-
-            <option value=""> None </option>
-
-            {customerList.map((customer, i) => (
-                  <DropDownCustomers
-                  customerList={customer}
-                  />
-            ))}
-
-          </select>
-
-
-
-
+          <SelectDropdown
+            className={"form-select mb-3 bg-transparent"}
+            ariaLabel={"customer_id"}
+            onChangeHandler={handleCustomerSelection}
+            id="edit-customer-ID"
+            name="customer_id"
+            selectOptions={customerList}
+            optionValue={"customer_id"}
+            optionDisplay={"name"}
+            selectedOption={customer_id}
+          ></SelectDropdown>
         </div>
 
         <div className="mb-3">
@@ -52,11 +50,11 @@ function EditOrderForm({ order, onClickAction, setCustomerID, setOrderDate, setT
             Order date:
           </label>
           <input
-            type="text"
+            type="date-time-local"
             className="form-control bg-transparent"
             id="add-date"
-            defaultValue={order.order_date}
-            onChange={(e)=>setOrderDate(e)}
+            value={order.order_date}
+            onChange={(e) => setNewOrderDate(e.target.value)}
             required
           />
         </div>
@@ -69,8 +67,9 @@ function EditOrderForm({ order, onClickAction, setCustomerID, setOrderDate, setT
             type="number"
             className="form-control bg-transparent"
             id="add-total-price"
-            defaultValue={order.order_total}
-            onChange={(e)=>setTotal(e)}
+            value={order_total}
+            step="0.01"
+            onChange={(e) => setNewTotal(e.target.value)}
             required
           />
         </div>
@@ -86,7 +85,8 @@ function EditOrderForm({ order, onClickAction, setCustomerID, setOrderDate, setT
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => onClickAction(order.order_id)}
+            data-bs-dismiss="modal"
+            onClick={editOrder}
           >
             {" "}
             Save{" "}
