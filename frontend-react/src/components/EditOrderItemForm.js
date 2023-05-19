@@ -1,28 +1,16 @@
 import React, { useState } from "react";
+import RadioButtonGroup from "./RadioButtonGroup";
 import SelectDropdown from "./SelectDropdown";
 import axios from "axios";
+import {
+  bobaOptions,
+  dairyOptions,
+  iceLevelOptions,
+  sugarLevelOptions,
+} from "../utils/index";
 
 function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
-  // setting these because each button needs a unique name and id.
-  // for the names
-  let uniqueIceID = "iceLevelEditOrderItem-" + orderItem.order_id;
-  let uniqueSugarID = "sugarLevelEditOrderItem" + orderItem.order_id;
-  let uniqueDairyOpt = "dairyOptionEditOrderItem" + orderItem.order_id;
-  let uniqueBoba = "bobaOptionEditOrderItem" + orderItem.order_id;
-
-  // just actual ID
-  let unIce100 = "iceLevelOrdIt100-" + orderItem.order_id;
-  let unIce50 = "iceLevelOrdIt50-" + orderItem.order_id;
-  let unIce0 = "iceLevelOrdIt0-" + orderItem.order_id;
-  let unSugar100 = "sugarLevelOrdIt100-" + orderItem.order_id;
-  let unSugar50 = "sugarLevelOrdIt50-" + orderItem.order_id;
-  let unSugar0 = "sugarLevelOrdIt0-" + orderItem.order_id;
-  let unDairyY = "dairyOptionOrdItY-" + orderItem.order_id;
-  let unDairyN = "dairyOptionOrdItN-" + orderItem.order_id;
-  let unBobaY = "bobaOptionOrdItY-" + orderItem.order_id;
-  let unBobaN = "bobaOptionOrdItN-" + orderItem.order_id;
-
-  const [order_id, setorder_id] = useState(orderItem.order_id);
+  const [order_id, setSelectedOrderID] = useState(orderItem.order_id);
   const [drink_id, setSelectedDrinkID] = useState(orderItem.drink_id);
   const [drink_quantity, setSelectedDrinkQuantity] = useState(
     orderItem.drink_quantity
@@ -55,8 +43,8 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
     }
   };
 
-  function changeorder_id(val) {
-    setorder_id(val);
+  function changeOrderID(val) {
+    setSelectedOrderID(val);
   }
 
   function changeSelectedDrinkID(val) {
@@ -73,9 +61,9 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
           <SelectDropdown
             className={"form-select mb-3 bg-transparent"}
             ariaLabel={"order_ID"}
-            onChangeHandler={changeorder_id}
-            id="edit-order-ID"
-            name="order_ID"
+            onChangeHandler={changeOrderID}
+            id={"edit-order-ID"}
+            name={"order_ID"}
             selectOptions={orderList}
             optionValue={"order_id"}
             optionDisplay={"order_id"}
@@ -91,8 +79,8 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
             className={"form-select mb-3 bg-transparent"}
             ariaLabel={"drink_ID"}
             onChangeHandler={changeSelectedDrinkID}
-            id="edit-drink-ID"
-            name="drink_ID"
+            id={"edit-drink-ID"}
+            name={"drink_ID"}
             selectOptions={drinkList}
             optionValue={"drink_id"}
             optionDisplay={"drink_name"}
@@ -101,167 +89,58 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="addItem-customer-ID" className="col-form-label">
+          <label htmlFor="editIODrinkQty" className="col-form-label">
             Drink Qty:
           </label>
           <input
             type="number"
             className="form-control bg-transparent"
-            id="edit-OrderItem-Drink-QTY"
+            id="editIODrinkQty"
             value={drink_quantity}
             onChange={(e) => setSelectedDrinkQuantity(e.target.value)}
             required
           />
         </div>
 
-        <div className="mb-3 pt-2">
-          <label htmlFor={uniqueIceID} className="col-form-label w-25">
-            Ice level:
-          </label>
-          <div className="btn-group">
-            <input
-              className="btn-check"
-              type="radio"
-              name={uniqueIceID}
-              value="1"
-              id={unIce100}
-              onChange={(e) => setSelectedIceLevel(e.target.value)}
-            />
-            <label className="btn btn-outline-primary" htmlFor={unIce100}>
-              100%
-            </label>
+        <RadioButtonGroup
+          groupID={"editIceLevelSelection"}
+          uniqueID={order_items_id}
+          label={"Ice level:"}
+          setSelectedOption={setSelectedIceLevel}
+          radioOptions={iceLevelOptions}
+          groupName={"editIceLevel"}
+          selectedOption={ice_level}
+        />
 
-            <input
-              className="btn-check"
-              type="radio"
-              name={uniqueIceID}
-              value="0.5"
-              id={unIce50}
-              onChange={(e) => setSelectedIceLevel(e.target.value)}
-            />
-            <label className="btn btn-outline-primary" htmlFor={unIce50}>
-              50%
-            </label>
+        <RadioButtonGroup
+          groupID={"editSugarLevelSelection"}
+          uniqueID={order_items_id}
+          label={"Sugar level:"}
+          setSelectedOption={setSelectedSugarLevel}
+          radioOptions={sugarLevelOptions}
+          groupName={"editSugarLevel"}
+          selectedOption={sugar_level}
+        />
 
-            <input
-              className="btn-check"
-              type="radio"
-              name={uniqueIceID}
-              value="0"
-              id={unIce0}
-              onChange={(e) => setSelectedIceLevel(e.target.value)}
-            />
-            <label className="btn btn-outline-primary" htmlFor={unIce0}>
-              0%
-            </label>
-          </div>
-        </div>
+        <RadioButtonGroup
+          groupID={"editDairyOptionSelection"}
+          uniqueID={order_items_id}
+          label={"Dairy Option:"}
+          setSelectedOption={setSelectedDairyOption}
+          radioOptions={dairyOptions}
+          groupName={"editDairyOption"}
+          selectedOption={dairy_option}
+        />
 
-        <div className="mb-3 pt-2">
-          <label htmlFor={uniqueSugarID} className="col-form-label w-25">
-            Sugar Level:
-          </label>
-          <div className="btn-group">
-            <input
-              className="btn-check"
-              type="radio"
-              name={uniqueSugarID}
-              value="1"
-              id={unSugar100}
-              onChange={(e) => setSelectedSugarLevel(e.target.value)}
-            />
-            <label className="btn btn-outline-primary" htmlFor={unSugar100}>
-              100%
-            </label>
-
-            <input
-              className="btn-check"
-              type="radio"
-              name={uniqueSugarID}
-              value="0.5"
-              id={unSugar50}
-              onChange={(e) => setSelectedSugarLevel(e.target.value)}
-            />
-            <label className="btn btn-outline-primary" htmlFor={unSugar50}>
-              50%
-            </label>
-
-            <input
-              className="btn-check"
-              type="radio"
-              name={uniqueSugarID}
-              value="0"
-              id={unSugar0}
-              onChange={(e) => setSelectedSugarLevel(e.target.value)}
-            />
-            <label className="btn btn-outline-primary" htmlFor={unSugar0}>
-              0%
-            </label>
-          </div>
-        </div>
-
-        <div className="mb-3 pt-2">
-          <label htmlFor={uniqueDairyOpt} className="col-form-label w-25">
-            Dairy Option:
-          </label>
-          <div className="btn-group">
-            <input
-              type="radio"
-              className="btn-check"
-              name={uniqueDairyOpt}
-              id={unDairyY}
-              value="1"
-              onChange={(e) => setSelectedBobaOption(e.target.value)}
-            />
-            <label className="btn btn-outline-primary" htmlFor={unDairyY}>
-              Dairy
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name={uniqueDairyOpt}
-              id={unDairyN}
-              value="0"
-              onChange={(e) => setSelectedBobaOption(e.target.value)}
-            />
-            <label className="btn btn-outline-primary" htmlFor={unDairyN}>
-              Non-dairy
-            </label>
-          </div>
-        </div>
-
-        <div className="mb-3 pt-2 ">
-          <label htmlFor={uniqueBoba} className="col-form-label  w-25">
-            Boba Option:
-          </label>
-
-          <div className="btn-group">
-            <input
-              type="radio"
-              className="btn-check"
-              name={uniqueBoba}
-              id={unBobaY}
-              value="1"
-              onChange={(e) => setSelectedBobaOption(e.target.value)}
-            />
-            <label className="btn btn-outline-primary" htmlFor={unBobaY}>
-              Yes
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name={uniqueBoba}
-              id={unBobaN}
-              value="0"
-              onChange={(e) => setSelectedBobaOption(e.target.value)}
-            />
-            <label className="btn btn-outline-secondary" htmlFor={unBobaN}>
-              No
-            </label>
-          </div>
-        </div>
+        <RadioButtonGroup
+          groupID={"editBobaOptionSelection"}
+          uniqueID={order_items_id}
+          label={"Boba Option:"}
+          setSelectedOption={setSelectedBobaOption}
+          radioOptions={bobaOptions}
+          groupName={"editBobaOption"}
+          selectedOption={boba_option}
+        />
 
         <div className="modal-footer">
           <button

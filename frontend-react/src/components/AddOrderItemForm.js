@@ -56,7 +56,7 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
             className={"form-select mb-3 bg-transparent"}
             ariaLabel={"drink_ID"}
             onChangeHandler={setDrinkID}
-            id="add-drink-ID"
+            id={"add-drink-OI"}
             name="drink_ID"
             selectOptions={drinkList}
             optionValue={"drink_id"}
@@ -66,13 +66,14 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="addItem-drink-qty-label" className="col-form-label">
+          <label htmlFor="addItem-drink-qty" className="col-form-label">
             Drink Qty:
           </label>
           <input
             type="number"
+            name="addItem-drink-qty"
             className="form-control bg-transparent"
-            id="addItem-qty-ID"
+            id="addItem-drink-qty"
             value={drink_quantity}
             onChange={(e) => setDrinkQuantity(e.target.value)}
             required
@@ -80,7 +81,7 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
         </div>
 
         <RadioButtonGroup
-          labelFor={"iceLevelSelection"}
+          groupID={"iceLevelSelection"}
           label={"Ice level:"}
           setSelectedOption={setIceLevel}
           radioOptions={iceLevelOptions}
@@ -89,7 +90,7 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
         />
 
         <RadioButtonGroup
-          labelFor={"sugarLevelSelection"}
+          groupID={"sugarLevelSelection"}
           label={"Sugar level:"}
           setSelectedOption={setSugarLevel}
           radioOptions={sugarLevelOptions}
@@ -98,7 +99,7 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
         />
 
         <RadioButtonGroup
-          labelFor={"dairyOptionSelection"}
+          groupID={"dairyOptionSelection"}
           label={"Dairy Option:"}
           setSelectedOption={setDairyOption}
           radioOptions={dairyOptions}
@@ -107,7 +108,7 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
         />
 
         <RadioButtonGroup
-          labelFor={"bobaOptionSelection"}
+          groupID={"bobaOptionSelection"}
           label={"Boba Option:"}
           setSelectedOption={setBobaOption}
           radioOptions={bobaOptions}

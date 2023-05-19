@@ -238,7 +238,7 @@ app.get("/api/order_items", (req, res) => {
 // update orderItem by ID
 app.put("/api/order_items/:id", (req, res) => {
   const id = req.params.id;
-  const order_id = req.params.order_id;
+  const order_id = req.body.order_id;
   const drink_id = req.body.drink_id;
   const ice_level = req.body.ice_level;
   const sugar_level = req.body.sugar_level;

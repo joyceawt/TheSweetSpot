@@ -11,6 +11,8 @@ export const Select = ({
   optionValue = null,
   onChangeHandler = null,
   optionDisplay = null,
+  id,
+  name,
 }) => {
   const handleChange = (e) => {
     if (onChangeHandler != null) {
@@ -28,6 +30,8 @@ export const Select = ({
       onChange={handleChange}
       defaultValue={selectedOption}
       placeholder={defaultFilterValue}
+      id={id}
+      name={name}
     >
       {defaultFilterValue ? <option>{defaultFilterValue}</option> : ""}
       {selectOptions.map((option, i) => (

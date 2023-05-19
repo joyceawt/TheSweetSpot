@@ -36,8 +36,8 @@ function EditOrderForm({ order, onClickAction, customerList }) {
             className={"form-select mb-3 bg-transparent"}
             ariaLabel={"customer_id"}
             onChangeHandler={handleCustomerSelection}
-            id="edit-customer-ID"
-            name="customer_id"
+            id={"edit-customer-ID"}
+            name={"customer_id"}
             selectOptions={customerList}
             optionValue={"customer_id"}
             optionDisplay={"name"}

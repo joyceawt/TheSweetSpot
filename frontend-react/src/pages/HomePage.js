@@ -16,7 +16,7 @@ function HomePage() {
     */
   return (
     <section
-      classNameName="d-flex flex-column align-content-center justify-content-center custom-size  pt-4 pb-4"
+      className="d-flex flex-column align-content-center justify-content-center custom-size  pt-4 pb-4"
       id="mainContent"
     >
       <article
