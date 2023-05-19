@@ -29,6 +29,14 @@ article {
   fill: #A64D79;
 }
 
+.tss-logo {
+  transform: scale(1);
+}
+
+.tss-header {
+  padding: 3rem 3rem 0rem 3rem;
+}
+
 /*!
  * Bootstrap  v5.3.0-alpha3 (https://getbootstrap.com/)
  * Copyright 2011-2023 The Bootstrap Authors

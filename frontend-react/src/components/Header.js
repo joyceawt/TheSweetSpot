@@ -2,9 +2,9 @@ import React from "react";
 
 function Header() {
   return (
-    <header className="p-5 flex-row justify-content-center align-items-center fs-4">
+    <header className="tss-header flex-row justify-content-center align-items-center">
       <div className="logo">
-        <svg transform="scale(1.3)">
+        <svg className="tss-logo">
           <g className="boba-icon" transform="translate(120,0)">
             <svg
               width="60"
