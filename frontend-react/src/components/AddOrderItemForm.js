@@ -1,8 +1,16 @@
 import React, { useState } from "react";
+import {
+  bobaOptions,
+  dairyOptions,
+  iceLevelOptions,
+  sugarLevelOptions,
+} from "../utils/index";
+import RadioButtonGroup from "./RadioButtonGroup";
+import SelectDropdown from "./SelectDropdown";
 
 function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
   const [order_id, setOrderID] = useState("");
-  const [drink_id, setDrinkID] = useState("");
+  const [drink_id, setDrinkID] = useState("1");
   const [drink_quantity, setDrinkQuantity] = useState("");
   const [ice_level, setIceLevel] = useState("1");
   const [sugar_level, setSugarLevel] = useState("1");
@@ -41,21 +49,20 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
         </div>
 
         <div className="mb-3">
-          <label
-            id="drink_id"
-            htmlFor="addItem-customer-ID"
-            className="col-form-label"
-          >
+          <label htmlFor="add-drink-OI" className="col-form-label">
             Drink ID:
           </label>
-          <input
-            type="number"
-            className="form-control bg-transparent"
-            id="addItem-customer-ID"
-            value={drink_id}
-            onChange={(e) => setDrinkID(e.target.value)}
-            required
-          />
+          <SelectDropdown
+            className={"form-select mb-3 bg-transparent"}
+            ariaLabel={"drink_ID"}
+            onChangeHandler={setDrinkID}
+            id="add-drink-ID"
+            name="drink_ID"
+            selectOptions={drinkList}
+            optionValue={"drink_id"}
+            optionDisplay={"drink_name"}
+            selectedOption={drink_id}
+          ></SelectDropdown>
         </div>
 
         <div className="mb-3">
@@ -72,152 +79,46 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
           />
         </div>
 
-        <div className="mb-3 pt-2">
-          <label htmlFor="iceLevel" className="col-form-label w-25">
-            Ice level:
-          </label>
-          <div className="btn-group">
-            <input
-              className="btn-check"
-              type="radio"
-              name="iceLevel"
-              value="1"
-              id="iceLevel100"
-              checked
-            />
-            <label className="btn btn-outline-primary" htmlFor="iceLevel100">
-              100%
-            </label>
+        <RadioButtonGroup
+          labelFor={"iceLevelSelection"}
+          label={"Ice level:"}
+          setSelectedOption={setIceLevel}
+          radioOptions={iceLevelOptions}
+          groupName={"iceLevel"}
+          selectedOption={ice_level}
+        />
 
-            <input
-              className="btn-check"
-              type="radio"
-              name="iceLevel"
-              value="0.5"
-              id="iceLevel50"
-            />
-            <label className="btn btn-outline-primary" htmlFor="iceLevel50">
-              50%
-            </label>
+        <RadioButtonGroup
+          labelFor={"sugarLevelSelection"}
+          label={"Sugar level:"}
+          setSelectedOption={setSugarLevel}
+          radioOptions={sugarLevelOptions}
+          groupName={"sugarLevel"}
+          selectedOption={sugar_level}
+        />
 
-            <input
-              className="btn-check"
-              type="radio"
-              name="iceLevel"
-              value=".25"
-              id="iceLevel0"
-            />
-            <label className="btn btn-outline-primary" htmlFor="iceLevel0">
-              0%
-            </label>
-          </div>
-        </div>
+        <RadioButtonGroup
+          labelFor={"dairyOptionSelection"}
+          label={"Dairy Option:"}
+          setSelectedOption={setDairyOption}
+          radioOptions={dairyOptions}
+          groupName={"dairyOption"}
+          selectedOption={dairy_option}
+        />
 
-        <div className="mb-3 pt-2">
-          <label htmlFor="sugarLevel" className="col-form-label w-25">
-            Sugar level:
-          </label>
-          <div className="btn-group">
-            <input
-              className="btn-check"
-              type="radio"
-              name="sugarLevel"
-              value="1"
-              id="sugarLevel100"
-              checked
-            />
-            <label className="btn btn-outline-primary" htmlFor="sugarLevel100">
-              100%
-            </label>
-
-            <input
-              className="btn-check"
-              type="radio"
-              name="sugarLevel"
-              value="0.5"
-              id="sugarLevel50"
-            />
-            <label className="btn btn-outline-primary" htmlFor="sugarLevel50">
-              50%
-            </label>
-
-            <input
-              className="btn-check"
-              type="radio"
-              name="sugarLevel"
-              value=".25"
-              id="sugarLevel0"
-            />
-            <label className="btn btn-outline-primary" htmlFor="sugarLevel0">
-              0%
-            </label>
-          </div>
-        </div>
-
-        <div className="mb-3 pt-2">
-          <label htmlFor="dairyOption" className="col-form-label w-25">
-            Dairy Option:
-          </label>
-          <div className="btn-group">
-            <input
-              type="radio"
-              className="btn-check"
-              name="dairyOption"
-              id="dairyOptionYes"
-              value="1"
-              checked
-            />
-            <label className="btn btn-outline-primary" htmlFor="dairyOptionYes">
-              Dairy
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name="dairyOption"
-              id="dairyOptionNo"
-              value="0"
-            />
-            <label className="btn btn-outline-primary" htmlFor="dairyOptionNo">
-              Non-dairy
-            </label>
-          </div>
-        </div>
-
-        <div className="mb-3 pt-2 ">
-          <label htmlFor="bobaOption" className="col-form-label  w-25">
-            Boba Option:
-          </label>
-
-          <div className="btn-group">
-            <input
-              type="radio"
-              className="btn-check"
-              name="bobaOption"
-              id="bobaOptionYes"
-              value="1"
-              checked
-            />
-            <label className="btn btn-outline-primary" htmlFor="bobaOptionYes">
-              Yes
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name="bobaOption"
-              id="bobaOptionNo"
-              value="0"
-            />
-            <label className="btn btn-outline-secondary" htmlFor="bobaOptionNo">
-              No
-            </label>
-          </div>
-        </div>
+        <RadioButtonGroup
+          labelFor={"bobaOptionSelection"}
+          label={"Boba Option:"}
+          setSelectedOption={setBobaOption}
+          radioOptions={bobaOptions}
+          groupName={"bobaOption"}
+          selectedOption={boba_option}
+        />
 
         <div className="modal-footer">
           <button
             type="button"
+            id="cancel-add-order-item-btn"
             className="btn btn-secondary"
             data-bs-dismiss="modal"
           >
@@ -225,6 +126,7 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
           </button>
           <button
             type="submit"
+            id="add-order-item-btn"
             className="btn btn-primary"
             data-bs-dismiss="modal"
             onClick={() => onAddOrderItem(order_item)}

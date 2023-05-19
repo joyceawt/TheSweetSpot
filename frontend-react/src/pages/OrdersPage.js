@@ -18,15 +18,6 @@ function OrdersPage() {
   const [customerList, setCustomerList] = useState([]);
   const [drinkList, setDrinkList] = useState([]);
 
-  // OrderItem states. OI = OrderItems
-  const [OI_orderID, setOI_orderID] = useState([]);
-  const [OI_drinkID, setOI_drinkID] = useState([]);
-  const [OI_drinkQuantity, setOI_drinkQuantity] = useState([]);
-  const [OI_iceLvl, setOI_iceLvl] = useState([]);
-  const [OI_sugarLvl, setOI_sugarLvl] = useState([]);
-  const [OI_dairyOpt, setOI_dairyOpt] = useState([]);
-  const [OI_bobaOpt, setOI_bobaOpt] = useState([]);
-
   // LOAD ORDERS
   const loadAllOrders = async () => {
     try {
@@ -105,26 +96,18 @@ function OrdersPage() {
     }
   };
 
-  const onAddOrderItem = async (
-    order_id,
-    drink_id,
-    ice_level,
-    sugar_level,
-    dairy_option,
-    drink_quantity,
-    boba_option
-  ) => {
+  const onAddOrderItem = async (order_item) => {
     try {
       const response = await axios.post(
         "http://localhost:9124/api/order_items",
         {
-          order_id: order_id,
-          drink_id: drink_id,
-          ice_level: ice_level,
-          sugar_level: sugar_level,
-          dairy_option: dairy_option,
-          drink_quantity: drink_quantity,
-          boba_option: boba_option,
+          order_id: order_item.order_id,
+          drink_id: order_item.drink_id,
+          ice_level: order_item.ice_level,
+          sugar_level: order_item.sugar_level,
+          dairy_option: order_item.dairy_option,
+          drink_quantity: order_item.drink_quantity,
+          boba_option: order_item.boba_option,
         }
       );
       if (response) {

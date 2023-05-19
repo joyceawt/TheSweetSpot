@@ -270,7 +270,7 @@ app.put("/api/order_items/:id", (req, res) => {
 
 //create an orderItem
 app.post("/api/order_items", (req, res) => {
-  const order_id = req.params.order_id;
+  const order_id = req.body.order_id;
   const drink_id = req.body.drink_id;
   const ice_level = req.body.ice_level;
   const sugar_level = req.body.sugar_level;
@@ -279,7 +279,7 @@ app.post("/api/order_items", (req, res) => {
   const drink_quantity = req.body.drink_quantity;
 
   db.pool.query(
-    "INSERT INTO OrderItems (order_id, drink_id, ice_level, sugar_level, dairy_option, boba_option, drink_quantity) VALUES (?, ?, ?)",
+    "INSERT INTO OrderItems (order_id, drink_id, ice_level, sugar_level, dairy_option, boba_option, drink_quantity) VALUES (?, ?, ?, ?, ?, ?, ?)",
     [
       order_id,
       drink_id,
