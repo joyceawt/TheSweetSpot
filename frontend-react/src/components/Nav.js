@@ -1,35 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 function Nav({ current }) {
-  /***
-     * 
-     *  <Link to="/">Home</Link>
-        <Link to="/topics">Topics</Link>
-        <Link to="../subscriptionlog">Logs</Link>
-        <Link to="../gallery">Gallery</Link>
-        <Link to="../order">Order</Link>
-        <Link to="../staff">Staff</Link>
-     *  */
   return (
     <ul className="nav nav-underline nav flex-row justify-content-center align-items-center fs-4 ">
       <li className="nav-item">
         <Link className="nav-link" to="/">
-          Home
+          <div className="nav-text">Home</div>
         </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link" aria-current="page" to="/drinks">
-          Drinks
+          <div className="nav-text">Drinks</div>
         </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link" aria-current="page" to="/orders">
-          Orders
+          <div className="nav-text">Orders</div>
         </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link" aria-current="page" to="/customers">
-          Customers
+          <div className="nav-text">Customers</div>
         </Link>
       </li>
     </ul>
