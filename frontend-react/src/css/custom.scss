@@ -1,5 +1,7 @@
 /* custom CSS for BOOTSTRAP*/
 // Default variable overrides
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
 $body-bg:  #ead1d2;
 $body-color: #111;
 
@@ -27,5 +29,3 @@ article{
 .custom-font-color{
     color: #5b2b41;
 }
-@import "../../node_modules/bootstrap/scss/bootstrap";
-
