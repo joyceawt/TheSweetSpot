@@ -81,6 +81,17 @@ function OrdersPage() {
     }
   };
 
+  const onFilterOrderItems = (searchText) => {
+    if (searchText.length > 0) {
+      const filterOrderItems = orderItemList.filter((order_item) => {
+        return order_item.order_id.toString().includes(searchText);
+      });
+      return filterOrderItems;
+    } else {
+      return orderItemList;
+    }
+  };
+
   const onAddOrder = async (order) => {
     try {
       const response = await axios.post("http://localhost:9124/api/orders", {
@@ -217,9 +228,11 @@ function OrdersPage() {
 
       <article>
         <OrderItemList
-          orderItemList={orderItemList}
+          orderItemList={onFilterOrderItems(searchText)}
           onEditOrderItem={onEditOrderItem}
           onDeleteOrderItem={onDeleteOrderItem}
+          filterSearch={onFilterOrderItems}
+          searchText={searchText}
           drinkList={drinkList}
           orderList={orderList}
         />
