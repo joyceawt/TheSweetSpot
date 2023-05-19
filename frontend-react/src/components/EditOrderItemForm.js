@@ -89,13 +89,13 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
           </label>
           <SelectDropdown
             className={"form-select mb-3 bg-transparent"}
-            ariaLabel={"order_ID"}
+            ariaLabel={"drink_ID"}
             onChangeHandler={changeSelectedDrinkID}
             id="edit-drink-ID"
             name="drink_ID"
             selectOptions={drinkList}
             optionValue={"drink_id"}
-            optionDisplay={"drinks_name"}
+            optionDisplay={"drink_name"}
             selectedOption={drink_id}
           ></SelectDropdown>
         </div>
@@ -268,6 +268,7 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
             type="button"
             className="btn btn-secondary"
             data-bs-dismiss="modal"
+            id="cancel-edit-order-item-btn"
           >
             Cancel
           </button>
@@ -276,6 +277,7 @@ function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
             className="btn btn-primary"
             data-bs-dismiss="modal"
             onClick={editOrderItem}
+            id="save-edit-order-item-btn"
           >
             {" "}
             Save{" "}
