@@ -59,6 +59,7 @@ function AddDrinkForm({ onAddDrink }) {
       <div className="modal-footer ">
         <button
           type="button"
+          id="cancel-add-drink-btn"
           className="btn btn-secondary"
           data-bs-dismiss="modal"
         >
