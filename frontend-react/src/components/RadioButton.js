@@ -1,20 +1,34 @@
 import React from "react";
 
-export const RadioButton = ({ label, labelFor, name, value, id, checked }) => {
+export const RadioButton = ({
+  label,
+  name,
+  value,
+  id,
+  selectedOption,
+  setSelectedOption,
+}) => {
   return (
-    <div className="btn-group">
+    <>
       <input
         className="btn-check"
         type="radio"
         name={name}
         value={value}
         id={id}
-        checked={checked}
+        checked={value == selectedOption}
+        onChange={(e) => {
+          setSelectedOption(e.target.value);
+        }}
       />
-      <label className="btn btn-outline-primary" htmlFor={labelFor}>
+      <label
+        id={`${id}-label`}
+        className="btn btn-outline-primary"
+        htmlFor={id}
+      >
         {label}
       </label>
-    </div>
+    </>
   );
 };
 
