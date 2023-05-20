@@ -2,6 +2,18 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function HomePage() {
+  const date = new Date().getHours();
+  const greeting =
+    date < 12 ? "Good Morning" : date < 18 ? "Good Afternoon" : "Good Evening";
+  const icon =
+    date < 12 ? (
+      <i className="greeting bi bi-brightness-alt-low-fill"></i>
+    ) : date < 18 ? (
+      <i className="greeting bi bi-brightness-high-fill"></i>
+    ) : (
+      <i className="greeting bi bi-moon-stars-fill"></i>
+    );
+
   return (
     <section
       className="d-flex flex-column align-content-center justify-content-center custom-size  pt-4 pb-4"
@@ -12,12 +24,54 @@ function HomePage() {
         id="content-1"
       >
         <div className="p-3">
-          <h4 className="footer-font-color">Overview</h4>
+          <h4 className="footer-font-color">
+            {greeting} {icon}
+          </h4>
           <p className="lh-lg">
-            Welcome. The main functionality of this webpage is to add, edit, and
-            delete drink items. You may also view customer's Orders, OrderItems,
-            and Customers information.
+            Welcome to The Sweet Spot's Order Management Site.
           </p>
+        </div>
+
+        <div className="p-3 analytics row justify-content-center">
+          <div className="col-sm-2 p-3">
+            <div className="card text-center bg-purple">
+              <div className="card-body">
+                <h5 className="card-title">Today's Orders</h5>
+                <h3 className="card-text">10</h3>
+                <p className="card-text"> Orders</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-sm-2 p-3">
+            <div className="card text-center bg-purple">
+              <div className="card-body">
+                <h5 className="card-title">Total Orders</h5>
+                <h3 className="card-text">10</h3>
+                <p className="card-text"> this year</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-sm-2 p-3">
+            <div className="card text-center bg-purple">
+              <div className="card-body">
+                <h5 className="card-title">Most Popular</h5>
+                <h3 className="card-text">10</h3>
+                <p className="card-text"> drink on menu</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-sm-2 p-3">
+            <div className="card text-center bg-purple">
+              <div className="card-body">
+                <h5 className="card-title">Total Customers</h5>
+                <h3 className="card-text">10</h3>
+                <p className="card-text"> to date</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="row p-4 ">
