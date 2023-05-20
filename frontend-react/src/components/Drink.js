@@ -66,7 +66,7 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
           <Modal
             trigger={modalEdit}
             buttonName={<i className="bi bi-pencil-square fs-3" />}
-            btnClasses="btn btn-light btn-outline-primary"
+            btnClasses="btn btn-light"
             content={
               <EditDrinkForm drinkItem={drink} onClickAction={onEditDrink} />
             }
@@ -75,8 +75,8 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
 
           <Modal
             trigger={modalDelete}
-            buttonName={<i className="bi bi-x-lg fs-3" />}
-            btnClasses="btn btn-outline-danger"
+            buttonName={<i className="bi bi-trash fs-3" />}
+            btnClasses="btn btn-light"
             content={
               <DeleteConfirm
                 actionOnClick={onDeleteDrink}
