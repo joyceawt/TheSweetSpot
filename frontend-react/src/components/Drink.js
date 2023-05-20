@@ -7,14 +7,14 @@ import DeleteConfirm from "./DeleteConfirm";
 
 function Drink({ drink, onEditDrink, onDeleteDrink }) {
   let id = drink.drink_id;
-  let drinkName = "name-" + drink.drink_id;
-  let drinkID = "id-" + drink.drink_id;
-  let drinkDescription = "drinkDescription-" + drink.drink_id;
-  let drinkPrice = "drinkPrice-" + drink.drink_id;
+  let drinkName = "name-" + id;
+  let drinkID = "id-" + id;
+  let drinkDescription = "drinkDescription-" + id;
+  let drinkPrice = "drinkPrice-" + id;
 
   // NEED UNIQUE ID for each modal! this is to assign each drink a unique modal.
-  let modalEdit = "edit-entry-" + drink.drink_id;
-  let modalDelete = "delete-confirm-" + drink.drink_id;
+  let modalEdit = "edit-entry-" + id;
+  let modalDelete = "delete-confirm-" + id;
 
   return (
     <>
@@ -38,7 +38,7 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
                 ID
               </th>
               <td id={drinkID} style={{ wordWrap: "break-word" }}>
-                {drink.drink_id}
+                {id}
               </td>
             </tr>
             <tr>
@@ -77,12 +77,7 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
             trigger={modalDelete}
             buttonName={<i className="bi bi-trash fs-3" />}
             btnClasses="btn btn-light"
-            content={
-              <DeleteConfirm
-                actionOnClick={onDeleteDrink}
-                id={drink.drink_id}
-              />
-            }
+            content={<DeleteConfirm actionOnClick={onDeleteDrink} id={id} />}
             title="Delete Entry?"
           />
         </div>
