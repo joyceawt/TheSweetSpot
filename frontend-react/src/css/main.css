@@ -1,4 +1,3 @@
-@charSet "UTF-8";
 /* custom CSS for BOOTSTRAP*/
 header {
   display: flex;
@@ -14,7 +13,7 @@ article {
 
 .custom-size {
   max-width: 100%;
-  width: 1000px;
+  /* width: 1000px; */
 }
 
 .dashedDivider {
@@ -29,6 +28,10 @@ article {
   fill: #A64D79;
 }
 
+.nav-link > i {
+  color: #A64D79;
+}
+
 .tss-logo {
   transform: scale(1);
 }
@@ -36,6 +39,11 @@ article {
 .tss-header {
   padding: 3rem 3rem 0rem 3rem;
 }
+
+.nav-text {
+  font-size: 18px;
+}
+
 
 /*!
  * Bootstrap  v5.3.0-alpha3 (https://getbootstrap.com/)
@@ -133,7 +141,7 @@ article {
   --bs-link-color: #0d6efd;
   --bs-link-color-rgb: 13, 110, 253;
   --bs-link-decoration: underline;
-  --bs-link-hover-color: #0a58ca;
+  --bs-link-hover-color: #c9cccf;
   --bs-link-hover-color-rgb: 10, 88, 202;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
@@ -234,7 +242,7 @@ body {
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
+  background-color: var(--bs-white-rgb);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -3779,6 +3787,7 @@ textarea.form-control-lg {
     transition: none;
   }
 }
+
 .nav-link:hover, .nav-link:focus {
   color: var(--bs-nav-link-hover-color);
 }
@@ -3832,7 +3841,7 @@ textarea.form-control-lg {
 .nav-pills {
   --bs-nav-pills-border-radius: var(--bs-border-radius);
   --bs-nav-pills-link-active-color: #fff;
-  --bs-nav-pills-link-active-bg: #0d6efd;
+  --bs-nav-pills-link-active-bg: #dee1e4;
 }
 .nav-pills .nav-link {
   border-radius: var(--bs-nav-pills-border-radius);
@@ -3851,7 +3860,7 @@ textarea.form-control-lg {
 .nav-underline {
   --bs-nav-underline-gap: 1rem;
   --bs-nav-underline-border-width: 0.125rem;
-  --bs-nav-underline-link-active-color: var(--bs-emphasis-color);
+  --bs-nav-underline-link-active-color: #e2e1da;
   gap: var(--bs-nav-underline-gap);
 }
 .nav-underline .nav-link {
@@ -8747,6 +8756,11 @@ textarea.form-control-lg {
 .bg-white {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-pink {
+  --bs-bg-opacity: 1;
+  background-color: var(--bs-body-bg) !important;
 }
 
 .bg-body {

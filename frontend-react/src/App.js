@@ -18,27 +18,26 @@ function App() {
 
   return (
     <div className="App">
-      <div className="d-flex flex-column  align-items-center justify-content-center">
+      <div className="d-flex">
         <BrowserRouter>
-          <Header title={title} />
           <Nav />
+          <div className="p2 flex-grow-1 ps-5 flex-column align-items-center justify-content-center">
+            <Header title={title} />
 
-          <main className="custom-size">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
+            <main className="custom-size">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
 
-              <Route path="/drinks" element={<DrinksPage />}></Route>
+                <Route path="/drinks" element={<DrinksPage />}></Route>
 
-              <Route path="/orders" element={<OrdersPage />}></Route>
+                <Route path="/orders" element={<OrdersPage />}></Route>
 
-              <Route path="/customers" element={<CustomersPage />}></Route>
-
-              {/* <Route path="/subscriptionupdate" element={<SubscriptionLogEditPage subsListEdit={subscriptionListEdit} />} /> */}
-            </Routes>
-          </main>
+                <Route path="/customers" element={<CustomersPage />}></Route>
+              </Routes>
+              <Footer />
+            </main>
+          </div>
         </BrowserRouter>
-
-        <Footer />
       </div>
     </div>
   );

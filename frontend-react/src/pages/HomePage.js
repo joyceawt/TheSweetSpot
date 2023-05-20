@@ -2,25 +2,13 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function HomePage() {
-  //to render the proper sizing of header.. homepage header is different size.
-  /*
-    useEffect(() => {    
-        // Update the document title using the browser API    
-        if (window.location.pathname ==="/"){
-            document.getElementById("headerDefault").classNameName = "homeOnly";
-        }
-        else{
-            document.getElementById("headerDefault").classNameName = "default";
-        }
-    });
-    */
   return (
     <section
       className="d-flex flex-column align-content-center justify-content-center custom-size  pt-4 pb-4"
       id="mainContent"
     >
       <article
-        className="d-flex flex-column align-content-center justify-content-center rounded bg-white p-1"
+        className="d-flex flex-column align-content-center justify-content-center rounded p-1"
         id="content-1"
       >
         <div className="p-3">
@@ -34,7 +22,7 @@ function HomePage() {
 
         <div className="row p-4 ">
           <div className="col-sm-6 p-3">
-            <div className="card text-center bg-white">
+            <div className="card text-center bg-pink">
               <div className="card-body ">
                 <h5 className="card-title">Drinks table</h5>
                 <p className="card-text">
@@ -49,7 +37,7 @@ function HomePage() {
           </div>
 
           <div className="col-sm-6 p-3">
-            <div className="card text-center bg-white">
+            <div className="card text-center bg-pink">
               <div className="card-body">
                 <h5 className="card-title">Orders Table</h5>
                 <p className="card-text">
@@ -64,7 +52,7 @@ function HomePage() {
           </div>
 
           <div className="col-sm-6 p-3">
-            <div className="card text-center bg-white">
+            <div className="card text-center bg-pink">
               <div className="card-body">
                 <h5 className="card-title">OrderItems Table</h5>
                 <p className="card-text">
@@ -78,7 +66,7 @@ function HomePage() {
           </div>
 
           <div className="col-sm-6 p-3">
-            <div className="card text-center bg-white">
+            <div className="card text-center bg-pink">
               <div className="card-body">
                 <h5 className="card-title">Customers Table</h5>
                 <p className="card-text">
