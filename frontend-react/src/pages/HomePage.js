@@ -32,9 +32,9 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="p-3 analytics row justify-content-center">
+        <div className="p-3 row justify-content-center">
           <div className="col-sm-2 p-3">
-            <div className="card text-center bg-purple">
+            <div className="analytics card text-center bg-purple">
               <div className="card-body">
                 <h5 className="card-title">Today's Orders</h5>
                 <h3 className="card-text">10</h3>
@@ -44,7 +44,7 @@ function HomePage() {
           </div>
 
           <div className="col-sm-2 p-3">
-            <div className="card text-center bg-purple">
+            <div className="analytics card text-center bg-purple">
               <div className="card-body">
                 <h5 className="card-title">Total Orders</h5>
                 <h3 className="card-text">10</h3>
@@ -54,7 +54,7 @@ function HomePage() {
           </div>
 
           <div className="col-sm-2 p-3">
-            <div className="card text-center bg-purple">
+            <div className="analytics card text-center bg-purple">
               <div className="card-body">
                 <h5 className="card-title">Most Popular</h5>
                 <h3 className="card-text">10</h3>
@@ -64,7 +64,7 @@ function HomePage() {
           </div>
 
           <div className="col-sm-2 p-3">
-            <div className="card text-center bg-purple">
+            <div className="analytics card text-center bg-purple">
               <div className="card-body">
                 <h5 className="card-title">Total Customers</h5>
                 <h3 className="card-text">10</h3>
