@@ -1,4 +1,3 @@
-// model this after SubscriptionRow
 import React from "react";
 import bobaPic from "../data/images/boba_unknownartist.png";
 import Modal from "./Modal";
