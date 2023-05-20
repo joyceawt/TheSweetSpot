@@ -78,10 +78,10 @@ function HomePage() {
           <div className="col-sm-6 p-3">
             <div className="card text-center bg-pink">
               <div className="card-body ">
-                <h5 className="card-title">Drinks table</h5>
+                <h5 className="card-title">Drinks Table</h5>
                 <p className="card-text">
-                  Shows a list of all drinks. Contains drink ID, drink name,
-                  drink description, and drink price.s
+                  Preview all drinks. View the drink ID, drink name, drink
+                  description, and prices.
                 </p>
                 <Link to="/drinks" className="btn btn-primary">
                   Manage drinks
@@ -95,8 +95,8 @@ function HomePage() {
               <div className="card-body">
                 <h5 className="card-title">Orders Table</h5>
                 <p className="card-text">
-                  Returns a table of all orders. Contains the order ID, Customer
-                  ID, order date, and total.{" "}
+                  Preview all orders. View the order ID, Customer ID, order
+                  date, and total.{" "}
                 </p>
                 <Link className="btn btn-primary" to="/orders">
                   Checkout the list of orders
@@ -110,7 +110,8 @@ function HomePage() {
               <div className="card-body">
                 <h5 className="card-title">OrderItems Table</h5>
                 <p className="card-text">
-                  Intersection table between Orders table and the Drinks table.
+                  Preview intersection table between Orders table and the Drinks
+                  table.
                 </p>
                 <Link className="btn btn-primary" to="/orders">
                   Go to the detailed list
@@ -124,8 +125,8 @@ function HomePage() {
               <div className="card-body">
                 <h5 className="card-title">Customers Table</h5>
                 <p className="card-text">
-                  Contains all of the information regarding the customer.
-                  Cointains ID, name, and phone number.
+                  Preview all our customers. View their ID, name, and phone
+                  number.
                 </p>
                 <Link className="btn btn-primary" to="/customers">
                   List of customers
