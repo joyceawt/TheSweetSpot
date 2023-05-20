@@ -16,7 +16,7 @@ function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
       <tr>
         <td>
           {" "}
-          <button className="btn btn-outline-dark ">
+          <button className="btn btn-inverse ">
             {" "}
             <i className="bi bi-info-circle" />{" "}
           </button>{" "}
@@ -28,8 +28,8 @@ function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
         <td>
           <Modal
             trigger={modalEdit}
-            buttonName={<i className="bi bi-pencil-square fs-6"></i>}
-            btnClasses="btn btn-outline-secondary"
+            buttonName={<i className="bi bi-pencil-square fs-5"></i>}
+            btnClasses="btn btn-light mx-1"
             content={
               <EditOrderForm
                 order={order}
@@ -42,8 +42,8 @@ function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
 
           <Modal
             trigger={modalDelete}
-            buttonName={<i className="bi bi-x-lg fs-6"></i>}
-            btnClasses="btn btn-outline-danger"
+            buttonName={<i className="bi bi-trash fs-5"></i>}
+            btnClasses="btn btn-light mx-1"
             content={
               <DeleteConfirm
                 actionOnClick={onDeleteOrder}

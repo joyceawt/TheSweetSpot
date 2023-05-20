@@ -171,7 +171,7 @@ function OrdersPage() {
       key="AddOrder"
       trigger="add-order"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
-      btnClasses="btn btn-light btn-outline-primary"
+      btnClasses="btn btn-inverse"
       content={
         <AddOrderForm customerList={customerList} onAddOrder={onAddOrder} />
       }
@@ -184,7 +184,7 @@ function OrdersPage() {
       key="AddOrderItem"
       trigger="add-order-item"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
-      btnClasses="btn btn-light btn-outline-primary"
+      btnClasses="btn btn-inverse"
       content={
         <AddOrderItemForm
           drinkList={drinkList}

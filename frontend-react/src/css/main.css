@@ -3114,12 +3114,12 @@ textarea.form-control-lg {
 }
 
 .btn-light {
-  --bs-btn-color: var(--custom-dark-blue);
-  --bs-btn-bg: #f8f9fa;
-  --bs-btn-border-color: #f8f9fa;
-  --bs-btn-hover-color: var(--custom-logo-purple);
-  --bs-btn-hover-bg: #f4f3ee;
-  --bs-btn-hover-border-color: #f4f3ee;
+  --bs-btn-color:var(--custom-logo-purple);
+  --bs-btn-bg: var(--bs-body-bg);
+  --bs-btn-border-color: var(--bs-body-bg);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #E8A0BF;
+  --bs-btn-hover-border-color: #E8A0BF;
   --bs-btn-focus-shadow-rgb: 211, 212, 213;
   --bs-btn-active-color: #000;
   --bs-btn-active-bg: #c6c7c8;

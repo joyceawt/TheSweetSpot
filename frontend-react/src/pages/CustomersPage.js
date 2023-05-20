@@ -82,7 +82,7 @@ export const CustomersPage = () => {
     <Modal
       trigger="add-customer"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
-      btnClasses="btn btn-light btn-outline-primary"
+      btnClasses="btn btn-inverse"
       content={<AddCustomerForm onAddCust={onAddCustomer} />}
       title="Add a new customer"
     />
