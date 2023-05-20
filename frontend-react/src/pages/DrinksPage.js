@@ -86,7 +86,7 @@ export const DrinksPage = () => {
     <Modal
       trigger="add-drink"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
-      btnClasses="btn btn-light btn-outline-primary"
+      btnClasses="btn btn-inverse"
       content={<AddDrinkForm onAddDrink={onAddDrink} />}
       title="Add a new Drink"
     />

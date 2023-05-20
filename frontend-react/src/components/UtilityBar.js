@@ -52,7 +52,7 @@ export const UtilityBar = ({
         <div className={`ms-auto ${renderSearchBar ? "pt-1" : "pt-4"}`}>
           {filterComponent()}
         </div>
-        <div className="pt-3 pe-2"> {addModal} </div>
+        <div className="pt-3 pe-2 me-3"> {addModal} </div>
       </div>
     </>
   );

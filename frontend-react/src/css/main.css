@@ -65,6 +65,7 @@ article {
 :root,
 [data-bs-theme=light] {
   --custom-dark-blue: #748DA6;
+  --custom-light-blue: #9CB4CC;
   --custom-logo-purple: #A64D79;
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -3129,6 +3130,29 @@ textarea.form-control-lg {
   --bs-btn-disabled-border-color: #f8f9fa;
   --bs-btn-border-radius: 20px;
   transition: all 0.30s ease-in-out;
+  &:hover {
+    transform: scale(0.9);
+  }
+}
+
+.btn-inverse {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--custom-light-blue);
+  --bs-btn-border-color: var(--custom-light-blue);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--custom-dark-blue);
+  --bs-btn-hover-border-color: var(--custom-dark-blue);;
+  --bs-btn-focus-shadow-rgb: 211, 212, 213;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #c6c7c8;
+  --bs-btn-active-border-color: #babbbc;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: #f8f9fa;
+  --bs-btn-disabled-border-color: #f8f9fa;
+  --bs-btn-border-radius: 20px;
+  transition: all 0.30s ease-in-out;
+
   &:hover {
     transform: scale(0.9);
   }

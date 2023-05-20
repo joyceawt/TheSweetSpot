@@ -61,11 +61,11 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
             </tr>
           </tbody>
         </table>
-        <div className="p-2 d-flex flex-column justify-content-evenly align-content-center">
+        <div className="p-4 d-flex flex-column justify-content-evenly align-content-center">
           <Modal
             trigger={modalEdit}
             buttonName={<i className="bi bi-pencil-square fs-3" />}
-            btnClasses="btn btn-light"
+            btnClasses="mt-3 btn btn-light"
             content={
               <EditDrinkForm drinkItem={drink} onClickAction={onEditDrink} />
             }
@@ -75,7 +75,7 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
           <Modal
             trigger={modalDelete}
             buttonName={<i className="bi bi-trash fs-3" />}
-            btnClasses="btn btn-light"
+            btnClasses="mt-3 btn btn-light"
             content={<DeleteConfirm actionOnClick={onDeleteDrink} id={id} />}
             title="Delete Entry?"
           />

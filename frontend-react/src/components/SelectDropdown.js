@@ -24,22 +24,24 @@ export const Select = ({
   };
 
   return (
-    <select
-      className={className}
-      aria-label={ariaLabel}
-      onChange={handleChange}
-      defaultValue={selectedOption}
-      placeholder={defaultFilterValue}
-      id={id}
-      name={name}
-    >
-      {defaultFilterValue ? <option>{defaultFilterValue}</option> : ""}
-      {selectOptions.map((option, i) => (
-        <option key={i} value={optionValue ? option[optionValue] : option}>
-          {optionDisplay ? option[optionDisplay] : option}
-        </option>
-      ))}
-    </select>
+    <div className="pe-3">
+      <select
+        className={className}
+        aria-label={ariaLabel}
+        onChange={handleChange}
+        defaultValue={selectedOption}
+        placeholder={defaultFilterValue}
+        id={id}
+        name={name}
+      >
+        {defaultFilterValue ? <option>{defaultFilterValue}</option> : ""}
+        {selectOptions.map((option, i) => (
+          <option key={i} value={optionValue ? option[optionValue] : option}>
+            {optionDisplay ? option[optionDisplay] : option}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 
