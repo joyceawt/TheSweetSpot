@@ -10,7 +10,7 @@ function AddCustomerForm({ onAddCust }) {
     <>
       <form className="needs-validation">
         <div className="mb-3">
-          <label htmlFor="add-description" className="col-form-label">
+          <label htmlFor="add-name" className="col-form-label">
             Customer Name:
           </label>
           <input
@@ -23,7 +23,7 @@ function AddCustomerForm({ onAddCust }) {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="add-date" className="col-form-label">
+          <label htmlFor="add-phone" className="col-form-label">
             Phone number
           </label>
           <input
@@ -48,6 +48,7 @@ function AddCustomerForm({ onAddCust }) {
           <button
             type="button"
             className="btn btn-primary"
+            data-bs-dismiss="modal"
             onClick={() => onAddCust(customer)}
           >
             Add
