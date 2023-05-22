@@ -2,7 +2,7 @@
 const mysql = require("mysql");
 
 // Create a 'connection pool' using the provided credentials
-const pool = mysql.createConnection({
+const pool = mysql.createPool({
   connectionLimit: 10,
   host: "classmysql.engr.oregonstate.edu",
   user: "cs340_aujoy",
@@ -12,13 +12,13 @@ const pool = mysql.createConnection({
 });
 
 // Log if unsuccessful
-pool.connect((err) => {
-  if (!err) {
-    console.log("Successfully connect to mysql");
-  } else {
-    console.log("Failed to connect to mysql");
-  }
-});
+// pool.connect((err) => {
+//   if (!err) {
+//     console.log("Successfully connect to mysql");
+//   } else {
+//     console.log("Failed to connect to mysql");
+//   }
+// });
 
 // Export it for use in our applicaiton
 module.exports.pool = pool;
