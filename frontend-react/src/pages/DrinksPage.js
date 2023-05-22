@@ -35,6 +35,7 @@ export const DrinksPage = () => {
         "http://localhost:9124/api/drinks",
         drink
       );
+      debugger;
       if (response) {
         setDrinkList([...drinkList, response.data]);
       }
@@ -104,6 +105,7 @@ export const DrinksPage = () => {
         setSearchText={setSearchText}
         defaultOption={defaultFilterValue}
         ariaLabel={ariaLabel}
+        id={"drink-filter"}
       />
       <DrinkList
         drinkLists={onFilterDrinks(searchText)}
