@@ -19,21 +19,6 @@ app.get("/api/customers", (req, res) => {
   });
 });
 
-// get customers by ID
-// Customers
-app.get("/api/customers/:id", (req, res) => {
-  db.pool.query(
-    `SELECT * FROM Customers WHERE customer_id = ${req.params.id}`,
-    (err, results, fields) => {
-      if (err) {
-        res.status(500).send("Error fetching customers");
-        return;
-      }
-      res.json(results);
-    }
-  );
-});
-
 //update customer by ID
 app.put("/api/customers/:id", (req, res) => {
   const id = req.params.id;
@@ -53,25 +38,25 @@ app.put("/api/customers/:id", (req, res) => {
   );
 });
 
-//add new customer
+// create a customer
 app.post("/api/customers", (req, res) => {
   const name = req.body.name;
   const phone = req.body.phone;
 
-  db.pool.query(
-    "INSERT INTO Customers (name, phone) VALUES (?, ?)",
-    [name, phone],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      res.json(result);
+  const insertAndSelect =
+    "INSERT INTO Customers (name, phone) VALUES (?, ?) ; SELECT * FROM Customers WHERE customer_id = LAST_INSERT_ID()";
+
+  db.pool.query(insertAndSelect, [name, phone], (err, results) => {
+    if (err) {
+      res.status(500).send("Error creating a customer");
+      return;
     }
-  );
+    res.json(results[1][0]);
+  });
 });
 
 //delete customer by ID
-app.delete("/api/customers/delete/:id", (req, res) => {
+app.delete("/api/customers/:id", (req, res) => {
   const id = req.params.id;
 
   db.pool.query(
@@ -92,7 +77,7 @@ app.delete("/api/customers/delete/:id", (req, res) => {
 app.get("/api/drinks", (req, res) => {
   db.pool.query("SELECT * FROM Drinks", (err, results) => {
     if (err) {
-      res.status(500).send("Error fetching customers");
+      res.status(500).send("Error fetching drinks");
       return;
     }
     res.json(results);
@@ -125,14 +110,18 @@ app.post("/api/drinks", (req, res) => {
   const drink_description = req.body.drink_description;
   const drink_price = req.body.drink_price;
 
+  const insertAndSelect =
+    "INSERT INTO Drinks (drink_name, drink_description, drink_price) VALUES (?, ?, ?) SELECT * FROM Drinks WHERE drink_id = LAST_INSERT_ID()";
+
   db.pool.query(
-    "INSERT INTO Drinks (drink_name, drink_description, drink_price) VALUES (?, ?, ?)",
+    insertAndSelect,
     [drink_name, drink_description, drink_price],
     (err, result) => {
       if (err) {
-        console.log(err);
+        res.status(500).send("Error creating a drink");
+        return;
       }
-      res.json(result);
+      res.json(result[1][0]);
     }
   );
 });
@@ -204,7 +193,7 @@ app.post("/api/orders", (req, res) => {
 
   db.pool.query(query, query_array, (err, result) => {
     if (err) {
-      console.log(err);
+      res.status(500).send("Error creating an order");
     }
     res.json(result);
   });
@@ -291,7 +280,8 @@ app.post("/api/order_items", (req, res) => {
     ],
     (err, result) => {
       if (err) {
-        console.log(err);
+        res.status(500).send("Error updating order items");
+        return;
       }
       res.json(result);
     }
