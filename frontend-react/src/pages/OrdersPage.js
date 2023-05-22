@@ -100,7 +100,7 @@ function OrdersPage() {
         order_total: order.order_total,
       });
       if (response) {
-        setOrderList(...orderList, response.data);
+        setOrderList([...orderList, response.data]);
       }
     } catch (err) {
       console.log(err);
@@ -122,7 +122,7 @@ function OrdersPage() {
         }
       );
       if (response) {
-        setOrderItemList(...orderItemList, response.data);
+        setOrderItemList([...orderItemList, response.data]);
       }
     } catch (err) {
       console.log(err);

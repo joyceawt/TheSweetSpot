@@ -36,7 +36,7 @@ export const DrinksPage = () => {
         drink
       );
       if (response) {
-        setDrinkList(...drinkList, response.data);
+        setDrinkList([...drinkList, response.data]);
       }
     } catch (err) {
       console.log(err);
@@ -64,7 +64,7 @@ export const DrinksPage = () => {
 
   //filter Drinks
   const onFilterDrinks = (filterName) => {
-    if (filterName != "Filter By Drink Name") {
+    if (filterName !== "Filter By Drink Name") {
       const filteredDrinks = drinkList.filter((drink) => {
         return drink.drink_name
           .toLowerCase()

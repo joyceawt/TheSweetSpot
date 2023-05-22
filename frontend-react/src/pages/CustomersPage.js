@@ -50,7 +50,7 @@ export const CustomersPage = () => {
         customer
       );
       if (response) {
-        setCustomerList(...customerList, response.data);
+        setCustomerList([...customerList, response.data]);
       }
     } catch (err) {
       console.log(err);
