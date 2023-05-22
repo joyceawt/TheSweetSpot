@@ -69,6 +69,7 @@ function AddDrinkForm({ onAddDrink }) {
           type="submit"
           className="btn btn-primary"
           id="add-new-drink-btn"
+          data-bs-dismiss="modal"
           onClick={() => onAddDrink(drink)}
         >
           Add item
