@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import bobaPic from "../data/images/boba_unknownartist.png";
-import Modal from "./Modal";
+import ModalComponent from "./Modal";
 import EditDrinkForm from "./EditDrinkForm";
 import DeleteConfirm from "./DeleteConfirm";
 
@@ -11,9 +11,10 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
   let drinkDescription = "drinkDescription-" + id;
   let drinkPrice = "drinkPrice-" + id;
 
-  // NEED UNIQUE ID for each modal! this is to assign each drink a unique modal.
   let modalEdit = "edit-entry-" + id;
   let modalDelete = "delete-confirm-" + id;
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   return (
     <>
@@ -62,20 +63,28 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
           </tbody>
         </table>
         <div className="p-4 d-flex flex-column justify-content-evenly align-content-center">
-          <Modal
+          <ModalComponent
             trigger={modalEdit}
             buttonName={<i className="bi bi-pencil-square fs-3" />}
             btnClasses="mt-3 btn btn-light"
+            showModal={showEditModal}
+            setShowModal={setShowEditModal}
             content={
-              <EditDrinkForm drinkItem={drink} onClickAction={onEditDrink} />
+              <EditDrinkForm
+                drinkItem={drink}
+                onClickAction={onEditDrink}
+                setShowModal={setShowEditModal}
+              />
             }
             title="Edit drink"
           />
 
-          <Modal
+          <ModalComponent
             trigger={modalDelete}
             buttonName={<i className="bi bi-trash fs-3" />}
             btnClasses="mt-3 btn btn-light"
+            showModal={showDeleteModal}
+            setShowModal={setShowDeleteModal}
             content={<DeleteConfirm actionOnClick={onDeleteDrink} id={id} />}
             title="Delete Entry?"
           />

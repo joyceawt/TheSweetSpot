@@ -17,11 +17,11 @@ function AddCustomerForm({ onAddCust, setShowModal }) {
 
     if (form.checkValidity() === false) {
       event.stopPropagation();
+    } else {
+      setValidated(true);
+      onAddCust(customer);
+      closeModal();
     }
-
-    setValidated(true);
-    onAddCust(customer);
-    closeModal();
   };
 
   return (

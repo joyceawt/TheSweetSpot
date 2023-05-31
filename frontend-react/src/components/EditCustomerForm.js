@@ -17,10 +17,10 @@ export const EditCustomerForm = ({ customer, onClickAction, setShowModal }) => {
 
     if (form.checkValidity() === false) {
       event.stopPropagation();
+    } else {
+      setValidated(true);
+      editCustomer();
     }
-
-    setValidated(true);
-    editCustomer(customer);
   };
 
   const editCustomer = async () => {
@@ -39,16 +39,19 @@ export const EditCustomerForm = ({ customer, onClickAction, setShowModal }) => {
   return (
     <>
       <Form
-        id={"editCustomerForm-" + { customer_id }}
+        id={"editCustomerForm-" + customer_id}
         noValidate
         validated={validated}
         onSubmit={handleSubmit}
       >
-        <Form.Group className="mb-3 d-flex" controlId="customer-ID">
+        <Form.Group
+          className="mb-3 d-flex"
+          controlId={"customer-ID" + customer_id}
+        >
           <Form.Label className="col-form-label">Customer ID:</Form.Label>
           <Form.Control
             type="text"
-            className="form-control bg-transparent ms-2"
+            className="bg-transparent ms-2"
             placeholder="Name"
             style={{ width: "15%" }}
             value={customer_id}
@@ -60,7 +63,7 @@ export const EditCustomerForm = ({ customer, onClickAction, setShowModal }) => {
         <Form.Group className="mb-3" controlId="customer-name">
           <Form.Label className="col-form-label">Name:</Form.Label>
           <Form.Control
-            className="form-control bg-transparent"
+            className="bg-transparent"
             type="text"
             onChange={(e) => setNewName(e.target.value)}
             value={name}
@@ -74,7 +77,7 @@ export const EditCustomerForm = ({ customer, onClickAction, setShowModal }) => {
         <Form.Group className="mb-3" controlId="customer-phone">
           <Form.Label className="col-form-label">Phone Number:</Form.Label>
           <Form.Control
-            className="form-control bg-transparent"
+            className="bg-transparent"
             type="tel"
             onChange={(e) => setNewPhone(e.target.value)}
             value={phone}
@@ -84,11 +87,12 @@ export const EditCustomerForm = ({ customer, onClickAction, setShowModal }) => {
             Please provide a valid phone number.
           </Form.Control.Feedback>
         </Form.Group>
+
         <Modal.Footer>
           <Button type="button" variant="secondary" onClick={closeModal}>
             Cancel
           </Button>
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" onClick={handleSubmit}>
             Save
           </Button>
         </Modal.Footer>

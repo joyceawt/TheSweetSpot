@@ -1,81 +1,106 @@
 import React, { useState } from "react";
+import { Form, Button, Modal, InputGroup } from "react-bootstrap";
 
-function AddDrinkForm({ onAddDrink }) {
+function AddDrinkForm({ onAddDrink, setShowModal }) {
   const [drink_name, setDrinkName] = useState([]);
   const [drink_description, setDrinkDescription] = useState([]);
   const [drink_price, setDrinkPrice] = useState([]);
+  const [validated, setValidated] = useState(false);
+
+  const closeModal = () => setShowModal(false);
 
   const drink = { drink_name, drink_description, drink_price };
 
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+
+    event.preventDefault();
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    } else {
+      setValidated(true);
+      onAddDrink(drink);
+      closeModal();
+    }
+  };
+
   return (
-    <form className="needs-validation">
-      <div className="mb-3">
-        <label htmlFor="add-drink-name" className="col-form-label">
-          Drink Name:
-        </label>
-        <input
-          type="text"
-          className="form-control bg-transparent"
-          id="add-drink-name"
-          value={drink_name}
-          onChange={(e) => setDrinkName(e.target.value)}
-          autoFocus
-          required
-        />
-      </div>
-
-      <div className="mb-3">
-        <label htmlFor="add-description" className="col-form-label">
-          Description:
-        </label>
-        <textarea
-          className="form-control bg-transparent"
-          id="add-description"
-          value={drink_description}
-          onChange={(e) => setDrinkDescription(e.target.value)}
-          required
-        />
-      </div>
-
-      <div className="mb-3">
-        <label htmlFor="add-price" className="col-form-label">
-          Price:
-        </label>
-        <div className="input-group">
-          <span className="input-group-text ">$</span>
-          <input
-            type="number"
-            className="form-control bg-transparent"
-            id="add-price"
-            value={drink_price}
-            onChange={(e) => {
-              setDrinkPrice(e.target.value);
-            }}
+    <>
+      <Form
+        id="addDrinkForm"
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+      >
+        <Form.Group className="mb-3" controlId="add-drink-name">
+          <Form.Label className="col-form-label">Drink Name:</Form.Label>
+          <Form.Control
+            type="text"
+            className="bg-transparent"
+            placeholder="Drink Name"
+            value={drink_name}
+            onChange={(e) => setDrinkName(e.target.value)}
+            autoFocus
             required
           />
-        </div>
-      </div>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid drink name.
+          </Form.Control.Feedback>
+        </Form.Group>
 
-      <div className="modal-footer ">
-        <button
-          type="button"
-          id="cancel-add-drink-btn"
-          className="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          id="add-new-drink-btn"
-          data-bs-dismiss="modal"
-          onClick={() => onAddDrink(drink)}
-        >
-          Add item
-        </button>
-      </div>
-    </form>
+        <Form.Group className="mb-3" controlId="add-description">
+          <Form.Label className="col-form-label">Description:</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            className="bg-transparent"
+            value={drink_description}
+            onChange={(e) => setDrinkDescription(e.target.value)}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid drink description.
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="add-price">
+          <Form.Label htmlFor="add-price" className="col-form-label">
+            Price:
+          </Form.Label>
+          <InputGroup className="mb-3" hasValidation>
+            <InputGroup.Text id="dollarPrepend">$</InputGroup.Text>
+            <Form.Control
+              type="number"
+              className="bg-transparent"
+              value={drink_price}
+              min="0"
+              step=".01"
+              onChange={(e) => setDrinkPrice(e.target.value)}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid drink price.
+            </Form.Control.Feedback>
+          </InputGroup>
+        </Form.Group>
+
+        <Modal.Footer>
+          <Button
+            type="button"
+            id="cancel-add-drink-btn"
+            variant="secondary"
+            onClick={closeModal}
+          >
+            Cancel
+          </Button>
+          <Button type="submit" id="add-new-drink-btn" variant="primary">
+            {" "}
+            Add Item{" "}
+          </Button>
+        </Modal.Footer>
+      </Form>
+    </>
   );
 }
 

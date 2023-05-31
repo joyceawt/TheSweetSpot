@@ -1,9 +1,8 @@
-// model after SubscriptionLogPage.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UtilityBar from "../components/UtilityBar";
 import DrinkList from "../components/DrinkList";
-import Modal from "../components/Modal";
+import ModalComponent from "../components/Modal";
 import AddDrinkForm from "../components/AddDrinkForm";
 
 export const allDrinks = async () => {
@@ -15,6 +14,7 @@ export const DrinksPage = () => {
   const [drinkNamesList, setDrinkNamesList] = useState([]);
   const defaultFilterValue = "Filter By Drink Name";
   const [searchText, setSearchText] = useState(defaultFilterValue, "");
+  const [showAddModal, setShowAddModal] = useState(false);
   const ariaLabel = "Filter By Drink Name";
 
   // load all.
@@ -35,7 +35,6 @@ export const DrinksPage = () => {
         "http://localhost:9124/api/drinks",
         drink
       );
-      debugger;
       if (response) {
         setDrinkList([...drinkList, response.data]);
       }
@@ -83,12 +82,16 @@ export const DrinksPage = () => {
   }, []);
 
   // add button + modal.
-  let Add_Button_Modal = (
-    <Modal
+  let AddDrinkModal = (
+    <ModalComponent
       trigger="add-drink"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
       btnClasses="btn btn-inverse"
-      content={<AddDrinkForm onAddDrink={onAddDrink} />}
+      showModal={showAddModal}
+      setShowModal={setShowAddModal}
+      content={
+        <AddDrinkForm onAddDrink={onAddDrink} setShowModal={setShowAddModal} />
+      }
       title="Add a new Drink"
     />
   );
@@ -96,7 +99,7 @@ export const DrinksPage = () => {
   return (
     <section>
       <UtilityBar
-        addModal={Add_Button_Modal}
+        addModal={AddDrinkModal}
         contentTitle="Drinks"
         renderSearchBar={false}
         searchText={searchText}
