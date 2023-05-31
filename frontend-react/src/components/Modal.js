@@ -1,6 +1,5 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Modal";
+import { Modal, Button } from "react-bootstrap";
 
 function ModalComponent({
   trigger,
@@ -28,7 +27,6 @@ function ModalComponent({
       >
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
-          <Button type="button" className="btn-close" onClick={handleClose} />
         </Modal.Header>
         <Modal.Body>{content}</Modal.Body>
       </Modal>
