@@ -15,7 +15,7 @@ function AddOrderForm({ customerList, onAddOrder, setShowModal }) {
 
   const closeModal = () => setShowModal(false);
 
-  const handleSubmit = (event, order) => {
+  const handleSubmit = (event) => {
     const form = event.currentTarget;
 
     event.preventDefault();
@@ -75,7 +75,7 @@ function AddOrderForm({ customerList, onAddOrder, setShowModal }) {
               type="number"
               className="bg-transparent"
               value={order_total}
-              min="0"
+              min="1"
               step=".01"
               onChange={(e) => setTotal(e.target.value)}
               required
@@ -99,7 +99,7 @@ function AddOrderForm({ customerList, onAddOrder, setShowModal }) {
             type="submit"
             id="add-new-order-btn"
             variant="primary"
-            onClick={(e) => handleSubmit(e, order)}
+            onClick={(e) => handleSubmit(e)}
           >
             {" "}
             Add Item{" "}
