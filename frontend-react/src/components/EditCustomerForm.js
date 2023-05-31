@@ -1,21 +1,36 @@
 import React, { useState } from "react";
+import { Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 
-export const EditCustomerForm = ({ customer, onClickAction, customerList }) => {
+export const EditCustomerForm = ({ customer, onClickAction, setShowModal }) => {
   const [name, setNewName] = useState(customer.name);
   const [phone, setNewPhone] = useState(customer.phone);
   const [customer_id] = useState(customer.customer_id);
+  const [validated, setValidated] = useState(false);
+
+  const closeModal = () => setShowModal(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+
+    event.preventDefault();
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+    editCustomer(customer);
+  };
 
   const editCustomer = async () => {
     try {
-      const response = await axios.put(
-        `http://localhost:9124/api/customers/${customer_id}`,
-        {
-          name: name,
-          phone: phone,
-        }
-      );
+      await axios.put(`http://localhost:9124/api/customers/${customer_id}`, {
+        name: name,
+        phone: phone,
+      });
       onClickAction();
+      closeModal();
     } catch (err) {
       console.log(err);
     }
@@ -23,73 +38,61 @@ export const EditCustomerForm = ({ customer, onClickAction, customerList }) => {
 
   return (
     <>
-      <form className="needs-validation bg-transparent">
-        <div className="mb-3 d-flex">
-          <label htmlFor="customer-ID" className="col-form-label">
-            Customer ID:
-          </label>
-          <input
+      <Form
+        id={"editCustomerForm-" + { customer_id }}
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+      >
+        <Form.Group className="mb-3 d-flex" controlId="customer-ID">
+          <Form.Label className="col-form-label">Customer ID:</Form.Label>
+          <Form.Control
             type="text"
             className="form-control bg-transparent ms-2"
-            id="customer-ID"
-            autoFocus="autoFocus"
+            placeholder="Name"
             style={{ width: "15%" }}
             value={customer_id}
+            required
             disabled
           />
-        </div>
+        </Form.Group>
 
-        <div className="mb-3">
-          <label htmlFor="customer-name" className="col-form-label">
-            Name:
-          </label>
-          <textarea
+        <Form.Group className="mb-3" controlId="customer-name">
+          <Form.Label className="col-form-label">Name:</Form.Label>
+          <Form.Control
             className="form-control bg-transparent"
-            id="customer-name"
-            value={name}
+            type="text"
             onChange={(e) => setNewName(e.target.value)}
+            value={name}
             required
-          ></textarea>
-        </div>
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid name.
+          </Form.Control.Feedback>
+        </Form.Group>
 
-        <div className="mb-3">
-          <label htmlFor="customer-phone" className="col-form-label">
-            Phone number:
-          </label>
-          <div className="input-group">
-            <input
-              type="number"
-              className="form-control bg-transparent"
-              id="customer-phone"
-              value={phone}
-              onChange={(e) => {
-                setNewPhone(e.target.value);
-              }}
-              required
-            />
-          </div>
-        </div>
-
-        <div className="modal-footer ">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            {" "}
-            Cancel{" "}
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-bs-dismiss="modal"
-            onClick={editCustomer}
-          >
-            {" "}
-            Save{" "}
-          </button>
-        </div>
-      </form>
+        <Form.Group className="mb-3" controlId="customer-phone">
+          <Form.Label className="col-form-label">Phone Number:</Form.Label>
+          <Form.Control
+            className="form-control bg-transparent"
+            type="tel"
+            onChange={(e) => setNewPhone(e.target.value)}
+            value={phone}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid phone number.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Modal.Footer>
+          <Button type="button" variant="secondary" onClick={closeModal}>
+            Cancel
+          </Button>
+          <Button type="submit" variant="primary">
+            Save
+          </Button>
+        </Modal.Footer>
+      </Form>
     </>
   );
 };
