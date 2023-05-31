@@ -1,4 +1,5 @@
 import React from "react";
+import Form from "react-bootstrap/Form";
 
 export const Select = ({
   selectOptions,
@@ -25,14 +26,14 @@ export const Select = ({
 
   return (
     <div className="pe-3">
-      <select
+      <Form.Select
         className={className}
         aria-label={ariaLabel}
         onChange={handleChange}
         defaultValue={selectedOption}
         placeholder={defaultFilterValue}
-        id={id}
         name={name}
+        id={id}
       >
         {defaultFilterValue ? <option>{defaultFilterValue}</option> : ""}
         {selectOptions.map((option, i) => (
@@ -40,7 +41,10 @@ export const Select = ({
             {optionDisplay ? option[optionDisplay] : option}
           </option>
         ))}
-      </select>
+      </Form.Select>
+      <Form.Control.Feedback type="invalid">
+        Please select a valid {name}.
+      </Form.Control.Feedback>
     </div>
   );
 };

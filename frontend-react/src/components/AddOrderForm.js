@@ -1,22 +1,44 @@
 import React, { useState } from "react";
 import SelectDropdown from "./SelectDropdown";
+import { Form, Button, Modal, InputGroup } from "react-bootstrap";
 
-function AddOrderForm({ customerList, onAddOrder }) {
+function AddOrderForm({ customerList, onAddOrder, setShowModal }) {
   const [customer_id, setCustomerID] = useState("");
   const [order_date, setOrderDate] = useState("");
   const [order_total, setTotal] = useState("");
+  const [validated, setValidated] = useState(false);
 
   const order = { customer_id, order_date, order_total };
   const handleCustomerSelection = (customer) => {
     setCustomerID(customer);
   };
+
+  const closeModal = () => setShowModal(false);
+
+  const handleSubmit = (event, order) => {
+    const form = event.currentTarget;
+
+    event.preventDefault();
+    setValidated(true);
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    } else {
+      onAddOrder(order);
+      closeModal();
+    }
+  };
+
   return (
     <>
-      <form className="needs-validation">
-        <div className="mb-3">
-          <label htmlFor="add-customer-ID" className="col-form-label">
-            Customer ID:
-          </label>
+      <Form
+        id="addOrderForm"
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+      >
+        <Form.Group className="mb-3" controlId="add-customer-ID">
+          <Form.Label className="col-form-label">Customer ID:</Form.Label>
           <SelectDropdown
             className={"form-select mb-3 bg-transparent"}
             ariaLabel={"customer_id"}
@@ -29,55 +51,61 @@ function AddOrderForm({ customerList, onAddOrder }) {
             defaultFilterValue={"None"}
             selectedOption={setCustomerID}
           ></SelectDropdown>
-        </div>
+        </Form.Group>
 
-        <div className="mb-3">
-          <label htmlFor="add-date" className="col-form-label">
-            Order date:
-          </label>
-          <input
+        <Form.Group className="mb-3" controlId="add-date">
+          <Form.Label className="col-form-label">Order Date:</Form.Label>
+          <Form.Control
             type="datetime-local"
-            className="form-control bg-transparent"
-            id="add-date"
-            value={order_date}
+            className="bg-transparent"
             onChange={(e) => setOrderDate(e.target.value)}
+            value={order_date}
             required
           />
-        </div>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid name.
+          </Form.Control.Feedback>
+        </Form.Group>
 
-        <div className="mb-3">
-          <label htmlFor="add-total-price" className="col-form-label">
-            Total price:
-          </label>
-          <input
-            type="number"
-            className="form-control bg-transparent"
-            id="add-total-price"
-            value={order_total}
-            step="0.01"
-            onChange={(e) => setTotal(e.target.value)}
-            required
-          />
-        </div>
+        <Form.Group className="mb-3" controlId="add-total-price">
+          <Form.Label className="col-form-label">Total price:</Form.Label>
+          <InputGroup className="mb-3" hasValidation>
+            <InputGroup.Text id="dollarPrepend">$</InputGroup.Text>
+            <Form.Control
+              type="number"
+              className="bg-transparent"
+              value={order_total}
+              min="0"
+              step=".01"
+              onChange={(e) => setTotal(e.target.value)}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid drink price.
+            </Form.Control.Feedback>
+          </InputGroup>
+        </Form.Group>
 
-        <div className="modal-footer">
-          <button
+        <Modal.Footer>
+          <Button
             type="button"
-            className="btn btn-secondary"
-            data-bs-dismiss="modal"
+            id="cancel-add-order-btn"
+            variant="secondary"
+            onClick={closeModal}
           >
             Cancel
-          </button>
-          <button
+          </Button>
+          <Button
             type="submit"
-            className="btn btn-primary"
-            data-bs-dismiss="modal"
-            onClick={() => onAddOrder(order)}
+            id="add-new-order-btn"
+            variant="primary"
+            onClick={(e) => handleSubmit(e, order)}
           >
-            Add
-          </button>
-        </div>
-      </form>
+            {" "}
+            Add Item{" "}
+          </Button>
+        </Modal.Footer>
+      </Form>
     </>
   );
 }
