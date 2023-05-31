@@ -9,7 +9,13 @@ import {
   sugarLevelOptions,
 } from "../utils/index";
 
-function EditOrderItemForm({ orderItem, onClickAction, drinkList, orderList }) {
+function EditOrderItemForm({
+  orderItem,
+  onClickAction,
+  drinkList,
+  orderList,
+  setShowModal,
+}) {
   const [order_id, setSelectedOrderID] = useState(orderItem.order_id);
   const [drink_id, setSelectedDrinkID] = useState(orderItem.drink_id);
   const [drink_quantity, setSelectedDrinkQuantity] = useState(
