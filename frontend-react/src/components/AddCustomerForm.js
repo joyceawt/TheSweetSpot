@@ -33,10 +33,11 @@ function AddCustomerForm({ onAddCust, setShowModal }) {
         onSubmit={handleSubmit}
       >
         <Form.Group className="mb-3" controlId="add-name">
-          <Form.Label>Name:</Form.Label>
+          <Form.Label className="col-form-label">Name:</Form.Label>
           <Form.Control
             type="text"
             placeholder="Name"
+            className="bg-transparent"
             onChange={(e) => setName(e.target.value)}
             value={name}
             autoFocus
@@ -48,9 +49,10 @@ function AddCustomerForm({ onAddCust, setShowModal }) {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="add-phone">
-          <Form.Label>Phone number:</Form.Label>
+          <Form.Label className="col-form-label">Phone number:</Form.Label>
           <Form.Control
-            type="tel"
+            type="number"
+            className="bg-transparent"
             placeholder="Phone Number"
             onChange={(e) => setPhone(e.target.value)}
             pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
