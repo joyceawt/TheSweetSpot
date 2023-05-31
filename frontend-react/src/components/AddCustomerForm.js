@@ -1,25 +1,27 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Form, Button, Modal } from "react-bootstrap";
 
 function AddCustomerForm({ onAddCust, setShowModal }) {
   const [name, setName] = useState([]);
   const [phone, setPhone] = useState([]);
   const [validated, setValidated] = useState(false);
+
   const closeModal = () => setShowModal(false);
 
   const customer = { name, phone };
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
+
+    event.preventDefault();
+
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
     }
 
     setValidated(true);
     onAddCust(customer);
-    setShowModal(false);
+    closeModal();
   };
 
   return (
@@ -31,7 +33,7 @@ function AddCustomerForm({ onAddCust, setShowModal }) {
         onSubmit={handleSubmit}
       >
         <Form.Group className="mb-3" controlId="add-name">
-          <Form.Label>Customer Name:</Form.Label>
+          <Form.Label>Name:</Form.Label>
           <Form.Control
             type="text"
             placeholder="Name"
@@ -59,7 +61,7 @@ function AddCustomerForm({ onAddCust, setShowModal }) {
             Please provide a valid phone number.
           </Form.Control.Feedback>
         </Form.Group>
-        <div className="modal-footer">
+        <Modal.Footer>
           <Button type="button" variant="secondary" onClick={closeModal}>
             Cancel
           </Button>
@@ -67,7 +69,7 @@ function AddCustomerForm({ onAddCust, setShowModal }) {
             {" "}
             Add{" "}
           </Button>
-        </div>
+        </Modal.Footer>
       </Form>
     </>
   );
