@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-function AddCustomerForm({ onAddCust }) {
+function AddCustomerForm({ onAddCust, setShowModal }) {
   const [name, setName] = useState([]);
   const [phone, setPhone] = useState([]);
   const [validated, setValidated] = useState(false);
+  const closeModal = () => setShowModal(false);
 
   const customer = { name, phone };
 
@@ -18,6 +19,7 @@ function AddCustomerForm({ onAddCust }) {
 
     setValidated(true);
     onAddCust(customer);
+    setShowModal(false);
   };
 
   return (
@@ -35,6 +37,7 @@ function AddCustomerForm({ onAddCust }) {
             placeholder="Name"
             onChange={(e) => setName(e.target.value)}
             value={name}
+            autoFocus
             required
           />
           <Form.Control.Feedback type="invalid">
@@ -57,10 +60,10 @@ function AddCustomerForm({ onAddCust }) {
           </Form.Control.Feedback>
         </Form.Group>
         <div className="modal-footer">
-          <Button type="button" variant="secondary" data-bs-dismiss="modal">
+          <Button type="button" variant="secondary" onClick={closeModal}>
             Cancel
           </Button>
-          <Button type="submit" variant="primary" data-bs-dismiss="modal">
+          <Button type="submit" variant="primary">
             {" "}
             Add{" "}
           </Button>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Modal from "../components/Modal";
+import ModalComponent from "../components/Modal";
 import AddCustomerForm from "../components/AddCustomerForm";
 import UtilityBar from "../components/UtilityBar";
 import CustomerList from "../components/CustomerList";
@@ -12,6 +12,7 @@ export const allCustomers = async () => {
 export const CustomersPage = () => {
   const [customerList, setCustomerList] = useState([]);
   const [searchText, setSearchText] = useState([]);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const loadAllCustomers = async () => {
     try {
@@ -78,12 +79,19 @@ export const CustomersPage = () => {
 
   // add button + modal.
 
-  let Add_Button_Modal = (
-    <Modal
+  const addModal = (
+    <ModalComponent
       trigger="add-customer"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
       btnClasses="btn btn-inverse"
-      content={<AddCustomerForm onAddCust={onAddCustomer} />}
+      showModal={showAddModal}
+      setShowModal={setShowAddModal}
+      content={
+        <AddCustomerForm
+          onAddCust={onAddCustomer}
+          setShowModal={setShowAddModal}
+        />
+      }
       title="Add a new customer"
     />
   );
@@ -92,7 +100,7 @@ export const CustomersPage = () => {
     <>
       <section>
         <UtilityBar
-          addModal={Add_Button_Modal}
+          addModal={addModal}
           contentTitle="Customer"
           searchText={searchText}
           setSearchText={setSearchText}
