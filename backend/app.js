@@ -111,17 +111,17 @@ app.post("/api/drinks", (req, res) => {
   const drink_price = req.body.drink_price;
 
   const insertAndSelect =
-    "INSERT INTO Drinks (drink_name, drink_description, drink_price) VALUES (?, ?, ?) SELECT * FROM Drinks WHERE drink_id = LAST_INSERT_ID()";
+    "INSERT INTO Drinks (drink_name, drink_description, drink_price) VALUES (?, ?, ?); SELECT * FROM Drinks WHERE drink_id = LAST_INSERT_ID()";
 
   db.pool.query(
     insertAndSelect,
     [drink_name, drink_description, drink_price],
-    (err, result) => {
+    (err, results) => {
       if (err) {
         res.status(500).send("Error creating a drink");
         return;
       }
-      res.json(result[1][0]);
+      res.json(results[1][0]);
     }
   );
 });
@@ -179,10 +179,10 @@ app.post("/api/orders", (req, res) => {
   const order_date = req.body.order_date;
 
   const no_customer_id_query =
-    "INSERT INTO Orders (order_total, order_date) VALUES (?, ?)";
+    "INSERT INTO Orders (order_total, order_date) VALUES (?, ?); SELECT * FROM Orders WHERE order_id = LAST_INSERT_ID()";
 
   const default_query =
-    "INSERT INTO Orders (customer_id, order_total, order_date) VALUES (?, ?, ?)";
+    "INSERT INTO Orders (customer_id, order_total, order_date) VALUES (?, ?, ?); SELECT * FROM Orders WHERE order_id = LAST_INSERT_ID()";
 
   const query = customer_id == null ? no_customer_id_query : default_query;
 
@@ -194,8 +194,9 @@ app.post("/api/orders", (req, res) => {
   db.pool.query(query, query_array, (err, result) => {
     if (err) {
       res.status(500).send("Error creating an order");
+      return;
     }
-    res.json(result);
+    res.json(result[1][0]);
   });
 });
 
@@ -268,7 +269,7 @@ app.post("/api/order_items", (req, res) => {
   const drink_quantity = req.body.drink_quantity;
 
   db.pool.query(
-    "INSERT INTO OrderItems (order_id, drink_id, ice_level, sugar_level, dairy_option, boba_option, drink_quantity) VALUES (?, ?, ?, ?, ?, ?, ?)",
+    "INSERT INTO OrderItems (order_id, drink_id, ice_level, sugar_level, dairy_option, boba_option, drink_quantity) VALUES (?, ?, ?, ?, ?, ?, ?); SELECT * FROM OrderItems WHERE order_items_id = LAST_INSERT_ID()",
     [
       order_id,
       drink_id,
@@ -283,7 +284,7 @@ app.post("/api/order_items", (req, res) => {
         res.status(500).send("Error updating order items");
         return;
       }
-      res.json(result);
+      res.json(result[1][0]);
     }
   );
 });
