@@ -5,17 +5,19 @@ import {
   iceLevelOptions,
   sugarLevelOptions,
 } from "../utils/index";
+import { Form, Button, Modal, InputGroup } from "react-bootstrap";
 import RadioButtonGroup from "./RadioButtonGroup";
 import SelectDropdown from "./SelectDropdown";
 
-function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
+function AddOrderItemForm({ drinkList, onAddOrderItem, setShowModal }) {
   const [order_id, setOrderID] = useState("");
   const [drink_id, setDrinkID] = useState("1");
-  const [drink_quantity, setDrinkQuantity] = useState("");
+  const [drink_quantity, setDrinkQuantity] = useState("1");
   const [ice_level, setIceLevel] = useState("1");
   const [sugar_level, setSugarLevel] = useState("1");
   const [dairy_option, setDairyOption] = useState("1");
   const [boba_option, setBobaOption] = useState("1");
+  const [validated, setValidated] = useState(false);
 
   const order_item = {
     order_id,
@@ -27,31 +29,49 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
     boba_option,
   };
 
+  const closeModal = () => setShowModal(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+
+    event.preventDefault();
+    setValidated(true);
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    } else {
+      onAddOrderItem(order_item);
+      closeModal();
+    }
+  };
+
   return (
     <>
-      <form className="needs-validation">
-        <div className="mb-3">
-          <label
-            id="customer_id"
-            htmlFor="addItem-customer-ID"
-            className="col-form-label"
-          >
-            Order ID:
-          </label>
-          <input
+      <Form
+        id="addOrderItem"
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+      >
+        <Form.Group className="mb-3" controlId="addItem-customer-ID">
+          <Form.Label className="col-form-label">Order ID:</Form.Label>
+          <Form.Control
             type="number"
-            className="form-control bg-transparent"
-            id="addItem-customer-ID"
+            name="addItem-customer-ID"
+            className="bg-transparent"
             value={order_id}
+            min="1"
             onChange={(e) => setOrderID(e.target.value)}
             required
+            autoFocus
           />
-        </div>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid order ID.
+          </Form.Control.Feedback>
+        </Form.Group>
 
-        <div className="mb-3">
-          <label htmlFor="add-drink-OI" className="col-form-label">
-            Drink ID:
-          </label>
+        <Form.Group className="mb-3" controlId="add-drink-OI">
+          <Form.Label className="col-form-label">Drink ID:</Form.Label>
           <SelectDropdown
             className={"form-select mb-3 bg-transparent"}
             ariaLabel={"drink_ID"}
@@ -63,22 +83,24 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
             optionDisplay={"drink_name"}
             selectedOption={drink_id}
           ></SelectDropdown>
-        </div>
+        </Form.Group>
 
-        <div className="mb-3">
-          <label htmlFor="addItem-drink-qty" className="col-form-label">
-            Drink Qty:
-          </label>
-          <input
+        <Form.Group className="mb-3" controlId="addItem-drink-qty">
+          <Form.Label className="col-form-label">Drink Qty:</Form.Label>
+          <Form.Control
             type="number"
             name="addItem-drink-qty"
-            className="form-control bg-transparent"
-            id="addItem-drink-qty"
+            className="bg-transparent"
+            placeholder="Drink Name"
             value={drink_quantity}
+            min="1"
             onChange={(e) => setDrinkQuantity(e.target.value)}
             required
           />
-        </div>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid drink quantity.
+          </Form.Control.Feedback>
+        </Form.Group>
 
         <RadioButtonGroup
           groupID={"iceLevelSelection"}
@@ -116,26 +138,26 @@ function AddOrderItemForm({ drinkList, orderList, onAddOrderItem }) {
           selectedOption={boba_option}
         />
 
-        <div className="modal-footer">
-          <button
+        <Modal.Footer>
+          <Button
             type="button"
             id="cancel-add-order-item-btn"
-            className="btn btn-secondary"
-            data-bs-dismiss="modal"
+            variant="secondary"
+            onClick={closeModal}
           >
             Cancel
-          </button>
-          <button
+          </Button>
+          <Button
             type="submit"
             id="add-order-item-btn"
-            className="btn btn-primary"
-            data-bs-dismiss="modal"
-            onClick={() => onAddOrderItem(order_item)}
+            variant="primary"
+            onClick={(e) => handleSubmit(e)}
           >
-            Add
-          </button>
-        </div>
-      </form>
+            {" "}
+            Add{" "}
+          </Button>
+        </Modal.Footer>
+      </Form>
     </>
   );
 }
