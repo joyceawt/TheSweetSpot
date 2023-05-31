@@ -1,60 +1,71 @@
 import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function AddCustomerForm({ onAddCust }) {
   const [name, setName] = useState([]);
   const [phone, setPhone] = useState([]);
+  const [validated, setValidated] = useState(false);
 
   const customer = { name, phone };
 
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+    onAddCust(customer);
+  };
+
   return (
     <>
-      <form className="needs-validation">
-        <div className="mb-3">
-          <label htmlFor="add-name" className="col-form-label">
-            Customer Name:
-          </label>
-          <input
-            className="form-control bg-transparent"
-            id="add-name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="add-phone" className="col-form-label">
-            Phone number
-          </label>
-          <input
+      <Form
+        id="addCustomerForm"
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+      >
+        <Form.Group className="mb-3" controlId="add-name">
+          <Form.Label>Customer Name:</Form.Label>
+          <Form.Control
             type="text"
-            className="form-control bg-transparent"
-            id="add-phone"
-            value={phone}
-            onChange={(e) => {
-              setPhone(e.target.value);
-            }}
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             required
           />
-        </div>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid name.
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="add-phone">
+          <Form.Label>Phone number:</Form.Label>
+          <Form.Control
+            type="tel"
+            placeholder="Phone Number"
+            onChange={(e) => setPhone(e.target.value)}
+            pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+            value={phone}
+            required
+          />
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid phone number.
+          </Form.Control.Feedback>
+        </Form.Group>
         <div className="modal-footer">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
+          <Button type="button" variant="secondary" data-bs-dismiss="modal">
             Cancel
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-bs-dismiss="modal"
-            onClick={() => onAddCust(customer)}
-          >
-            Add
-          </button>
+          </Button>
+          <Button type="submit" variant="primary" data-bs-dismiss="modal">
+            {" "}
+            Add{" "}
+          </Button>
         </div>
-      </form>
+      </Form>
     </>
   );
 }
