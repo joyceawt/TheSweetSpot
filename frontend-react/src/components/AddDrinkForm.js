@@ -15,11 +15,11 @@ function AddDrinkForm({ onAddDrink, setShowModal }) {
     const form = event.currentTarget;
 
     event.preventDefault();
+    setValidated(true);
 
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      setValidated(true);
       onAddDrink(drink);
       closeModal();
     }
@@ -65,9 +65,7 @@ function AddDrinkForm({ onAddDrink, setShowModal }) {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="add-price">
-          <Form.Label htmlFor="add-price" className="col-form-label">
-            Price:
-          </Form.Label>
+          <Form.Label className="col-form-label">Price:</Form.Label>
           <InputGroup className="mb-3" hasValidation>
             <InputGroup.Text id="dollarPrepend">$</InputGroup.Text>
             <Form.Control

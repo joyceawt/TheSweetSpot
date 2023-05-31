@@ -85,8 +85,14 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
             btnClasses="mt-3 btn btn-light"
             showModal={showDeleteModal}
             setShowModal={setShowDeleteModal}
-            content={<DeleteConfirm actionOnClick={onDeleteDrink} id={id} />}
-            title="Delete Entry?"
+            content={
+              <DeleteConfirm
+                actionOnClick={onDeleteDrink}
+                id={id}
+                setShowModal={setShowDeleteModal}
+              />
+            }
+            title="Delete Drink?"
           />
         </div>
       </article>

@@ -22,11 +22,11 @@ export const EditDrinkForm = ({ drinkItem, onClickAction, setShowModal }) => {
     const form = event.currentTarget;
 
     event.preventDefault();
+    setValidated(true);
 
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      setValidated(true);
       editDrink();
     }
   };

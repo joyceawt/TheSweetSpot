@@ -53,7 +53,7 @@ function Customer({ customer, onEditCust, onDeleteCust }) {
                 setShowModal={setShowDeleteModal}
               />
             }
-            title="Delete Entry?"
+            title="Delete Customer?"
           />
         </td>
       </tr>

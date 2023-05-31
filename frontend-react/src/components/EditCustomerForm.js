@@ -14,11 +14,11 @@ export const EditCustomerForm = ({ customer, onClickAction, setShowModal }) => {
     const form = event.currentTarget;
 
     event.preventDefault();
+    setValidated(true);
 
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      setValidated(true);
       editCustomer();
     }
   };
