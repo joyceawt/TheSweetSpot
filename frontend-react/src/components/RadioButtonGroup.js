@@ -1,5 +1,6 @@
 import React from "react";
 import RadioButton from "./RadioButton";
+import Form from "react-bootstrap/form";
 
 export const RadioButtonGroup = ({
   label,
@@ -16,10 +17,10 @@ export const RadioButtonGroup = ({
       : `${groupName}-${option.id}`;
   };
   return (
-    <div className="radio-button-group mb-3 pt-2">
-      <p className="col-form-label w-25" onChange={setSelectedOption}>
+    <Form.Group className="radio-button-group mb-3 pt-2" controlId={groupID}>
+      <Form.Label className="col-form-label w-25" onChange={setSelectedOption}>
         {label}
-      </p>
+      </Form.Label>
       <div role="radio-group" id={groupID} className="btn-group">
         {radioOptions.map((option, i) => (
           <RadioButton
@@ -33,7 +34,7 @@ export const RadioButtonGroup = ({
           />
         ))}
       </div>
-    </div>
+    </Form.Group>
   );
 };
 
