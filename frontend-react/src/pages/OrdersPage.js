@@ -196,7 +196,6 @@ function OrdersPage() {
       content={
         <AddOrderItemForm
           drinkList={drinkList}
-          orderList={orderList}
           setShowModal={setShowAddOrderItemModal}
           onAddOrderItem={onAddOrderItem}
         />
