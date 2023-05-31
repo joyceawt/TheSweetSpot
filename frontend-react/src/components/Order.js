@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "../components/Modal";
+import ModalComponent from "../components/Modal";
 import DeleteConfirm from "./DeleteConfirm";
 
 import EditOrderForm from "./EditOrderForm";
@@ -9,7 +9,8 @@ function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
   let modalEdit = "edit-entry-" + order.order_id;
   let modalDelete = "delete-confirm-" + order.order_id;
 
-  // grab
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   return (
     <>
@@ -26,31 +27,37 @@ function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
         <td>{order.order_date}</td>
         <td>{order.order_total}</td>
         <td>
-          <Modal
+          <ModalComponent
             trigger={modalEdit}
             buttonName={<i className="bi bi-pencil-square fs-5"></i>}
             btnClasses="btn btn-light mx-1"
+            showModal={showEditModal}
+            setShowModal={setShowEditModal}
             content={
               <EditOrderForm
                 order={order}
                 onClickAction={onEditOrder}
                 customerList={customerList}
+                setShowModal={setShowEditModal}
               />
             }
             title="Edit Order"
           />
 
-          <Modal
+          <ModalComponent
             trigger={modalDelete}
             buttonName={<i className="bi bi-trash fs-5"></i>}
             btnClasses="btn btn-light mx-1"
+            showModal={showDeleteModal}
+            setShowModal={setShowDeleteModal}
             content={
               <DeleteConfirm
                 actionOnClick={onDeleteOrder}
                 id={order.order_id}
+                setShowModal={setShowDeleteModal}
               />
             }
-            title="Delete Entry?"
+            title="Delete Order?"
           />
         </td>
       </tr>

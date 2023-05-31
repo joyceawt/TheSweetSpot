@@ -3,7 +3,7 @@ import UtilityBar from "../components/UtilityBar";
 import axios from "axios";
 import { allCustomers } from "./CustomersPage";
 import { allDrinks } from "./DrinksPage";
-import Modal from "../components/Modal";
+import ModalComponent from "../components/Modal";
 import AddOrderForm from "../components/AddOrderForm";
 import AddOrderItemForm from "../components/AddOrderItemForm";
 import OrderList from "../components/OrderList";
@@ -17,6 +17,9 @@ function OrdersPage() {
   // //for loading pre-loaded drop down options
   const [customerList, setCustomerList] = useState([]);
   const [drinkList, setDrinkList] = useState([]);
+
+  const [showAddOrderModal, setShowAddOrderModal] = useState(false);
+  const [showAddOrderItemModal, setShowAddOrderItemModal] = useState(false);
 
   // LOAD ORDERS
   const loadAllOrders = async () => {
@@ -71,9 +74,6 @@ function OrdersPage() {
     if (searchText.length > 0) {
       const filteredOrders = orderList.filter((order) => {
         return order.order_id.toString().includes(searchText);
-        // order.customer_id.toString().includes(searchText) ||
-        // order.order_date.toString().includes(searchText) ||
-        // order.order_total.toString().includes(searchText)
       });
       return filteredOrders;
     } else {
@@ -167,28 +167,37 @@ function OrdersPage() {
   }, []);
 
   let OrderModal = (
-    <Modal
+    <ModalComponent
       key="AddOrder"
       trigger="add-order"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
       btnClasses="btn btn-inverse"
+      showModal={showAddOrderModal}
+      setShowModal={setShowAddOrderModal}
       content={
-        <AddOrderForm customerList={customerList} onAddOrder={onAddOrder} />
+        <AddOrderForm
+          customerList={customerList}
+          setShowModal={setShowAddOrderModal}
+          onAddOrder={onAddOrder}
+        />
       }
       title="Add a new Order"
     />
   );
 
   let OrderItemModal = (
-    <Modal
+    <ModalComponent
       key="AddOrderItem"
       trigger="add-order-item"
       buttonName={<i className="bi bi-plus-lg fs-4" />}
       btnClasses="btn btn-inverse"
+      showModal={showAddOrderItemModal}
+      setShowModal={setShowAddOrderItemModal}
       content={
         <AddOrderItemForm
           drinkList={drinkList}
           orderList={orderList}
+          setShowModal={setShowAddOrderItemModal}
           onAddOrderItem={onAddOrderItem}
         />
       }

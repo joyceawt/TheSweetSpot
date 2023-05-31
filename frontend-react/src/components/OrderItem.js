@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "../components/Modal";
+import ModalComponent from "../components/Modal";
 import DeleteConfirm from "./DeleteConfirm";
 
 import EditOrderItemForm from "./EditOrderItemForm";
@@ -14,6 +14,8 @@ function OrderItem({
   // unique IDs.
   let modalEdit = "edit-entry-item-" + orderItem.order_items_id;
   let modalDelete = "delete-item-confirm-" + orderItem.order_items_id;
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   return (
     <>
@@ -34,29 +36,35 @@ function OrderItem({
         <td>{orderItem.dairy_option == 1 ? "Yes" : "No"}</td>
         <td>{orderItem.boba_option == 1 ? "Yes" : "No"}</td>
         <td>
-          <Modal
+          <ModalComponent
             trigger={modalEdit}
             buttonName={<i className="bi bi-pencil-square fs-5"></i>}
             btnClasses="btn btn-light mx-1"
+            showModal={showEditModal}
+            setShowModal={setShowEditModal}
             content={
               <EditOrderItemForm
                 orderItem={orderItem}
                 onClickAction={onEditOrderItem}
                 drinkList={drinkList}
                 orderList={orderList}
+                setShowModal={setShowEditModal}
               />
             }
             title="Edit OrderItem"
           />
 
-          <Modal
+          <ModalComponent
             trigger={modalDelete}
             buttonName={<i className="bi bi-trash fs-5"></i>}
             btnClasses="btn btn-light mx-1"
+            showModal={showDeleteModal}
+            setShowModal={setShowDeleteModal}
             content={
               <DeleteConfirm
                 actionOnClick={onDeleteOrderItem}
                 id={orderItem.order_items_id}
+                setShowModal={setShowDeleteModal}
               />
             }
             title="Delete Entry?"
