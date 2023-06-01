@@ -24,6 +24,7 @@ function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
         </td>
         <td>{order.order_id}</td>
         <td>{order.customer_id}</td>
+        <td>{order.name}</td>
         <td>{order.order_date}</td>
         <td>{order.order_total}</td>
         <td>

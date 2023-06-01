@@ -13,6 +13,7 @@ function OrderList({ orderList, onEditOrder, onDeleteOrder, customerList }) {
               <th></th>
               <th>OrderID</th>
               <th>CustomerID</th>
+              <th>Customer Name</th>
               <th>Order Date</th>
               <th>Total</th>
               <th>Option</th>

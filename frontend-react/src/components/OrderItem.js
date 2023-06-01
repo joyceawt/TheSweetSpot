@@ -30,6 +30,7 @@ function OrderItem({
         <td>{orderItem.order_items_id}</td>
         <td>{orderItem.order_id}</td>
         <td>{orderItem.drink_id}</td>
+        <td>{orderItem.drink_name}</td>
         <td>{orderItem.drink_quantity}</td>
         <td>{orderItem.ice_level.toFixed(2)}</td>
         <td>{orderItem.sugar_level.toFixed(2)}</td>

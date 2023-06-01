@@ -20,6 +20,7 @@ function OrderList({
               <th>order_items_id</th>
               <th>Order ID</th>
               <th>Drink ID</th>
+              <th>Drink Name</th>
               <th>Drink Qty</th>
               <th>Ice level</th>
               <th>Sugar level</th>

@@ -170,13 +170,16 @@ app.delete("/api/drinks/:id", (req, res) => {
 
 // Get all Orders
 app.get("/api/orders", (req, res) => {
-  db.pool.query("SELECT * FROM Orders", (err, results) => {
-    if (err) {
-      res.status(500).send("Error fetching orders");
-      return;
+  db.pool.query(
+    "SELECT * FROM Orders INNER JOIN Customers ON Orders.customer_id = Customers.customer_id;",
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error fetching orders");
+        return;
+      }
+      res.json(results);
     }
-    res.json(results);
-  });
+  );
 });
 
 //for statistics page, counts total customers
@@ -262,13 +265,16 @@ app.delete("/api/orders/:id", (req, res) => {
 
 // Get all OrderItems
 app.get("/api/order_items", (req, res) => {
-  db.pool.query("SELECT * FROM OrderItems", (err, results) => {
-    if (err) {
-      res.status(500).send("Error fetching order items");
-      return;
+  db.pool.query(
+    "SELECT * FROM OrderItems INNER JOIN Drinks ON OrderItems.drink_id = Drinks.drink_id",
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error fetching order items");
+        return;
+      }
+      res.json(results);
     }
-    res.json(results);
-  });
+  );
 });
 
 // update orderItem by ID
