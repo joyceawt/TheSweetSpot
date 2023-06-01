@@ -123,12 +123,7 @@ export const EditDrinkForm = ({ drinkItem, onClickAction, setShowModal }) => {
           >
             Cancel
           </Button>
-          <Button
-            type="submit"
-            id={drinkBtnId}
-            variant="primary"
-            onClick={handleSubmit}
-          >
+          <Button type="submit" id={drinkBtnId} variant="primary">
             {" "}
             Save{" "}
           </Button>

@@ -92,7 +92,7 @@ export const EditCustomerForm = ({ customer, onClickAction, setShowModal }) => {
           <Button type="button" variant="secondary" onClick={closeModal}>
             Cancel
           </Button>
-          <Button type="submit" variant="primary" onClick={handleSubmit}>
+          <Button type="submit" variant="primary">
             Save
           </Button>
         </Modal.Footer>

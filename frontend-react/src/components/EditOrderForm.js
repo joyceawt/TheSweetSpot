@@ -139,7 +139,6 @@ function EditOrderForm({ order, onClickAction, customerList, setShowModal }) {
             type="submit"
             id={"edit-order-btn-" + order_id}
             variant="primary"
-            onClick={(e) => handleSubmit(e)}
           >
             {" "}
             Save{" "}

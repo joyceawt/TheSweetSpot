@@ -92,12 +92,7 @@ function AddDrinkForm({ onAddDrink, setShowModal }) {
           >
             Cancel
           </Button>
-          <Button
-            type="submit"
-            id="add-new-drink-btn"
-            variant="primary"
-            onClick={handleSubmit}
-          >
+          <Button type="submit" id="add-new-drink-btn" variant="primary">
             {" "}
             Add Item{" "}
           </Button>

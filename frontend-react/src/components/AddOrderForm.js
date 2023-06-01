@@ -95,12 +95,7 @@ function AddOrderForm({ customerList, onAddOrder, setShowModal }) {
           >
             Cancel
           </Button>
-          <Button
-            type="submit"
-            id="add-new-order-btn"
-            variant="primary"
-            onClick={(e) => handleSubmit(e)}
-          >
+          <Button type="submit" id="add-new-order-btn" variant="primary">
             {" "}
             Add Item{" "}
           </Button>

@@ -5,7 +5,7 @@ import {
   iceLevelOptions,
   sugarLevelOptions,
 } from "../utils/index";
-import { Form, Button, Modal, InputGroup } from "react-bootstrap";
+import { Form, Button, Modal } from "react-bootstrap";
 import RadioButtonGroup from "./RadioButtonGroup";
 import SelectDropdown from "./SelectDropdown";
 
@@ -147,12 +147,7 @@ function AddOrderItemForm({ drinkList, onAddOrderItem, setShowModal }) {
           >
             Cancel
           </Button>
-          <Button
-            type="submit"
-            id="add-order-item-btn"
-            variant="primary"
-            onClick={(e) => handleSubmit(e)}
-          >
+          <Button type="submit" id="add-order-item-btn" variant="primary">
             {" "}
             Add{" "}
           </Button>
