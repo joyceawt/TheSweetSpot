@@ -9,6 +9,7 @@ import {
   AddOrderItemForm,
   OrderList,
   OrderItemList,
+  AlertError,
 } from "../components/index";
 
 function OrdersPage() {
@@ -22,6 +23,8 @@ function OrdersPage() {
 
   const [showAddOrderModal, setShowAddOrderModal] = useState(false);
   const [showAddOrderItemModal, setShowAddOrderItemModal] = useState(false);
+  const [errorContent, setErrorContent] = useState({});
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   // LOAD ORDERS
   const loadAllOrders = async () => {
@@ -105,10 +108,12 @@ function OrdersPage() {
         setOrderList([...orderList, response.data]);
       }
     } catch (err) {
-      const heading =
-        "Oops! Something went wrong and we couldn't add your order.";
-      const message = err;
-      return;
+      return {
+        error: {
+          heading: "Oops! Something went wrong and we couldn't add your order.",
+          message: err,
+        },
+      };
     }
   };
 
@@ -179,11 +184,17 @@ function OrdersPage() {
       btnClasses="btn btn-inverse"
       showModal={showAddOrderModal}
       setShowModal={setShowAddOrderModal}
+      showErrorAlert={showErrorAlert}
+      errorContent={
+        <AlertError error={errorContent} setShow={setShowErrorAlert} />
+      }
       content={
         <AddOrderForm
           customerList={customerList}
           setShowModal={setShowAddOrderModal}
           onAddOrder={onAddOrder}
+          setShowErrorAlert={setShowErrorAlert}
+          setErrorContent={setErrorContent}
         />
       }
       title="Add a new Order"

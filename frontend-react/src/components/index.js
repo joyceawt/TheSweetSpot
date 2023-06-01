@@ -2,7 +2,7 @@ import AddCustomerForm from "./AddCustomerForm";
 import AddDrinkForm from "./AddDrinkForm";
 import AddOrderForm from "./AddOrderForm";
 import AddOrderItemForm from "./AddOrderItemForm";
-import AlertModal from "./AlertModal";
+import AlertError from "./AlertError";
 import Customer from "./Customer";
 import CustomerList from "./CustomerList";
 import DeleteConfirm from "./DeleteConfirm";
@@ -33,7 +33,7 @@ export {
   AddDrinkForm,
   AddOrderForm,
   AddOrderItemForm,
-  AlertModal,
+  AlertError,
   Customer,
   CustomerList,
   DeleteConfirm,

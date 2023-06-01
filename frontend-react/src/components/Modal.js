@@ -10,9 +10,12 @@ function ModalComponent({
   showModal,
   setShowModal,
   contentClassName = "bg-white",
+  showErrorAlert = false,
+  errorContent = null,
 }) {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+  const displayContent = () => (showErrorAlert ? errorContent : content);
 
   return (
     <>
@@ -29,7 +32,7 @@ function ModalComponent({
         <Modal.Header closeButton>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{content}</Modal.Body>
+        <Modal.Body>{displayContent()}</Modal.Body>
       </Modal>
     </>
   );

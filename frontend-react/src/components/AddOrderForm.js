@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import SelectDropdown from "./SelectDropdown";
+import { SelectDropdown } from "./index";
 import { Form, Button, Modal, InputGroup } from "react-bootstrap";
 
-function AddOrderForm({ customerList, onAddOrder, setShowModal }) {
+function AddOrderForm({
+  customerList,
+  onAddOrder,
+  setShowModal,
+  setShowErrorAlert,
+  setErrorContent,
+}) {
   const [customer_id, setCustomerID] = useState("");
   const [order_date, setOrderDate] = useState("");
   const [order_total, setTotal] = useState("");
@@ -15,7 +21,7 @@ function AddOrderForm({ customerList, onAddOrder, setShowModal }) {
 
   const closeModal = () => setShowModal(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
 
     event.preventDefault();
@@ -24,8 +30,14 @@ function AddOrderForm({ customerList, onAddOrder, setShowModal }) {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      onAddOrder(order);
-      closeModal();
+      const resp = await onAddOrder(order);
+
+      if (resp.error) {
+        setErrorContent(resp.error);
+        setShowErrorAlert(true);
+      } else {
+        closeModal();
+      }
     }
   };
 
