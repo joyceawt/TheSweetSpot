@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import RadioButtonGroup from "./RadioButtonGroup";
-import SelectDropdown from "./SelectDropdown";
 import axios from "axios";
+import { Form, Button, Modal } from "react-bootstrap";
 import {
   bobaOptions,
   dairyOptions,
   iceLevelOptions,
   sugarLevelOptions,
 } from "../utils/index";
+import { RadioButtonGroup, SelectDropdown } from "./index";
 
 function EditOrderItemForm({
   orderItem,
@@ -28,6 +28,22 @@ function EditOrderItemForm({
   );
   const [boba_option, setSelectedBobaOption] = useState(orderItem.boba_option);
   const [order_items_id] = useState(orderItem.order_items_id);
+  const [validated, setValidated] = useState(false);
+
+  const closeModal = () => setShowModal(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+
+    event.preventDefault();
+    setValidated(true);
+
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    } else {
+      editOrderItem();
+    }
+  };
 
   const editOrderItem = async () => {
     try {
@@ -44,6 +60,7 @@ function EditOrderItemForm({
         }
       );
       onClickAction();
+      closeModal();
     } catch (err) {
       console.log(err);
     }
@@ -59,11 +76,17 @@ function EditOrderItemForm({
 
   return (
     <>
-      <form className="needs-validation">
-        <div className="mb-3">
-          <label htmlFor="addItem-customer-ID" className="col-form-label">
-            Order ID:
-          </label>
+      <Form
+        id={"editOrderItem-" + order_items_id}
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+      >
+        <Form.Group
+          className="mb-3"
+          controlId={"editItem-customer-ID-" + order_items_id}
+        >
+          <Form.Label className="col-form-label">Order ID:</Form.Label>
           <SelectDropdown
             className={"form-select mb-3 bg-transparent"}
             ariaLabel={"order_ID"}
@@ -75,12 +98,13 @@ function EditOrderItemForm({
             optionDisplay={"order_id"}
             selectedOption={order_id}
           ></SelectDropdown>
-        </div>
+        </Form.Group>
 
-        <div className="mb-3">
-          <label htmlFor="addItem-customer-ID" className="col-form-label">
-            Drink ID:
-          </label>
+        <Form.Group
+          className="mb-3"
+          controlId={"edit-drink-OI-" + order_items_id}
+        >
+          <Form.Label className="col-form-label">Drink ID:</Form.Label>
           <SelectDropdown
             className={"form-select mb-3 bg-transparent"}
             ariaLabel={"drink_ID"}
@@ -92,21 +116,27 @@ function EditOrderItemForm({
             optionDisplay={"drink_name"}
             selectedOption={drink_id}
           ></SelectDropdown>
-        </div>
+        </Form.Group>
 
-        <div className="mb-3">
-          <label htmlFor="editIODrinkQty" className="col-form-label">
-            Drink Qty:
-          </label>
-          <input
+        <Form.Group
+          className="mb-3"
+          controlId={"edit-OI-drink-qty" + order_items_id}
+        >
+          <Form.Label className="col-form-label">Drink Qty:</Form.Label>
+          <Form.Control
             type="number"
-            className="form-control bg-transparent"
-            id="editIODrinkQty"
+            name="edit-Item-drink-qty"
+            className="bg-transparent"
+            placeholder="Drink Name"
             value={drink_quantity}
+            min="1"
             onChange={(e) => setSelectedDrinkQuantity(e.target.value)}
             required
           />
-        </div>
+          <Form.Control.Feedback type="invalid">
+            Please provide a valid drink quantity.
+          </Form.Control.Feedback>
+        </Form.Group>
 
         <RadioButtonGroup
           groupID={"editIceLevelSelection"}
@@ -148,27 +178,21 @@ function EditOrderItemForm({
           selectedOption={boba_option}
         />
 
-        <div className="modal-footer">
-          <button
+        <Modal.Footer>
+          <Button
             type="button"
-            className="btn btn-secondary"
-            data-bs-dismiss="modal"
             id="cancel-edit-order-item-btn"
+            variant="secondary"
+            onClick={closeModal}
           >
             Cancel
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-bs-dismiss="modal"
-            onClick={editOrderItem}
-            id="save-edit-order-item-btn"
-          >
+          </Button>
+          <Button type="submit" id="save-edit-order-item-btn" variant="primary">
             {" "}
             Save{" "}
-          </button>
-        </div>
-      </form>
+          </Button>
+        </Modal.Footer>
+      </Form>
     </>
   );
 }

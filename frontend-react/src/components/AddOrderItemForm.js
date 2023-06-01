@@ -1,13 +1,12 @@
 import React, { useState } from "react";
+import { Form, Button, Modal } from "react-bootstrap";
 import {
   bobaOptions,
   dairyOptions,
   iceLevelOptions,
   sugarLevelOptions,
 } from "../utils/index";
-import { Form, Button, Modal } from "react-bootstrap";
-import RadioButtonGroup from "./RadioButtonGroup";
-import SelectDropdown from "./SelectDropdown";
+import { RadioButtonGroup, SelectDropdown } from "./index";
 
 function AddOrderItemForm({ drinkList, onAddOrderItem, setShowModal }) {
   const [order_id, setOrderID] = useState("");
@@ -53,11 +52,11 @@ function AddOrderItemForm({ drinkList, onAddOrderItem, setShowModal }) {
         validated={validated}
         onSubmit={handleSubmit}
       >
-        <Form.Group className="mb-3" controlId="addItem-customer-ID">
+        <Form.Group className="mb-3" controlId="addItem-order-ID">
           <Form.Label className="col-form-label">Order ID:</Form.Label>
           <Form.Control
             type="number"
-            name="addItem-customer-ID"
+            name="addItem-order-ID"
             className="bg-transparent"
             value={order_id}
             min="1"
