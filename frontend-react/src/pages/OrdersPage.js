@@ -3,11 +3,13 @@ import UtilityBar from "../components/UtilityBar";
 import axios from "axios";
 import { allCustomers } from "./CustomersPage";
 import { allDrinks } from "./DrinksPage";
-import ModalComponent from "../components/Modal";
-import AddOrderForm from "../components/AddOrderForm";
-import AddOrderItemForm from "../components/AddOrderItemForm";
-import OrderList from "../components/OrderList";
-import OrderItemList from "../components/OrderItemList";
+import {
+  ModalComponent,
+  AddOrderForm,
+  AddOrderItemForm,
+  OrderList,
+  OrderItemList,
+} from "../components/index";
 
 function OrdersPage() {
   const [orderList, setOrderList] = useState([]);
@@ -103,7 +105,10 @@ function OrdersPage() {
         setOrderList([...orderList, response.data]);
       }
     } catch (err) {
-      console.log(err);
+      const heading =
+        "Oops! Something went wrong and we couldn't add your order.";
+      const message = err;
+      return;
     }
   };
 

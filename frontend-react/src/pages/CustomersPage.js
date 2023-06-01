@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ModalComponent from "../components/Modal";
-import AddCustomerForm from "../components/AddCustomerForm";
-import UtilityBar from "../components/UtilityBar";
-import CustomerList from "../components/CustomerList";
+import {
+  ModalComponent,
+  AddCustomerForm,
+  UtilityBar,
+  CustomerList,
+} from "../components/index";
 
 export const allCustomers = async () => {
   return await axios.get("http://localhost:9124/api/customers");

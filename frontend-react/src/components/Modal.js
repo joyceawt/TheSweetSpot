@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 function ModalComponent({
   trigger,
@@ -9,6 +9,7 @@ function ModalComponent({
   title,
   showModal,
   setShowModal,
+  contentClassName = "bg-white",
 }) {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -19,7 +20,7 @@ function ModalComponent({
         {buttonName}
       </button>
       <Modal
-        contentClassName="bg-white"
+        contentClassName={contentClassName}
         size="lg"
         show={showModal}
         id={trigger}

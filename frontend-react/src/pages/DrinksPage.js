@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import UtilityBar from "../components/UtilityBar";
-import DrinkList from "../components/DrinkList";
-import ModalComponent from "../components/Modal";
-import AddDrinkForm from "../components/AddDrinkForm";
+import {
+  UtilityBar,
+  DrinkList,
+  ModalComponent,
+  AddDrinkForm,
+} from "../components/index";
 
 export const allDrinks = async () => {
   return await axios.get("http://localhost:9124/api/drinks");
