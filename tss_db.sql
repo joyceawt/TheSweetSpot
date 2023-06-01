@@ -43,7 +43,9 @@ CREATE TABLE
     order_date datetime NOT NULL,
     order_total decimal(10, 2) NOT NULL,
     PRIMARY KEY (order_id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE SET NULL
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE
+    SET
+      NULL
   );
 
 
@@ -77,8 +79,8 @@ CREATE TABLE
     order_id int NOT NULL,
     drink_id int NOT NULL,
     drink_quantity int NOT NULL,
-    ice_level decimal(2, 1) not NULL,
-    sugar_level decimal (2, 1) not NULL,
+    ice_level decimal(2, 2) not NULL,
+    sugar_level decimal (2, 2) not NULL,
     dairy_option boolean not NULL,
     boba_option boolean not NULL,
     PRIMARY KEY (order_items_id),
@@ -180,7 +182,6 @@ VALUES
   (2, 2, 1, 0.5, 0.5, 1, 1),
   (2, 3, 1, 1.0, 1.0, 1, 1),
   (3, 3, 3, 1.0, 0.5, 1, 1);
-
 
 
 UNLOCK TABLES
