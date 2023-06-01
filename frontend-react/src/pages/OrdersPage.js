@@ -29,7 +29,9 @@ function OrdersPage() {
   // LOAD ORDERS
   const loadAllOrders = async () => {
     try {
-      const response = await axios.get("http://localhost:9124/api/orders");
+      const response = await axios.get(
+        "http://flip3.engr.oregonstate.edu:32346/api/orders"
+      );
       setOrderList(response.data);
     } catch (err) {
       console.log(err);
@@ -38,7 +40,9 @@ function OrdersPage() {
 
   const loadAllOrderItems = async () => {
     try {
-      const response = await axios.get("http://localhost:9124/api/order_items");
+      const response = await axios.get(
+        "http://flip3.engr.oregonstate.edu:32346/api/order_items"
+      );
       setOrderItemList(response.data);
     } catch (err) {
       console.log(err);
@@ -99,11 +103,14 @@ function OrdersPage() {
 
   const onAddOrder = async (order) => {
     try {
-      const response = await axios.post("http://localhost:9124/api/orders", {
-        customer_id: order.customer_id,
-        order_date: order.order_date,
-        order_total: order.order_total,
-      });
+      const response = await axios.post(
+        "http://flip3.engr.oregonstate.edu:32346/api/orders",
+        {
+          customer_id: order.customer_id,
+          order_date: order.order_date,
+          order_total: order.order_total,
+        }
+      );
       if (response) {
         setOrderList([...orderList, response.data]);
       }
@@ -120,7 +127,7 @@ function OrdersPage() {
   const onAddOrderItem = async (order_item) => {
     try {
       const response = await axios.post(
-        "http://localhost:9124/api/order_items",
+        "http://flip3.engr.oregonstate.edu:32346/api/order_items",
         {
           order_id: order_item.order_id,
           drink_id: order_item.drink_id,
@@ -143,7 +150,7 @@ function OrdersPage() {
   const onDeleteOrder = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:9124/api/orders/${id}`
+        `http://flip3.engr.oregonstate.edu:32346/api/orders/${id}`
       );
       if (response) {
         loadAllOrders();
@@ -158,7 +165,7 @@ function OrdersPage() {
   const onDeleteOrderItem = async (orders_item_id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:9124/api/order_items/${orders_item_id}`
+        `http://flip3.engr.oregonstate.edu:32346/api/order_items/${orders_item_id}`
       );
       if (response) {
         loadAllOrderItems();
