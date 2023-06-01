@@ -9,7 +9,7 @@ import {
 
 export const allCustomers = async () => {
   return await axios.get(
-    "http://flip3.engr.oregonstate.edu:32346/api/customers"
+    "http://flip2.engr.oregonstate.edu:32346/api/customers"
   );
 };
 
@@ -51,7 +51,7 @@ export const CustomersPage = () => {
   const onAddCustomer = async (customer) => {
     try {
       const response = await axios.post(
-        "http://flip3.engr.oregonstate.edu:32346/api/customers",
+        "http://flip2.engr.oregonstate.edu:32346/api/customers",
         customer
       );
       if (response) {
@@ -66,7 +66,7 @@ export const CustomersPage = () => {
   const onDeleteCustomer = async (customer_id) => {
     try {
       const response = await axios.delete(
-        `http://flip3.engr.oregonstate.edu:32346/api/customers/${customer_id}`
+        `http://flip2.engr.oregonstate.edu:32346/api/customers/${customer_id}`
       );
       if (response) {
         loadAllCustomers();

@@ -42,7 +42,7 @@ function EditOrderForm({ order, onClickAction, customerList, setShowModal }) {
   const editOrder = async () => {
     try {
       await axios.put(
-        `http://flip3.engr.oregonstate.edu:32346/api/orders/${order_id}`,
+        `http://flip2.engr.oregonstate.edu:32346/api/orders/${order_id}`,
         {
           customer_id: customer_id,
           order_date: order_date,

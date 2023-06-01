@@ -26,7 +26,7 @@ export const EditCustomerForm = ({ customer, onClickAction, setShowModal }) => {
   const editCustomer = async () => {
     try {
       await axios.put(
-        `http://flip3.engr.oregonstate.edu:32346/api/customers/${customer_id}`,
+        `http://flip2.engr.oregonstate.edu:32346/api/customers/${customer_id}`,
         {
           name: name,
           phone: phone,

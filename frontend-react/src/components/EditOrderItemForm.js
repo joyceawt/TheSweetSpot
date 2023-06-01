@@ -48,7 +48,7 @@ function EditOrderItemForm({
   const editOrderItem = async () => {
     try {
       await axios.put(
-        `http://flip3.engr.oregonstate.edu:32346/api/order_items/${order_items_id}`,
+        `http://flip2.engr.oregonstate.edu:32346/api/order_items/${order_items_id}`,
         {
           order_id: order_id,
           drink_id: drink_id,

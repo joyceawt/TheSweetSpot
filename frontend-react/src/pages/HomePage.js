@@ -28,7 +28,7 @@ function HomePage() {
   const loadTotalCustomers = async () => {
     try {
       const response = await axios.get(
-        "http://flip3.engr.oregonstate.edu:32346/api/totalCustomers"
+        "http://flip2.engr.oregonstate.edu:32346/api/totalCustomers"
       );
       setTotalCustomers(response.data);
     } catch (err) {
@@ -39,7 +39,7 @@ function HomePage() {
   const loadTotalDrinks = async () => {
     try {
       const response = await axios.get(
-        "http://flip3.engr.oregonstate.edu:32346/api/totalDrinks"
+        "http://flip2.engr.oregonstate.edu:32346/api/totalDrinks"
       );
       setTotalDrinks(response.data);
     } catch (err) {
@@ -50,7 +50,7 @@ function HomePage() {
   const loadOrderStatistics = async () => {
     try {
       const response = await axios.get(
-        "http://flip3.engr.oregonstate.edu:32346/api/orderStatistics"
+        "http://flip2.engr.oregonstate.edu:32346/api/orderStatistics"
       );
       setTotalOrders(response.data.total);
       setOrdersToday(response.data.today);
