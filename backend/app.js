@@ -340,7 +340,7 @@ app.delete("/api/order_items/:id", (req, res) => {
   const id = req.params.id;
 
   db.pool.query(
-    "DELETE FROM Orders WHERE order_items_id= ?",
+    "DELETE FROM OrderItems WHERE order_items_id= ?",
     id,
     (err, result) => {
       if (err) {
