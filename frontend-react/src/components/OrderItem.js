@@ -31,8 +31,8 @@ function OrderItem({
         <td>{orderItem.order_id}</td>
         <td>{orderItem.drink_id}</td>
         <td>{orderItem.drink_quantity}</td>
-        <td>{orderItem.ice_level}</td>
-        <td>{orderItem.sugar_level}</td>
+        <td>{orderItem.ice_level.toFixed(2)}</td>
+        <td>{orderItem.sugar_level.toFixed(2)}</td>
         <td>{orderItem.dairy_option == 1 ? "Yes" : "No"}</td>
         <td>{orderItem.boba_option == 1 ? "Yes" : "No"}</td>
         <td>
