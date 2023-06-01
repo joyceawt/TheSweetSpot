@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function HomePage() {
   const date = new Date().getHours();
@@ -13,6 +14,49 @@ function HomePage() {
     ) : (
       <i className="greeting bi bi-moon-stars-fill"></i>
     );
+
+  const [totalCustomers, setTotalCustomers] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [ordersToday, setOrdersToday] = useState(0);
+  const [totalDrinks, setTotalDrinks] = useState(0);
+
+  const loadTotalCustomers = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9124/api/totalCustomers"
+      );
+      setTotalCustomers(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const loadTotalDrinks = async () => {
+    try {
+      const response = await axios.get("http://localhost:9124/api/totalDrinks");
+      setTotalDrinks(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const loadOrderStatistics = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9124/api/orderStatistics"
+      );
+      setTotalOrders(response.data.total);
+      setOrdersToday(response.data.today);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    loadTotalCustomers();
+    loadOrderStatistics();
+    loadTotalDrinks();
+  }, []);
 
   return (
     <section
@@ -37,7 +81,7 @@ function HomePage() {
             <div className="analytics card text-center bg-purple">
               <div className="card-body">
                 <h5 className="card-title">Today's Orders</h5>
-                <h3 className="card-text">10</h3>
+                <h3 className="card-text">{ordersToday}</h3>
                 <p className="card-text"> Orders</p>
               </div>
             </div>
@@ -47,8 +91,8 @@ function HomePage() {
             <div className="analytics card text-center bg-purple">
               <div className="card-body">
                 <h5 className="card-title">Total Orders</h5>
-                <h3 className="card-text">10</h3>
-                <p className="card-text"> this year</p>
+                <h3 className="card-text">{totalOrders}</h3>
+                <p className="card-text"> to date</p>
               </div>
             </div>
           </div>
@@ -56,9 +100,9 @@ function HomePage() {
           <div className="col-sm-2 p-3">
             <div className="analytics card text-center bg-purple">
               <div className="card-body">
-                <h5 className="card-title">Most Popular</h5>
-                <h3 className="card-text">10</h3>
-                <p className="card-text"> drink on menu</p>
+                <h5 className="card-title">Total Drinks</h5>
+                <h3 className="card-text">{totalDrinks}</h3>
+                <p className="card-text"> sold to date </p>
               </div>
             </div>
           </div>
@@ -67,7 +111,7 @@ function HomePage() {
             <div className="analytics card text-center bg-purple">
               <div className="card-body">
                 <h5 className="card-title">Total Customers</h5>
-                <h3 className="card-text">10</h3>
+                <h3 className="card-text">{totalCustomers}</h3>
                 <p className="card-text"> to date</p>
               </div>
             </div>

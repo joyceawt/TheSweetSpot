@@ -19,6 +19,20 @@ app.get("/api/customers", (req, res) => {
   });
 });
 
+//for statistics page, counts total customers
+app.get("/api/totalCustomers", (req, res) => {
+  db.pool.query(
+    "SELECT COUNT(customer_id) AS NumberOfCustomers FROM Customers",
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error counting customers");
+        return;
+      }
+      res.json(results[0]["NumberOfCustomers"]);
+    }
+  );
+});
+
 //update customer by ID
 app.put("/api/customers/:id", (req, res) => {
   const id = req.params.id;
@@ -82,6 +96,20 @@ app.get("/api/drinks", (req, res) => {
     }
     res.json(results);
   });
+});
+
+//for statistics page, counts total drinks
+app.get("/api/totalDrinks", (req, res) => {
+  db.pool.query(
+    "SELECT SUM(drink_quantity) As DrinksSold From OrderItems",
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error counting total drinks sold");
+        return;
+      }
+      res.json(results[0]["DrinksSold"]);
+    }
+  );
 });
 
 // update drink by ID
@@ -149,6 +177,24 @@ app.get("/api/orders", (req, res) => {
     }
     res.json(results);
   });
+});
+
+//for statistics page, counts total customers
+app.get("/api/orderStatistics", (req, res) => {
+  db.pool.query(
+    "SELECT COUNT(order_id) AS TotalOrders FROM Orders; SELECT COUNT(*) AS OrdersToday from Orders where date(order_date)=date(now());",
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error counting orders");
+        return;
+      }
+      const orderStatistics = {
+        total: results[0][0]["TotalOrders"],
+        today: results[1][0]["OrdersToday"],
+      };
+      res.json(orderStatistics);
+    }
+  );
 });
 
 // update order by ID
