@@ -20,7 +20,7 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
     <>
       <article className="d-flex flex-row align-content-center justify-content-center rounded bg-white">
         <div className="p-2 d-flex justify-content-center align-content-center">
-          <img id="img-1" src={bobaPic} />
+          <img id="img-1" alt="boba-drink" src={bobaPic} />
         </div>
 
         <table className="table table-sm">

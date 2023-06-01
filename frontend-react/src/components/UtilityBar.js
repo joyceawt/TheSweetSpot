@@ -24,7 +24,7 @@ export const UtilityBar = ({
           setSearchText={setSearchText}
         />
       );
-    } else if (renderSearchBar == false) {
+    } else if (renderSearchBar === false) {
       return (
         <Select
           selectOptions={selectOptions}

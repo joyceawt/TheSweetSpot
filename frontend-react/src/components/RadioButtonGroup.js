@@ -21,7 +21,7 @@ export const RadioButtonGroup = ({
       <Form.Label className="col-form-label w-25" onChange={setSelectedOption}>
         {label}
       </Form.Label>
-      <div role="radio-group" id={groupID} className="btn-group">
+      <div role="radiogroup" id={groupID} className="btn-group">
         {radioOptions.map((option, i) => (
           <RadioButton
             name={groupName + uniqueID}
