@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import ModalComponent from "../components/Modal";
-import DeleteConfirm from "./DeleteConfirm";
-
-import EditOrderItemForm from "./EditOrderItemForm";
+import { ModalComponent, DeleteConfirm, EditOrderItemForm } from "./index";
 
 function OrderItem({
   orderItem,

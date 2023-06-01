@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import bobaPic from "../data/images/boba_unknownartist.png";
-import ModalComponent from "./Modal";
-import EditDrinkForm from "./EditDrinkForm";
-import DeleteConfirm from "./DeleteConfirm";
+import { ModalComponent, EditDrinkForm, DeleteConfirm } from "./index";
 
 function Drink({ drink, onEditDrink, onDeleteDrink }) {
   let id = drink.drink_id;

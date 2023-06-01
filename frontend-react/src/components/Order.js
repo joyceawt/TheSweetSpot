@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import ModalComponent from "../components/Modal";
-import DeleteConfirm from "./DeleteConfirm";
-
-import EditOrderForm from "./EditOrderForm";
+import { ModalComponent, DeleteConfirm, EditOrderForm } from "./index";
 
 function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
   // unique IDs.

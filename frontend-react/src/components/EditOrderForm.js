@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import SelectDropdown from "./SelectDropdown";
 import axios from "axios";
 import { Form, Button, Modal, InputGroup } from "react-bootstrap";
+import { SelectDropdown } from "./index";
 
 function EditOrderForm({ order, onClickAction, customerList, setShowModal }) {
   const [customer_id, setNewCustomerID] = useState(order.customer_id);

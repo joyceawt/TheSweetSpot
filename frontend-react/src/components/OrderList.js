@@ -1,5 +1,4 @@
 import React from "react";
-
 import Order from "./Order";
 
 function OrderList({ orderList, onEditOrder, onDeleteOrder, customerList }) {

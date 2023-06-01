@@ -1,7 +1,5 @@
 import React from "react";
-import SearchBar from "./SearchBar";
-import SortBy from "./SortBy";
-import Select from "./SelectDropdown";
+import { SelectDropdown, SearchBar, SortBy } from "./index";
 
 export const UtilityBar = ({
   contentTitle,
@@ -26,7 +24,7 @@ export const UtilityBar = ({
       );
     } else if (renderSearchBar === false) {
       return (
-        <Select
+        <SelectDropdown
           selectOptions={selectOptions}
           selectedOption={searchText}
           filterSelect={filterSearch}
