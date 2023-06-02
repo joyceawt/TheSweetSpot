@@ -110,7 +110,7 @@ function HomePage() {
           <div className="col-sm-2 p-3">
             <div className="analytics card text-center bg-purple">
               <div className="card-body">
-                <h5 className="card-title">Total Customers</h5>
+                <h5 className="card-title">Customers</h5>
                 <h3 className="card-text">{totalCustomers}</h3>
                 <p className="card-text"> to date</p>
               </div>

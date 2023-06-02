@@ -1,6 +1,6 @@
 import React from "react";
 import RadioButton from "./RadioButton";
-import Form from "react-bootstrap/form";
+import { Form } from "react-bootstrap";
 
 export const RadioButtonGroup = ({
   label,
