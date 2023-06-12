@@ -1,5 +1,5 @@
 import React from "react";
-import { SelectDropdown, SearchBar, SortBy } from "./index";
+import { SelectDropdown, SearchBar } from "./index";
 
 export const UtilityBar = ({
   contentTitle,
@@ -44,10 +44,6 @@ export const UtilityBar = ({
           <h4>
             <strong>{contentTitle}</strong>
           </h4>
-        </div>
-        <div className="pt-3">
-          {" "}
-          <SortBy />{" "}
         </div>
         <div className={`ms-auto ${renderSearchBar ? "pt-1" : "pt-4"}`}>
           {filterComponent()}

@@ -25,7 +25,6 @@ import OrderList from "./OrderList";
 import RadioButtonGroup from "./RadioButtonGroup";
 import SearchBar from "./SearchBar";
 import SelectDropdown from "./SelectDropdown";
-import SortBy from "./SortBy";
 import UtilityBar from "./UtilityBar";
 
 export {
@@ -56,6 +55,5 @@ export {
   RadioButtonGroup,
   SearchBar,
   SelectDropdown,
-  SortBy,
   UtilityBar,
 };
