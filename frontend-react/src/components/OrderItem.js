@@ -19,10 +19,6 @@ function OrderItem({
       <tr>
         <td>
           {" "}
-          <button className="btn btn-inverse ">
-            {" "}
-            <i className="bi bi-info-circle" />{" "}
-          </button>{" "}
         </td>
         <td>{orderItem.order_items_id}</td>
         <td>{orderItem.order_id}</td>

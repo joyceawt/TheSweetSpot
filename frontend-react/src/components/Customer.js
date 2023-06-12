@@ -11,12 +11,6 @@ function Customer({ customer, onEditCust, onDeleteCust }) {
   return (
     <>
       <tr>
-        <td>
-          <button className="btn btn-inverse ">
-            {" "}
-            <i className="bi bi-info-circle"></i>
-          </button>
-        </td>
         <td>{customer.customer_id}</td>
         <td>{customer.name}</td>
         <td>{customer.phone}</td>

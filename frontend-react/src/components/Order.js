@@ -14,10 +14,6 @@ function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
       <tr>
         <td>
           {" "}
-          <button className="btn btn-inverse ">
-            {" "}
-            <i className="bi bi-info-circle" />{" "}
-          </button>{" "}
         </td>
         <td>{order.order_id}</td>
         <td>{order.customer_id ? order.customer_id : "N/A"}</td>

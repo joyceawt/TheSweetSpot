@@ -10,7 +10,6 @@ function CustomerList({ custList, onEditCust, onDeleteCust }) {
           <caption></caption>
           <thead className="thead-dark">
             <tr>
-              <th>info</th>
               <th>CustomerID</th>
               <th>Name</th>
               <th>Phone number</th>
