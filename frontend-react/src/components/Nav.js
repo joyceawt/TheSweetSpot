@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
+//Logo svg is the same one as the header, generated and created with the help of https://www.logoai.com/ 
+
 function Nav() {
   const fill = (active) => (active ? "-fill" : "");
   const svgFill = (active) => (active ? "-fill" : "");

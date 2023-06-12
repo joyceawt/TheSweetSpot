@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+//Logo svg generated and created with the help of https://www.logoai.com/ 
+
 function Header() {
   return (
     <header className="tss-header flex-row justify-content-center align-items-center">

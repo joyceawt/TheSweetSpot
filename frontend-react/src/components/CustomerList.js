@@ -1,4 +1,3 @@
-// model after SubscriptionList
 import React from "react";
 import Customer from "./Customer";
 

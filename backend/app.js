@@ -1,4 +1,3 @@
-//setup
 const express = require("express");
 const app = express();
 const PORT = 9124;
@@ -183,6 +182,7 @@ app.get("/api/orders", (req, res) => {
 });
 
 //for statistics page, counts total customers
+// syntax for grabbing today's orders referenced StackOverflow solution https://stackoverflow.com/questions/611402/count-rows-added-today-yesterday-and-other-times
 app.get("/api/orderStatistics", (req, res) => {
   db.pool.query(
     "SELECT COUNT(order_id) AS TotalOrders FROM Orders; SELECT COUNT(*) AS OrdersToday from Orders where date(order_date)=date(now());",
