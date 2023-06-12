@@ -1,3 +1,5 @@
+// Code below for setting up mysql is adapted from CS340 starter app code
+
 // Get an instance of mysql we can use in the app
 const mysql = require("mysql");
 
@@ -10,15 +12,6 @@ const pool = mysql.createPool({
   database: "cs340_aujoy",
   multipleStatements: true,
 });
-
-// Log if unsuccessful
-// pool.connect((err) => {
-//   if (!err) {
-//     console.log("Successfully connect to mysql");
-//   } else {
-//     console.log("Failed to connect to mysql");
-//   }
-// });
 
 // Export it for use in our applicaiton
 module.exports.pool = pool;
