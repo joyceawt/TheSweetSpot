@@ -18,7 +18,8 @@ function App() {
 
   return (
     <div className="App">
-      <div className="d-flex">
+      <div className='container-fluid p-0'>
+        <div className="d-flex min-vh-100">
         <BrowserRouter>
           <Nav />
           <div className="p2 flex-grow-1 ps-5 flex-column align-items-center justify-content-center">
@@ -38,6 +39,7 @@ function App() {
             </main>
           </div>
         </BrowserRouter>
+      </div>
       </div>
     </div>
   );
