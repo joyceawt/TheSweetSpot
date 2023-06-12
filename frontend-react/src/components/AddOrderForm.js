@@ -69,7 +69,7 @@ function AddOrderForm({
             required
           />
           <Form.Control.Feedback type="invalid">
-            Please provide a valid name.
+            Please provide a valid date.
           </Form.Control.Feedback>
         </Form.Group>
 
