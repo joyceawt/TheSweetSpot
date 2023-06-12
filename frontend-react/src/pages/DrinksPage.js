@@ -8,7 +8,7 @@ import {
 } from "../components/index";
 
 export const allDrinks = async () => {
-  return await axios.get("http://localhost:9124/api/drinks");
+  return await axios.get("http://flip2.engr.oregonstate.edu:32346/api/drinks");
 };
 
 export const DrinksPage = () => {
@@ -34,7 +34,7 @@ export const DrinksPage = () => {
   const onAddDrink = async (drink) => {
     try {
       const response = await axios.post(
-        "http://localhost:9124/api/drinks",
+        "http://flip2.engr.oregonstate.edu:32346/api/drinks",
         drink
       );
       if (response) {
@@ -54,7 +54,7 @@ export const DrinksPage = () => {
   const onDeleteDrink = async (drink_id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:9124/api/drinks/${drink_id}`
+        `http://flip2.engr.oregonstate.edu:32346/api/drinks/${drink_id}`
       );
       if (response) {
         loadAllDrinks();

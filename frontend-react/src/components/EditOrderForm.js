@@ -41,11 +41,14 @@ function EditOrderForm({ order, onClickAction, customerList, setShowModal }) {
 
   const editOrder = async () => {
     try {
-      await axios.put(`http://localhost:9124/api/orders/${order_id}`, {
-        customer_id: customer_id,
-        order_date: order_date,
-        order_total: order_total,
-      });
+      await axios.put(
+        `http://flip2.engr.oregonstate.edu:32346/api/orders/${order_id}`,
+        {
+          customer_id: customer_id,
+          order_date: order_date,
+          order_total: order_total,
+        }
+      );
       onClickAction();
       closeModal();
     } catch (err) {

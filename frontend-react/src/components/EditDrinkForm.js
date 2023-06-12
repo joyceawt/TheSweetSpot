@@ -34,11 +34,14 @@ export const EditDrinkForm = ({ drinkItem, onClickAction, setShowModal }) => {
 
   const editDrink = async () => {
     try {
-      await axios.put(`http://localhost:9124/api/drinks/${drink_id}`, {
-        drink_name: drink_name,
-        drink_description: drink_description,
-        drink_price: drink_price,
-      });
+      await axios.put(
+        `http://flip2.engr.oregonstate.edu:32346/api/drinks/${drink_id}`,
+        {
+          drink_name: drink_name,
+          drink_description: drink_description,
+          drink_price: drink_price,
+        }
+      );
       onClickAction();
       closeModal();
     } catch (err) {
