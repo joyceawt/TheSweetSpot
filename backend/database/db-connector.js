@@ -1,4 +1,7 @@
-// Code below for setting up mysql is adapted from CS340 starter app code
+// Citation for code below:
+// Date: April 27, 2023
+// Adapted from OSU CS340 Starter guide
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%201%20-%20Connecting%20to%20a%20MySQL%20Database 
 
 // Get an instance of mysql we can use in the app
 const mysql = require("mysql");
