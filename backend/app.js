@@ -228,15 +228,15 @@ app.post("/api/orders", (req, res) => {
   const order_date = req.body.order_date;
 
   const no_customer_id_query =
-    "INSERT INTO Orders (order_total, order_date) VALUES (?, ?); SELECT * FROM Orders WHERE order_id = LAST_INSERT_ID()";
+    "INSERT INTO Orders (order_total, order_date) VALUES (?, ?); SELECT * FROM Orders LEFT JOIN Customers ON Orders.customer_id = Customers.customer_id WHERE order_id = LAST_INSERT_ID()";
 
   const default_query =
-    "INSERT INTO Orders (customer_id, order_total, order_date) VALUES (?, ?, ?); SELECT * FROM Orders INNER JOIN Customers ON Orders.customer_id = Customers.customer_id WHERE order_id = LAST_INSERT_ID()";
+    "INSERT INTO Orders (customer_id, order_total, order_date) VALUES (?, ?, ?); SELECT * FROM Orders LEFT JOIN Customers ON Orders.customer_id = Customers.customer_id WHERE order_id = LAST_INSERT_ID()";
 
-  const query = customer_id == null ? no_customer_id_query : default_query;
+  const query = customer_id == '' ? no_customer_id_query : default_query;
 
   const query_array =
-    customer_id == null
+    customer_id == ''
       ? [order_total, order_date]
       : [customer_id, order_total, order_date];
 
