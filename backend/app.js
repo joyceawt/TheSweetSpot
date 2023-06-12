@@ -181,7 +181,7 @@ app.get("/api/orders", (req, res) => {
   );
 });
 
-//for statistics page, counts total customers
+//for homepage statistics, counts total orders and orders placed today
 // syntax for grabbing today's orders referenced StackOverflow solution https://stackoverflow.com/questions/611402/count-rows-added-today-yesterday-and-other-times
 app.get("/api/orderStatistics", (req, res) => {
   db.pool.query(

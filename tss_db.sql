@@ -1,5 +1,5 @@
 --
--- The Sweet Spot, Joyce AU, Samantha Perona
+-- The Sweet Spot, Joyce Au, Samantha Perona
 -- Team 25
 --
 --
