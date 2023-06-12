@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function HomePage() {
+  // Citation for code below:
+  // Date: June 1, 2023
+  // Adapted from StackOverflow
+  // Source URL: https://stackoverflow.com/questions/7122543/javascript-time-greeting 
+  
   const date = new Date().getHours();
   const greeting =
     date < 12 ? "Good Morning" : date < 18 ? "Good Afternoon" : "Good Evening";

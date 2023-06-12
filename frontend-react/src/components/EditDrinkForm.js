@@ -3,6 +3,7 @@ import { Button, Modal, Form, InputGroup } from "react-bootstrap";
 import axios from "axios";
 
 export const EditDrinkForm = ({ drinkItem, onClickAction, setShowModal }) => {
+  // set up unique IDs
   const drinkNameId = "edit-drink-name-" + drinkItem.drink_id;
   const drinkDescriptionId = "edit-description-" + drinkItem.drink_id;
   const drinkPriceId = "edit-price-" + drinkItem.drink_id;

@@ -8,9 +8,11 @@ function EditOrderForm({ order, onClickAction, customerList, setShowModal }) {
   const [order_total, setNewTotal] = useState(order.order_total);
   const [order_id] = useState(order.order_id);
   const [validated, setValidated] = useState(false);
-  const editCustomerID = `edit-order-cust-ID-${order_id}`;
 
+  const editCustomerID = `edit-order-cust-ID-${order_id}`;
+  
   const getDateTimeValue = (d) => {
+    //formats date 
     return new Date(d).toISOString().slice(0, -8);
   };
 

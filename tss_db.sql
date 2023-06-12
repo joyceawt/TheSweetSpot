@@ -1,7 +1,7 @@
 --
 -- The Sweet Spot, Joyce Au, Samantha Perona
 -- Team 25
---
+-- SQL file for CS340 Portfolio Project
 --
 -- Disable foreign key check and autocommit
 --

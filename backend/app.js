@@ -181,8 +181,11 @@ app.get("/api/orders", (req, res) => {
   );
 });
 
+// Citation for query below to grab today's orders adapted from StackOverflow:
+// Date: June 1, 2023
+// Source URL:https://stackoverflow.com/questions/611402/count-rows-added-today-yesterday-and-other-times
+
 //for homepage statistics, counts total orders and orders placed today
-// syntax for grabbing today's orders referenced StackOverflow solution https://stackoverflow.com/questions/611402/count-rows-added-today-yesterday-and-other-times
 app.get("/api/orderStatistics", (req, res) => {
   db.pool.query(
     "SELECT COUNT(order_id) AS TotalOrders FROM Orders; SELECT COUNT(*) AS OrdersToday from Orders where date(order_date)=date(now());",

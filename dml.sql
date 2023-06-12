@@ -1,3 +1,10 @@
+--
+-- The Sweet Spot, Joyce Au, Samantha Perona
+-- Team 25
+-- DML queries for CS340 Portfolio Project
+--
+-- Disable foreign key check and autocommit
+--
 /*---------------------------------------------------------------------
  
  CUSTOMERS

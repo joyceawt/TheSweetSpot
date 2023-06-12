@@ -3,6 +3,7 @@ import bobaPic from "../data/images/boba_unknownartist.png";
 import { ModalComponent, EditDrinkForm, DeleteConfirm } from "./index";
 
 function Drink({ drink, onEditDrink, onDeleteDrink }) {
+  // set up unique IDs
   let id = drink.drink_id;
   let drinkName = "name-" + id;
   let drinkID = "id-" + id;
@@ -11,6 +12,8 @@ function Drink({ drink, onEditDrink, onDeleteDrink }) {
 
   let modalEdit = "edit-entry-" + id;
   let modalDelete = "delete-confirm-" + id;
+
+  // states
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
