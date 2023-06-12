@@ -231,7 +231,7 @@ app.post("/api/orders", (req, res) => {
     "INSERT INTO Orders (order_total, order_date) VALUES (?, ?); SELECT * FROM Orders WHERE order_id = LAST_INSERT_ID()";
 
   const default_query =
-    "INSERT INTO Orders (customer_id, order_total, order_date) VALUES (?, ?, ?); SELECT * FROM Orders WHERE order_id = LAST_INSERT_ID()";
+    "INSERT INTO Orders (customer_id, order_total, order_date) VALUES (?, ?, ?); SELECT * FROM Orders INNER JOIN Customers ON Orders.customer_id = Customers.customer_id WHERE order_id = LAST_INSERT_ID()";
 
   const query = customer_id == null ? no_customer_id_query : default_query;
 
@@ -321,7 +321,7 @@ app.post("/api/order_items", (req, res) => {
   const drink_quantity = req.body.drink_quantity;
 
   db.pool.query(
-    "INSERT INTO OrderItems (order_id, drink_id, ice_level, sugar_level, dairy_option, boba_option, drink_quantity) VALUES (?, ?, ?, ?, ?, ?, ?); SELECT * FROM OrderItems WHERE order_items_id = LAST_INSERT_ID()",
+    "INSERT INTO OrderItems (order_id, drink_id, ice_level, sugar_level, dairy_option, boba_option, drink_quantity) VALUES (?, ?, ?, ?, ?, ?, ?); SELECT * FROM OrderItems INNER JOIN Drinks ON OrderItems.drink_id = Drinks.drink_id WHERE order_items_id = LAST_INSERT_ID()",
     [
       order_id,
       drink_id,
