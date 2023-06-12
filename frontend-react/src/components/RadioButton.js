@@ -16,7 +16,7 @@ export const RadioButton = ({
         name={name}
         value={value}
         id={id}
-        checked={value == selectedOption}
+        checked={value === selectedOption}
         onChange={(e) => {
           setSelectedOption(e.target.value);
         }}
