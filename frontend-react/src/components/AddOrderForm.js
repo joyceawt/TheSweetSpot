@@ -30,14 +30,8 @@ function AddOrderForm({
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      const resp = await onAddOrder(order);
-
-      if (resp.error) {
-        setErrorContent(resp.error);
-        setShowErrorAlert(true);
-      } else {
-        closeModal();
-      }
+      await onAddOrder(order);
+      closeModal();
     }
   };
 
