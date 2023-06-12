@@ -20,8 +20,8 @@ function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
           </button>{" "}
         </td>
         <td>{order.order_id}</td>
-        <td>{order.customer_id}</td>
-        <td>{order.name}</td>
+        <td>{order.customer_id ? order.customer_id : "N/A"}</td>
+        <td>{order.name ? order.name : "None"}</td>
         <td>{order.order_date}</td>
         <td>{order.order_total}</td>
         <td>

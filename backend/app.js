@@ -171,7 +171,7 @@ app.delete("/api/drinks/:id", (req, res) => {
 // Get all Orders
 app.get("/api/orders", (req, res) => {
   db.pool.query(
-    "SELECT * FROM Orders INNER JOIN Customers ON Orders.customer_id = Customers.customer_id;",
+    "SELECT * FROM Orders LEFT JOIN Customers ON Orders.customer_id = Customers.customer_id;",
     (err, results) => {
       if (err) {
         res.status(500).send("Error fetching orders");
