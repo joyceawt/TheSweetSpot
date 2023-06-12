@@ -15,7 +15,6 @@ import EditOrderForm from "./EditOrderForm";
 import EditOrderItemForm from "./EditOrderItemForm";
 import Footer from "./Footer";
 import Header from "./Header";
-import InfoButton from "./InfoButton";
 import ModalComponent from "./Modal";
 import Nav from "./Nav";
 import Order from "./Order";
@@ -45,7 +44,6 @@ export {
   EditOrderItemForm,
   Footer,
   Header,
-  InfoButton,
   ModalComponent,
   Nav,
   Order,
