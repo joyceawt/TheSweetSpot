@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./css/main.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import React, { useState } from "react";
+import React from "react";
 
 // components
 import Nav from "./components/Nav";
