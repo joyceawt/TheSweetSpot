@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ModalComponent, DeleteConfirm, EditOrderForm } from "./index";
 
 function Order({ order, onEditOrder, onDeleteOrder, customerList }) {
-  // unique IDs.
+  // set up unique ids
   let modalEdit = "edit-entry-" + order.order_id;
   let modalDelete = "delete-confirm-" + order.order_id;
 
